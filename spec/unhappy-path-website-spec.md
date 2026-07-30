@@ -177,7 +177,30 @@ Two visual wireframes are provided (see `implementation-hints.md` for filename m
 - **SEO / AEO:** See §8 — Discoverability.
 - **RSS:** Full feed for the Writing section is required.
 - **Accessibility:** Semantic markup, sufficient contrast, focus states, alt text for any images.
-- **Analytics:** None in v1. If curiosity strikes, flip on Cloudflare Web Analytics (already in the account).
+- **Analytics:** Two layers from day 0, both free, both privacy-preserving by construction.
+  Rationale and rejected alternatives: `docs/adr/0008-analytics-goatcounter.md`.
+  - **Layer 1 — consoles (zero code, zero bytes shipped).** Google Search Console + Bing
+    Webmaster Tools answer *what did people search to reach me, and is the site indexed*.
+    Cloudflare's dashboard + AI Crawl Control answer *are answer-engine bots actually fetching
+    pages* (§8). Highest-signal layer for an AEO-first site; already in the §9 checklist.
+  - **Layer 2 — on-site counter.** **GoatCounter**, hosted free tier, one async 3.5 KB script
+    in `BaseLayout.astro` before `</body>`:
+    ```html
+    <script data-goatcounter="https://unhappypath.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    ```
+    No cookies, no `localStorage`, no personal data retained — so no consent banner, because
+    there is nothing to consent to. Yields pageviews per path, **referrers**, country, browser.
+  - **Why referrers are the point:** `chatgpt.com` / `perplexity.ai` appearing in the referrer
+    list is the only place §8's AEO bet becomes visible. Search Console does not report it.
+    GoatCounter's no-JS tracking-pixel variant cannot record referrers, which is why the script
+    won over the pixel despite §2.3.
+  - **This does not weaken §8.** The script is async, non-blocking, and carries no content. All
+    content remains in the initial HTML; non-JS-executing crawlers see exactly what they saw
+    before. The §8 rule is *content in the initial HTML* — not *zero bytes of JS*.
+  - **Escape hatch:** GoatCounter is open source (single Go binary + SQLite). If the hosted
+    service disappears or starts charging, self-host it; the `data-goatcounter` endpoint URL is
+    the only thing that changes.
 - **Domain & Hosting:** unhappypath.dev (purchased, Cloudflare Registrar) → **Cloudflare Pages** free tier.
 
 ### Deferred (with bring-back triggers)
@@ -188,6 +211,8 @@ Two visual wireframes are provided (see `implementation-hints.md` for filename m
 | Related posts | Same |
 | Newsletter | Buttondown embed is the sanctioned path (not v1) |
 | Share buttons, contact form | Never, probably |
+| Richer analytics (Plausible $9/mo, funnels, GSC-in-dashboard) | GoatCounter's numbers stop answering a question you actually have |
+| Self-hosted GoatCounter | The hosted free tier goes away or starts charging |
 
 ---
 
@@ -270,8 +295,10 @@ You will need:
 
 Open TODOs (Oded):
 - [ ] Personal email address for `/contact`
-- [ ] Cloudflare dashboard: audit AI Crawl Control / bot-blocking / managed robots.txt (§8 — else AEO silently fails)
-- [ ] Register site in Google Search Console + Bing Webmaster Tools, submit sitemap (§8, post-launch)
+- [ ] Cloudflare dashboard: audit AI Crawl Control / bot-blocking / managed robots.txt (§8 — else AEO silently fails; also §7 analytics layer 1)
+- [ ] Register site in Google Search Console + Bing Webmaster Tools, submit sitemap (§8, post-launch; §7 analytics layer 1)
+- [ ] Create GoatCounter account, confirm the site code, paste the real endpoint into `BaseLayout.astro` (§7 analytics layer 2)
+- [ ] GoatCounter → Settings: enable "ignore my own pageviews" so local/dev traffic stays out of the numbers
 - [ ] Pick hero tagline from drafted options
 - [ ] Profile photo file
 - [ ] Bio text, 4–8 projects, first posts (LinkedIn conversions), fun links
