@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="unhappy path">
+	<style>
+		.happy { stroke: #b4b8bd; }
+		.unhappy { stroke: #1f4f8b; }
+		@media (prefers-color-scheme: dark) {
+			.happy { stroke: #5b6470; }
+			.unhappy { stroke: #8ab4f8; }
+		}
+	</style>
+	<g fill="none" stroke-width="3" stroke-linecap="round">
+		<!-- the happy path: straight through -->
+		<path class="happy" d="M4 10h9" />
+		<path class="happy" d="M19 10h9" />
+		<!-- the unhappy path: forks off and stops -->
+		<path class="unhappy" d="M13 10c4 0 4 14 9 14" />
+		<path class="unhappy" d="M25 21l4 3-4 3" />
+	</g>
+</svg>

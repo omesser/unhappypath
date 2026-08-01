@@ -1,0 +1,96 @@
+---
+import { Font } from 'astro:assets';
+import {
+	AUTHOR,
+	GOATCOUNTER_CODE,
+	NAV,
+	SITE_DESCRIPTION,
+	SITE_TAGLINE,
+	SITE_TITLE,
+} from '../consts';
+import '../styles/global.css';
+import { cleanPath } from '../utils';
+
+interface Props {
+	/** Page title. The site name is appended; omit on the homepage. */
+	title?: string;
+	description?: string;
+	ogType?: 'website' | 'article';
+	/** JSON-LD graph for this page (spec §8). */
+	jsonLd?: object;
+}
+
+const { title, description = SITE_DESCRIPTION, ogType = 'website', jsonLd } = Astro.props;
+
+const pageTitle = title ? `${title} — ${SITE_TITLE}` : `${SITE_TITLE} — ${SITE_TAGLINE}`;
+// ADR-0004: one URL form everywhere — no trailing slash, no .html extension.
+const canonical = new URL(cleanPath(Astro.url.pathname), Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="sitemap" href="/sitemap.xml" />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={SITE_TITLE}
+			href={new URL('/rss.xml', Astro.site)}
+		/>
+		<Font cssVariable="--font-inter" preload />
+
+		<meta property="og:site_name" content={SITE_TITLE} />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="generator" content={Astro.generator} />
+
+		{
+			jsonLd && (
+				<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+			)
+		}
+
+		{/* ADR-0008: the only script on the site. Async, cookieless, prod-only, and
+		    skipped entirely until a site code exists. */}
+		{
+			import.meta.env.PROD && GOATCOUNTER_CODE && (
+				<script
+					is:inline
+					defer
+					src="https://gc.zgo.at/count.js"
+					data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`}
+				/>
+			)
+		}
+	</head>
+	<body>
+		<a class="skip" href="#main">Skip to content</a>
+		<header>
+			<a class="logo" href="/">{SITE_TITLE}</a>
+			<nav aria-label="Main">
+				{NAV.map(({ href, label }) => <a href={href}>{label}</a>)}
+			</nav>
+		</header>
+		<main id="main">
+			<slot />
+		</main>
+		<footer>
+			<span>© {year} {AUTHOR.name} — unhappypath.dev</span>
+			<a href="/rss.xml">RSS</a>
+		</footer>
+	</body>
+</html>

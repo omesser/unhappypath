@@ -1,0 +1,474 @@
+/*
+ * unhappy path — one stylesheet, no framework (ADR-0002).
+ * Every colour pair below is verified against WCAG AA by `node scripts/contrast.mjs`.
+ * Dark mode is OS-driven only: no toggle, no JS, no persistence (spec §2.2).
+ */
+
+:root {
+	color-scheme: light dark;
+
+	--bg: #fbfbf9;
+	--surface: #f4f4f1;
+	--pill: #eeeeea;
+	--border: #e3e3dd;
+	--fg: #1f2328;
+	--muted: #5b6470;
+	--pill-fg: #4a5460;
+	--link: #1f4f8b;
+
+	--measure: 68ch;
+	--font: var(--font-inter), system-ui, sans-serif;
+	--radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #14171a;
+		--surface: #1c2024;
+		--pill: #22262b;
+		--border: #2b3137;
+		--fg: #e8eaed;
+		--muted: #a3abb5;
+		--pill-fg: #b6bec8;
+		--link: #8ab4f8;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--fg);
+	font-family: var(--font);
+	font-size: 1.0625rem;
+	line-height: 1.7;
+	-webkit-text-size-adjust: 100%;
+	text-rendering: optimizeLegibility;
+}
+
+/* Layout ------------------------------------------------------------------ */
+
+body > header,
+main,
+body > footer {
+	max-width: var(--measure);
+	margin-inline: auto;
+	padding-inline: 1.25rem;
+}
+
+main {
+	padding-block: 1rem 4rem;
+}
+
+/* Header: text links that wrap to a second line on narrow screens.
+   No hamburger, no menu state, no JS (spec §3). */
+body > header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.5rem 1.25rem;
+	padding-block: 2rem 1.5rem;
+}
+
+.logo {
+	font-weight: 700;
+	font-size: 1.0625rem;
+	letter-spacing: -0.01em;
+	color: var(--fg);
+	text-decoration: none;
+	margin-right: auto;
+}
+
+body > header nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 1rem;
+}
+
+body > header nav a {
+	color: var(--muted);
+	text-decoration: none;
+	font-size: 0.9375rem;
+}
+
+body > header nav a:hover,
+.logo:hover {
+	color: var(--link);
+}
+
+body > footer {
+	border-top: 1px solid var(--border);
+	padding-block: 1.5rem 3rem;
+	color: var(--muted);
+	font-size: 0.875rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 1rem;
+	justify-content: space-between;
+}
+
+/* Typography ------------------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+	line-height: 1.25;
+	letter-spacing: -0.015em;
+	margin: 0 0 0.5rem;
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: 1.875rem;
+}
+h2 {
+	font-size: 1.375rem;
+	margin-top: 0;
+}
+h3 {
+	font-size: 1.0625rem;
+}
+
+p,
+ul,
+ol {
+	margin: 0 0 1.15rem;
+}
+
+a {
+	color: var(--link);
+	text-underline-offset: 0.15em;
+}
+
+:focus-visible {
+	outline: 2px solid var(--link);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+.skip {
+	position: absolute;
+	left: -9999px;
+}
+.skip:focus {
+	left: 1rem;
+	top: 0.5rem;
+	z-index: 1;
+	background: var(--bg);
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+}
+
+.muted {
+	color: var(--muted);
+}
+
+/* Homepage sections ------------------------------------------------------ */
+
+section {
+	padding-block: 2.25rem 0;
+}
+
+section + section {
+	border-top: 1px solid var(--border);
+	margin-top: 2.25rem;
+}
+
+.section-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.5rem 1rem;
+}
+
+/* Hero: photo beside text on desktop, stacked on mobile (spec §4.1). */
+.hero {
+	display: flex;
+	gap: 1.5rem;
+	align-items: flex-start;
+	padding-top: 0.5rem;
+}
+
+.hero img {
+	width: 104px;
+	height: 104px;
+	border-radius: 50%;
+	background: var(--surface);
+	flex: none;
+}
+
+.hero-body {
+	min-width: 0;
+}
+
+.tagline {
+	color: var(--muted);
+	margin-top: -0.25rem;
+}
+
+@media (max-width: 34rem) {
+	.hero {
+		flex-direction: column;
+	}
+}
+
+.socials {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	font-size: 0.9375rem;
+	margin-bottom: 0;
+}
+
+/* Projects: 2 columns on desktop, 1 on mobile (spec §4.2). */
+.projects {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+	margin-top: 1.25rem;
+}
+
+@media (max-width: 40rem) {
+	.projects {
+		grid-template-columns: 1fr;
+	}
+}
+
+.card {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 1rem 1.15rem;
+}
+
+.card h3 {
+	margin-bottom: 0.35rem;
+}
+
+.card h3 a {
+	text-decoration: none;
+}
+
+.card h3 a:hover {
+	text-decoration: underline;
+}
+
+.card p {
+	margin-bottom: 0.75rem;
+	font-size: 0.9375rem;
+}
+
+.card p:last-child {
+	margin-bottom: 0;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	list-style: none;
+	padding: 0;
+	margin: 0 0 0.75rem;
+}
+
+.tags li {
+	background: var(--pill);
+	color: var(--pill-fg);
+	border-radius: 999px;
+	padding: 0.1rem 0.55rem;
+	font-size: 0.75rem;
+	margin: 0;
+}
+
+.card-links {
+	display: flex;
+	gap: 1rem;
+	font-size: 0.875rem;
+	margin: 0;
+}
+
+/* Post lists ------------------------------------------------------------- */
+
+.posts {
+	list-style: none;
+	padding: 0;
+	margin: 1.25rem 0 1rem;
+}
+
+.posts li + li {
+	margin-top: 1.25rem;
+}
+
+.posts time {
+	display: block;
+	color: var(--muted);
+	font-size: 0.8125rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.posts h3 {
+	margin-bottom: 0.15rem;
+}
+
+.posts h3 a {
+	text-decoration: none;
+}
+
+.posts h3 a:hover {
+	text-decoration: underline;
+}
+
+.posts p {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.9375rem;
+}
+
+/* Fun links: a plain Markdown list, styled lightly (spec §4.4). */
+.fun h3 {
+	margin: 1.5rem 0 0.5rem;
+	color: var(--muted);
+	font-size: 0.8125rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.fun ul {
+	padding-left: 1.15rem;
+}
+
+.fun li {
+	margin-bottom: 0.4rem;
+}
+
+/* Article ---------------------------------------------------------------- */
+
+article header {
+	margin-bottom: 2rem;
+}
+
+.byline {
+	color: var(--muted);
+	font-size: 0.875rem;
+	margin: 0;
+}
+
+.hero-img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	border-radius: var(--radius);
+	margin: 0 0 2rem;
+}
+
+.prose > :first-child {
+	margin-top: 0;
+}
+
+.prose h2 {
+	margin-top: 2.25rem;
+}
+
+.prose h3 {
+	margin-top: 1.75rem;
+}
+
+.prose img,
+.prose iframe,
+.prose video {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--radius);
+	display: block;
+	margin: 1.5rem 0;
+}
+
+.prose iframe {
+	aspect-ratio: 16 / 9;
+	width: 100%;
+	border: 0;
+}
+
+.prose blockquote {
+	margin: 1.5rem 0;
+	padding-left: 1rem;
+	border-left: 3px solid var(--border);
+	color: var(--muted);
+}
+
+.prose :not(pre) > code {
+	background: var(--pill);
+	border-radius: 4px;
+	padding: 0.1em 0.35em;
+	font-size: 0.9em;
+}
+
+.prose pre {
+	padding: 1rem 1.15rem;
+	border-radius: var(--radius);
+	overflow-x: auto;
+	font-size: 0.875rem;
+	line-height: 1.55;
+}
+
+/* Shiki writes the light theme inline and the dark one as custom properties, so
+   overriding it needs !important. This is the documented dual-theme approach. */
+@media (prefers-color-scheme: dark) {
+	.astro-code,
+	.astro-code span {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
+	}
+}
+
+.prose table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9375rem;
+	margin: 1.5rem 0;
+	display: block;
+	overflow-x: auto;
+}
+
+.prose th,
+.prose td {
+	border: 1px solid var(--border);
+	padding: 0.4rem 0.65rem;
+	text-align: left;
+}
+
+.prose hr {
+	border: 0;
+	border-top: 1px solid var(--border);
+	margin: 2.5rem 0;
+}
+
+/* A clearly-marked stub, so nothing placeholder-ish ships unnoticed (ADR-0006). */
+.stub {
+	background: var(--pill);
+	border: 1px dashed var(--muted);
+	border-radius: var(--radius);
+	padding: 0.75rem 1rem;
+	font-size: 0.875rem;
+	color: var(--pill-fg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
