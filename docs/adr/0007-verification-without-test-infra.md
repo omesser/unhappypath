@@ -12,9 +12,19 @@ initial HTML for non-JS-executing AI crawlers (spec §8), and valid RSS/sitemap/
 
 ## Decision
 
-`npm run check` = `astro check && astro build`, and it must pass with zero errors. `astro check`
-covers TypeScript and the content-collection schemas, so a malformed project frontmatter or a
-broken content reference fails there.
+`npm run check` = `astro check && astro build && node scripts/check-urls.mjs`, and it must pass
+with zero errors. `astro check` covers TypeScript and the content-collection schemas, so a
+malformed project frontmatter or a broken content reference fails there.
+
+`scripts/check-urls.mjs` was added during implementation — a ~40-line, zero-dependency script
+that asserts the output invariants which fail *silently*: every canonical/`og:url`/sitemap/feed
+URL is in the one canonical form (ADR-0004), every page has a canonical, and every feed item
+carries full content (spec §8). It earned its place immediately by catching two real defects
+the rendered pages looked fine with. This is not the CI browser automation rejected below; it
+reads `dist/` and needs no browser.
+
+`scripts/contrast.mjs` is the other one: it computes the WCAG ratio for every colour pair the
+stylesheet actually uses, so the palette claim below is arithmetic rather than an opinion.
 
 Hand-verified before the PR, and re-verified whenever the palette or layout changes:
 

@@ -40,7 +40,9 @@ or the routing.
 | `src/content/projects/` | One `.md` per project card |
 | `src/content/fun-links.md` | The whole Fun Links list, hand-written |
 | `src/styles/global.css` | Palette custom properties, typography, light + dark |
-| `public/og.png` | The single site-wide social card |
+| `src/consts.ts` | Tagline, contact email, analytics code, nav — the `TODO(oded)` knobs |
+| `scripts/` | `check-urls.mjs` (runs in `npm run check`), `contrast.mjs`, `render-assets.mjs` |
+| `public/og.png` | The single site-wide social card, rendered from `spec/og.svg` |
 
 ## Open TODOs owned by Oded
 

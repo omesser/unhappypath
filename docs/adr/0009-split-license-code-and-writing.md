@@ -1,4 +1,4 @@
-# ADR-0008: Split licensing — MIT for code, CC BY 4.0 for writing
+# ADR-0009: Split licensing — MIT for code, CC BY 4.0 for writing
 
 - **Date:** 2026-07-30
 - **Status:** Accepted

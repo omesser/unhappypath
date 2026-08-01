@@ -18,8 +18,15 @@ door open to a system font stack.
 `:root` block and a `@media (prefers-color-scheme: dark)` override — plus Astro's built-in
 scoped `<style>` blocks in each component for layout local to that component.
 
-**Self-hosted Inter**, latin subset, one preloaded `woff2` (~35KB), imported through
-`@fontsource-variable/inter`. No font CDN.
+**Self-hosted Inter**, latin subset, one preloaded `woff2`. No font CDN.
+
+*Mechanism revised during implementation:* Astro 7 has a first-party `fonts:` config with
+`fontProviders.fontsource()` and a `<Font preload />` component. It downloads the font at
+build time and serves it from our own origin, emits the `@font-face` and the preload link,
+and generates metric-matched fallbacks. Same decision, one fewer dependency than
+`@fontsource-variable/inter` — the platform feature beats the package. The build now needs
+network access to fetch the font (Cloudflare and Actions both have it); an offline build
+would need `fontProviders.local()` with the `woff2` committed.
 
 Tailwind was rejected: it adds a dependency and a build step, needs a second dependency
 (`@tailwindcss/typography`) just to satisfy the spec's reading rules, and utility-dense markup
