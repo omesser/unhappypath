@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404" description="This page does not exist.">
+	<h1>404 — you have reached the unhappy path.</h1>
+	<p class="muted">(Working as intended.)</p>
+	<p>
+		Nothing lives at <code>{Astro.url.pathname}</code>. Try
+		<a href="/">the homepage</a> or <a href="/writing">the writing archive</a>.
+	</p>
+</BaseLayout>

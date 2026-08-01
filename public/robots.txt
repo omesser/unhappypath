@@ -1,0 +1,19 @@
+# Allow everything, including AI crawlers (spec §8, ADR-0008 for the reasoning).
+#
+# Answer engines — NEVER block these. Blocking OAI-SearchBot removes this site
+# from ChatGPT search answers, which defeats the whole point:
+#   OAI-SearchBot, Claude-SearchBot, PerplexityBot, Googlebot, Bingbot
+#
+# Training crawlers — a personal call, and blocking them does NOT affect
+# citability in search or answer engines:
+#   GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended
+# v1 allows them. To opt out later, add per-agent Disallow blocks here.
+#
+# NOTE: this file is not the whole story. Cloudflare can block AI crawlers at the
+# edge and serve its own managed robots.txt regardless of what is written here —
+# audit AI Crawl Control in the dashboard, or the AEO story fails invisibly.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://unhappypath.dev/sitemap.xml
