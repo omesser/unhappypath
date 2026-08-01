@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { AUTHOR } from '../../consts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { fullDate, isoDate } from '../../utils';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('writing');
+	return posts.map((post) => ({ params: { slug: post.id }, props: post }));
+}
+type Props = CollectionEntry<'writing'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+const { title, description, pubDate, updatedDate, heroImage } = post.data;
+
+const home = new URL('/', Astro.site).href;
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description,
+	url: new URL(`/writing/${post.id}`, Astro.site).href,
+	datePublished: isoDate(pubDate),
+	...(updatedDate ? { dateModified: isoDate(updatedDate) } : {}),
+	author: {
+		'@type': 'Person',
+		'@id': `${home}#person`,
+		name: AUTHOR.name,
+		url: home,
+		sameAs: [AUTHOR.github, AUTHOR.linkedin],
+	},
+	image: new URL('/og.png', Astro.site).href,
+	mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(`/writing/${post.id}`, Astro.site).href },
+};
+---
+
+<BaseLayout title={title} description={description} ogType="article" jsonLd={jsonLd}>
+	<article>
+		<header>
+			<h1>{title}</h1>
+			<p class="byline">
+				<a href="/#about">{AUTHOR.name}</a>{' · '}<time datetime={isoDate(pubDate)}>
+					{fullDate(pubDate)}
+				</time>{
+					updatedDate && (
+						<>
+							{' · updated '}
+							<time datetime={isoDate(updatedDate)}>{fullDate(updatedDate)}</time>
+						</>
+					)
+				}
+			</p>
+		</header>
+		{
+			heroImage && (
+				<Image
+					class="hero-img"
+					src={heroImage}
+					alt=""
+					widths={[480, 800]}
+					sizes="(max-width: 40rem) 100vw, 68ch"
+				/>
+			)
+		}
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+	<p><a href="/writing">← Back to Writing</a></p>
+</BaseLayout>
