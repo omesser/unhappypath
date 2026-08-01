@@ -1,0 +1,117 @@
+---
+import { getCollection, render } from 'astro:content';
+import { AUTHOR, SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
+import { Content as FunLinks } from '../content/fun-links.md';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { isoDate, monthYear } from '../utils';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const cards = await Promise.all(
+	projects.map(async (p) => ({ ...p, Body: (await render(p)).Content })),
+);
+
+const posts = (await getCollection('writing')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const recent = posts.slice(0, 5);
+
+// Person + WebSite (spec §8). The Person node carries the authorship a human
+// visitor never sees in large type — sameAs is what makes it an entity.
+const home = new URL('/', Astro.site).href;
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${home}#website`,
+			url: home,
+			name: SITE_TITLE,
+			description: SITE_DESCRIPTION,
+			publisher: { '@id': `${home}#person` },
+		},
+		{
+			'@type': 'Person',
+			'@id': `${home}#person`,
+			name: AUTHOR.name,
+			url: home,
+			sameAs: [AUTHOR.github, AUTHOR.linkedin],
+		},
+	],
+};
+---
+
+<BaseLayout jsonLd={jsonLd}>
+	<section id="about" class="hero">
+		{/* TODO(oded): replace /avatar.svg with a real photo, then set a descriptive alt. */}
+		<img src="/avatar.svg" width="104" height="104" alt="" />
+		<div class="hero-body">
+			<h1>{SITE_TITLE} <span class="muted">| {SITE_TAGLINE}</span></h1>
+			<p class="stub">
+				<strong>TODO(oded): bio, 150–350 words.</strong> Honest and direct, no fluff. Cover: who
+				you are and what you're doing now; the past experience that actually matters; and what
+				you're currently obsessed with (systems, AI-native orgs, engineering leadership, unhappy
+				paths). Tagline options are in <code>src/consts.ts</code>.
+			</p>
+			<p class="socials">
+				<a href={AUTHOR.github}>GitHub</a>
+				<a href={AUTHOR.linkedin}>LinkedIn</a>
+			</p>
+		</div>
+	</section>
+
+	<section id="projects">
+		<div class="section-head">
+			<h2>Projects</h2>
+			<p class="muted"><small>A few things I've built or contributed to.</small></p>
+		</div>
+		<div class="projects">
+			{
+				cards.map(({ data, Body }) => (
+					<article class="card">
+						<h3><a href={data.github}>{data.title}</a></h3>
+						<Body />
+						{data.tags.length > 0 && (
+							<ul class="tags">
+								{data.tags.map((t) => (
+									<li>{t}</li>
+								))}
+							</ul>
+						)}
+						<p class="card-links">
+							<a href={data.github}>GitHub</a>
+							{data.live && <a href={data.live}>Live</a>}
+						</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section id="writing">
+		<div class="section-head">
+			<h2>Writing</h2>
+			<p class="muted"><small>Timeless notes on engineering, systems, and leadership.</small></p>
+		</div>
+		<ul class="posts">
+			{
+				recent.map((post) => (
+					<li>
+						<time datetime={isoDate(post.data.pubDate)}>{monthYear(post.data.pubDate)}</time>
+						<h3><a href={`/writing/${post.id}`}>{post.data.title}</a></h3>
+						<p>{post.data.description}</p>
+					</li>
+				))
+			}
+		</ul>
+		<p>
+			<a href="/writing">Browse all writing →</a>
+			<span class="muted"> · </span>
+			<a href="/rss.xml">RSS</a>
+		</p>
+	</section>
+
+	<section id="fun" class="fun">
+		<h2>Fun Links</h2>
+		<FunLinks />
+	</section>
+</BaseLayout>
