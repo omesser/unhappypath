@@ -1,0 +1,25 @@
+<!--
+  Source for public/og.png (ADR-0006). Re-render with `npm run assets` after
+  changing the tagline. Uses a system font stack on purpose: this is rasterized
+  by sharp/librsvg at author time, which has no access to the site's webfont.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+	<rect width="1200" height="630" fill="#fbfbf9" />
+	<rect x="0" y="0" width="1200" height="10" fill="#1f4f8b" />
+
+	<g fill="none" stroke-width="9" stroke-linecap="round" transform="translate(96 118) scale(2.6)">
+		<path stroke="#b4b8bd" d="M0 0h26" />
+		<path stroke="#b4b8bd" d="M44 0h26" />
+		<path stroke="#1f4f8b" d="M26 0c12 0 12 44 26 44" />
+		<path stroke="#1f4f8b" d="M62 34l12 10-12 10" />
+	</g>
+
+	<text x="96" y="392" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="104"
+		font-weight="700" letter-spacing="-3" fill="#1f2328">unhappy path</text>
+
+	<text x="96" y="460" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="42"
+		fill="#5b6470">Software engineering hijinks</text>
+
+	<text x="96" y="556" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30"
+		font-weight="700" fill="#1f4f8b">unhappypath.dev</text>
+</svg>
