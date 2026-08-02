@@ -14,8 +14,10 @@
 
 ### Deep Dives
 
+- [Staff archetypes](https://staffeng.com/guides/staff-archetypes/) — Will Larson's Tech Lead / Architect / Solver / Right Hand map; useful when "staff engineer" is doing too much work as one title.
 - [Falsehoods programmers believe about time](https://gist.github.com/timvisee/fcda9bbdff88d45cc9061606b4b923ca) — TODO(oded): example item. The good ones are the ones that changed how you work.
 
 ### Misc
 
+- [Behold, the Product Management Prioritization Menagerie](https://www.deanondelivery.com/product_management/behold-the-product-management-prioritization-menagerie/) — HiPPO, RHiNO, ZEbRA, WoLF, and seagulls: a field guide to the animals that eat your backlog.
 - [Wat](https://www.destroyallsoftware.com/talks/wat) — TODO(oded): example item. Still funny.
