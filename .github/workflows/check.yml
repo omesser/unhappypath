@@ -5,6 +5,10 @@ name: check
 on:
   pull_request:
 
+# Read-only: the job builds and inspects the tree, and writes nothing back.
+permissions:
+  contents: read
+
 concurrency:
   group: check-${{ github.ref }}
   cancel-in-progress: true

@@ -22,7 +22,10 @@ Everything is Markdown.
 |---|---|
 | Posts | `src/content/writing/<slug>/index.md` — frontmatter + full Markdown body, images colocated in the same folder |
 | Projects | `src/content/projects/<slug>.md` — frontmatter (`title`, `github`, `live`, `tags`, `order`), body is the card description, so it can carry inline links and emphasis |
-| Fun Links | `src/content/fun-links.md` — one hand-written Markdown file; `##` headings group, bullets are the items. No schema. |
+| Fun Links | `src/content/fun-links.md` — one hand-written Markdown file; `###` headings group, bullets are the items. No schema. |
+
+Fun Links uses `###`, not `##`: the file renders inside the homepage's "Fun Links" `<h2>`, so
+`##` would emit sibling h2s and break the H1→H2→H3 hierarchy spec §8 requires.
 
 Fun Links gets no per-item schema because spec §4.4 asks for "a simple bulleted list" — a file
 per bullet would be ten files for ten lines.

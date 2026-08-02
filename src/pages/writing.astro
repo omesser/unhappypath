@@ -15,5 +15,5 @@ const posts = (await getCollection('writing')).sort(byNewest);
 	<p class="muted">
 		Everything, newest first. <a href="/rss.xml">RSS</a>.
 	</p>
-	<PostList posts={posts} />
+	<PostList posts={posts} level={2} />
 </BaseLayout>

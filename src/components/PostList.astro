@@ -4,9 +4,16 @@ import { isoDate, monthYear, postPath } from '../utils';
 
 interface Props {
 	posts: CollectionEntry<'writing'>[];
+	/**
+	 * Heading level for post titles, so the hierarchy stays H1→H2→H3 (spec §8).
+	 * h3 on the homepage, where the section's own "Writing" h2 sits above the list;
+	 * h2 on the archive, where the page h1 is the only heading above it.
+	 */
+	level?: 2 | 3;
 }
 
-const { posts } = Astro.props;
+const { posts, level = 3 } = Astro.props;
+const Title = `h${level}` as 'h2' | 'h3';
 ---
 
 <ul class="posts">
@@ -14,9 +21,9 @@ const { posts } = Astro.props;
 		posts.map((post) => (
 			<li>
 				<time datetime={isoDate(post.data.pubDate)}>{monthYear(post.data.pubDate)}</time>
-				<h3>
+				<Title>
 					<a href={postPath(post)}>{post.data.title}</a>
-				</h3>
+				</Title>
 				<p>{post.data.description}</p>
 			</li>
 		))

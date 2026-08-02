@@ -16,12 +16,17 @@ authenticated as `omesser`.
 ## Decision
 
 **Stubs, TODO-marked:** bio (with inline structure prompts, 150–350 words), three tagline
-drafts to choose from, three example fun-links bullets, a neutral SVG avatar placeholder, and
-a placeholder personal email on `/contact`.
+drafts to choose from, three example fun-links bullets, and a neutral SVG avatar placeholder.
+
+*Revised during implementation:* `/contact` ships **no** placeholder email. `CONTACT_EMAIL` in
+`src/consts.ts` starts empty and the page renders a TODO box instead of an address — a fake
+`mailto:` is a broken link on the one page whose entire job is being reachable, and it would
+have looked real enough to escape notice. Setting the constant turns the box into the link.
 
 **Seeded from real data:** project cards are pre-filled from `gh repo list omesser` (name,
-description, primary language → tags, URL) so curation is pruning 8 down to 4–6 rather than
-typing from scratch. Social links use the real URLs from spec §4.1.
+description, primary language → tags, URL) so curation is pruning rather than typing from
+scratch. Five cards were seeded; spec §4.2 wants 4–8 curated. Social links use the real URLs
+from spec §4.1.
 
 **Demo posts:** two stub posts that exercise the Markdown surface — headings, code fence,
 colocated image, raw `<iframe>` — so the reading layout is verifiable before real content lands.

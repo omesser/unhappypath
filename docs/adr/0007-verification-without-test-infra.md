@@ -16,7 +16,7 @@ initial HTML for non-JS-executing AI crawlers (spec §8), and valid RSS/sitemap/
 with zero errors. `astro check` covers TypeScript and the content-collection schemas, so a
 malformed project frontmatter or a broken content reference fails there.
 
-`scripts/check-urls.mjs` was added during implementation — a ~40-line, zero-dependency script
+`scripts/check-urls.mjs` was added during implementation — a ~65-line, zero-dependency script
 that asserts the output invariants which fail *silently*: every canonical/`og:url`/sitemap/feed
 URL is in the one canonical form (ADR-0004), every page has a canonical, and every feed item
 carries full content (spec §8). It earned its place immediately by catching two real defects

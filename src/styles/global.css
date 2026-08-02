@@ -209,11 +209,6 @@ section + section {
 	min-width: 0;
 }
 
-.tagline {
-	color: var(--muted);
-	margin-top: -0.25rem;
-}
-
 @media (max-width: 34rem) {
 	.hero {
 		flex-direction: column;
@@ -314,15 +309,18 @@ section + section {
 	font-variant-numeric: tabular-nums;
 }
 
-.posts h3 {
+/* The title tag varies with the heading level the page needs (PostList `level`),
+   so the list looks identical whether it renders h2 or h3. */
+.posts :is(h2, h3) {
 	margin-bottom: 0.15rem;
+	font-size: 1.0625rem;
 }
 
-.posts h3 a {
+.posts :is(h2, h3) a {
 	text-decoration: none;
 }
 
-.posts h3 a:hover {
+.posts :is(h2, h3) a:hover {
 	text-decoration: underline;
 }
 
