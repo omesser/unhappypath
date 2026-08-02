@@ -10,6 +10,8 @@ Node 22+ (`.nvmrc` pins the major; `nvm use`).
 ```sh
 npm install
 npm run dev      # http://localhost:4321
+npm run build    # static site → dist/
+npm run preview  # serve dist/ locally
 npm run check    # format check + astro check + build + URL/link check — must pass before pushing
 npm run format   # apply formatting (prettier)
 npm run assets   # re-render public/og.png from spec/og.svg (only after a tagline change)
@@ -18,6 +20,36 @@ npm run assets   # re-render public/og.png from spec/og.svg (only after a taglin
 There is no pre-commit hook and no second entry point: `npm run check` is the whole gate, and
 CI runs exactly that on every PR. Formatting covers code, config and `src/content/`; the
 ADRs, the spec and this file are hand-written and deliberately left alone (ADR-0012).
+
+## Build
+
+`npm run build` runs Astro's static build. Output is `dist/` (`build.format: 'file'` — see
+ADR-0004), so pages land as `index.html`, `notes.html`, `notes/<slug>.html`, etc.
+
+Cloudflare Pages project settings (Git integration):
+
+| Setting | Value |
+| --- | --- |
+| Framework preset | Astro |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node version | from `.nvmrc` (`22`) |
+
+No Wrangler config and no Cloudflare credentials in this repo — Pages builds from Git.
+
+## Deploy
+
+Cloudflare Pages owns deployment (ADR-0005). GitHub Actions only runs `npm run check` on
+PRs; it never deploys.
+
+| Event | What happens |
+| --- | --- |
+| Push / merge to `main` | Production deploy → [unhappypath.dev](https://unhappypath.dev) |
+| Push to any other branch / open a PR | Preview deploy (Cloudflare gives a `*.pages.dev` URL) |
+
+`main` is production. There is no `draft:` flag for posts — keep unfinished work on a
+branch. Custom domain and the first Pages ↔ GitHub connect are dashboard one-time setup
+in the Cloudflare account that holds `unhappypath.dev`.
 
 ## Adding content
 
