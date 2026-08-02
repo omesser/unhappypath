@@ -33,6 +33,16 @@ export default defineConfig({
 		},
 	},
 
+	// Tooling dirs are gitignored but Vite still watches the project root; changes
+	// there shouldn't trigger HMR during `astro dev`.
+	vite: {
+		server: {
+			watch: {
+				ignored: ['**/.claude/**', '**/.idea/**', '**/.cursor/**'],
+			},
+		},
+	},
+
 	// ponytail: sitemap is hand-rolled at src/pages/sitemap.xml.ts instead of
 	// @astrojs/sitemap — see ADR-0004. The integration cannot know post dates, and
 	// spec §8 requires truthful <lastmod>.

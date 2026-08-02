@@ -10,7 +10,7 @@
 
 ### Tools
 
-- [ripgrep](https://github.com/BurntSushi/ripgrep) — TODO(oded): example item. Say in one line why it earned a place here, not what it is.
+- [thefuck](https://github.com/nvbn/thefuck) — it's ok to be mad when you typo. This terminal cli helps catch and correct simple command typos.
 
 ### Deep Dives
 

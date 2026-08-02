@@ -1,6 +1,6 @@
 # unhappypath.dev
 
-Personal site of Oded Messer. Static [Astro](https://astro.build), Markdown
+The Unhappy Path website. Static [Astro](https://astro.build), Markdown
 content, deployed on Cloudflare Pages.
 
 ## Running it
