@@ -52,7 +52,8 @@ or the routing.
 
 ## Open TODOs owned by Oded
 
-Tracked in spec §9. Live ones: tagline pick, project curation, first posts, fun links,
+Tracked in spec §9. Live ones: tagline pick, project curation, fun links polish,
 Cloudflare **AI Crawl Control** audit (else AEO fails silently), Google Search Console +
 Bing Webmaster registration (see `docs/register-search-consoles.md`). Contact email, bio,
-GoatCounter (`unhappypath`), and profile photo (`public/avatar.jpg`) are set.
+GoatCounter (`unhappypath`), profile photo (`public/avatar.jpg`), and first note
+(`staff-archetypes-and-ai`) are set.
