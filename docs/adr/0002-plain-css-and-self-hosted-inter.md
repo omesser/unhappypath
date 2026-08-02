@@ -18,6 +18,12 @@ door open to a system font stack.
 `:root` block and a `@media (prefers-color-scheme: dark)` override — plus Astro's built-in
 scoped `<style>` blocks in each component for layout local to that component.
 
+*Revised during implementation:* in practice **all** of the CSS is in `global.css` and no
+component carries a scoped `<style>` block. The page set is small enough that every class
+(`.card`, `.posts`, `.prose`, `.tags`) is used by two or more pages, so scoping any of them
+would mean duplicating it. Scoped styles stay available for the first genuinely
+single-component rule; there isn't one yet.
+
 **Self-hosted Inter**, latin subset, one preloaded `woff2`. No font CDN.
 
 *Mechanism revised during implementation:* Astro 7 has a first-party `fonts:` config with

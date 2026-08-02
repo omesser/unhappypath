@@ -21,9 +21,15 @@ if (pages.length === 0) problems.push('dist/ has no HTML — did the build run?'
 for (const page of pages) {
 	const html = await readFile(`dist/${page}`, 'utf8');
 
+	// Error pages carry noindex instead of a canonical (nothing should treat them
+	// as a destination), so they are exempt from the canonical requirement only.
+	const noindex = /name="robots" content="noindex"/.test(html);
+
 	const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
-	if (!canonical) problems.push(`${page}: no canonical URL`);
-	else if (badForm(canonical)) problems.push(`${page}: canonical ${badForm(canonical)} — ${canonical}`);
+	if (!canonical && !noindex) problems.push(`${page}: no canonical URL and no noindex`);
+	else if (canonical && noindex) problems.push(`${page}: has both a canonical and noindex`);
+	else if (canonical && badForm(canonical))
+		problems.push(`${page}: canonical ${badForm(canonical)} — ${canonical}`);
 
 	const ogUrl = html.match(/property="og:url" content="([^"]+)"/)?.[1];
 	if (!ogUrl) problems.push(`${page}: no og:url`);

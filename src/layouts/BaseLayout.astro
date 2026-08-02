@@ -18,9 +18,17 @@ interface Props {
 	ogType?: 'website' | 'article';
 	/** JSON-LD graph for this page (spec §8). */
 	jsonLd?: object;
+	/** Error pages only: keep them out of the index and emit no canonical. */
+	noindex?: boolean;
 }
 
-const { title, description = SITE_DESCRIPTION, ogType = 'website', jsonLd } = Astro.props;
+const {
+	title,
+	description = SITE_DESCRIPTION,
+	ogType = 'website',
+	jsonLd,
+	noindex = false,
+} = Astro.props;
 
 const pageTitle = title ? `${title} — ${SITE_TITLE}` : `${SITE_TITLE} — ${SITE_TAGLINE}`;
 // ADR-0004: one URL form everywhere — no trailing slash, no .html extension.
@@ -36,7 +44,7 @@ const year = new Date().getFullYear();
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>{pageTitle}</title>
 		<meta name="description" content={description} />
-		<link rel="canonical" href={canonical} />
+		{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="sitemap" href="/sitemap.xml" />
 		<link
@@ -70,7 +78,7 @@ const year = new Date().getFullYear();
 			import.meta.env.PROD && GOATCOUNTER_CODE && (
 				<script
 					is:inline
-					defer
+					async
 					src="https://gc.zgo.at/count.js"
 					data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`}
 				/>

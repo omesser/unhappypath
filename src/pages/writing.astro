@@ -1,11 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
+import PostList from '../components/PostList.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { isoDate, monthYear } from '../utils';
+import { byNewest } from '../utils';
 
-const posts = (await getCollection('writing')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection('writing')).sort(byNewest);
 ---
 
 <BaseLayout
@@ -16,15 +15,5 @@ const posts = (await getCollection('writing')).sort(
 	<p class="muted">
 		Everything, newest first. <a href="/rss.xml">RSS</a>.
 	</p>
-	<ul class="posts">
-		{
-			posts.map((post) => (
-				<li>
-					<time datetime={isoDate(post.data.pubDate)}>{monthYear(post.data.pubDate)}</time>
-					<h3><a href={`/writing/${post.id}`}>{post.data.title}</a></h3>
-					<p>{post.data.description}</p>
-				</li>
-			))
-		}
-	</ul>
+	<PostList posts={posts} />
 </BaseLayout>

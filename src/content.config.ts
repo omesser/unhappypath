@@ -28,8 +28,8 @@ const projects = defineCollection({
 	loader: glob({ base: './src/content/projects', pattern: '*.md' }),
 	schema: z.object({
 		title: z.string(),
-		github: z.string().url(),
-		live: z.string().url().optional(),
+		github: z.url(),
+		live: z.url().optional(),
 		tags: z.array(z.string()).default([]),
 		order: z.number(),
 	}),

@@ -1,5 +1,14 @@
-// ponytail: throwaway audit script, not shipped code — proves the palette meets WCAG AA
-// (ADR-0007 requires computed contrast ratios, not eyeballed ones). Run: node scripts/contrast.mjs
+// ponytail: throwaway audit script, not shipped code — ADR-0007 requires computed
+// contrast ratios rather than eyeballed ones. Run: node scripts/contrast.mjs
+//
+// Every pair below is a foreground/background combination global.css actually
+// produces. Keep it in sync when the palette changes, or the claim at the top of
+// global.css stops being true.
+//
+// Deliberately absent: --border (#e3e3dd light / #2b3137 dark). It draws dividers
+// and card outlines only — decorative, conveys no information, and WCAG sets no
+// minimum for it. The focus ring is --link, which is audited below at the 3:1 UI
+// threshold.
 const lum = (hex) => {
 	const c = hex
 		.replace('#', '')
@@ -15,27 +24,25 @@ const ratio = (a, b) => {
 	return (x + 0.05) / (y + 0.05);
 };
 
-const pairs = [
-	['light body', '#1f2328', '#fbfbf9', 4.5],
-	['light muted', '#5b6470', '#fbfbf9', 4.5],
-	['light link', '#1f4f8b', '#fbfbf9', 4.5],
-	['light link on card', '#1f4f8b', '#f4f4f1', 4.5],
-	['light tag pill', '#4a5460', '#eeeeea', 4.5],
-	['light border/ui', '#7d858f', '#fbfbf9', 3.0],
-	['dark body', '#e8eaed', '#14171a', 4.5],
-	['dark muted', '#a3abb5', '#14171a', 4.5],
-	['dark link', '#8ab4f8', '#14171a', 4.5],
-	['dark link on card', '#8ab4f8', '#1c2024', 4.5],
-	['dark tag pill', '#b6bec8', '#22262b', 4.5],
-	['dark border/ui', '#6b737d', '#14171a', 3.0],
+const light = { bg: '#fbfbf9', surface: '#f4f4f1', pill: '#eeeeea', fg: '#1f2328', muted: '#5b6470', pillFg: '#4a5460', link: '#1f4f8b' };
+const dark = { bg: '#14171a', surface: '#1c2024', pill: '#22262b', fg: '#e8eaed', muted: '#a3abb5', pillFg: '#b6bec8', link: '#8ab4f8' };
+
+const pairs = (p, mode) => [
+	[`${mode} body text`, p.fg, p.bg, 4.5],
+	[`${mode} muted text (tagline, dates, teasers)`, p.muted, p.bg, 4.5],
+	[`${mode} link`, p.link, p.bg, 4.5],
+	[`${mode} card body text`, p.fg, p.surface, 4.5],
+	[`${mode} card link/heading`, p.link, p.surface, 4.5],
+	[`${mode} tag pill + stub box`, p.pillFg, p.pill, 4.5],
+	[`${mode} focus ring (UI component, 3:1)`, p.link, p.bg, 3.0],
 ];
 
 let failed = 0;
-for (const [name, fg, bg, min] of pairs) {
+for (const [name, fg, bg, min] of [...pairs(light, 'light'), ...pairs(dark, 'dark')]) {
 	const r = ratio(fg, bg);
 	const ok = r >= min;
 	if (!ok) failed++;
-	console.log(`${ok ? 'PASS' : 'FAIL'}  ${r.toFixed(2)}:1  (min ${min})  ${name}  ${fg} on ${bg}`);
+	console.log(`${ok ? 'PASS' : 'FAIL'}  ${r.toFixed(2)}:1  (min ${min})  ${name}`);
 }
-console.log(failed ? `\n${failed} pair(s) below AA` : '\nAll pairs meet WCAG AA');
+console.log(failed ? `\n${failed} pair(s) below the threshold` : '\nAll pairs meet WCAG AA');
 process.exit(failed ? 1 : 0);

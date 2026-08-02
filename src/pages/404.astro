@@ -2,11 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="404" description="This page does not exist.">
+{/* noindex: Cloudflare serves this with a 404 status, but nothing should treat the
+    error page itself as a destination worth indexing or canonicalising. */}
+<BaseLayout title="404" description="This page does not exist." noindex>
 	<h1>404 — you have reached the unhappy path.</h1>
 	<p class="muted">(Working as intended.)</p>
 	<p>
-		Nothing lives at <code>{Astro.url.pathname}</code>. Try
-		<a href="/">the homepage</a> or <a href="/writing">the writing archive</a>.
+		That URL does not exist. Try <a href="/">the homepage</a> or
+		<a href="/writing">the writing archive</a>.
 	</p>
 </BaseLayout>

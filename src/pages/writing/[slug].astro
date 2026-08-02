@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import { AUTHOR } from '../../consts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fullDate, isoDate } from '../../utils';
+import { fullDate, isoDate, personLd, postPath } from '../../utils';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('writing');
@@ -15,24 +15,18 @@ const post = Astro.props;
 const { Content } = await render(post);
 const { title, description, pubDate, updatedDate, heroImage } = post.data;
 
-const home = new URL('/', Astro.site).href;
+const url = new URL(postPath(post), Astro.site).href;
 const jsonLd = {
 	'@context': 'https://schema.org',
 	'@type': 'BlogPosting',
 	headline: title,
 	description,
-	url: new URL(`/writing/${post.id}`, Astro.site).href,
+	url,
 	datePublished: isoDate(pubDate),
 	...(updatedDate ? { dateModified: isoDate(updatedDate) } : {}),
-	author: {
-		'@type': 'Person',
-		'@id': `${home}#person`,
-		name: AUTHOR.name,
-		url: home,
-		sameAs: [AUTHOR.github, AUTHOR.linkedin],
-	},
+	author: personLd(Astro.site!),
 	image: new URL('/og.png', Astro.site).href,
-	mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(`/writing/${post.id}`, Astro.site).href },
+	mainEntityOfPage: { '@type': 'WebPage', '@id': url },
 };
 ---
 

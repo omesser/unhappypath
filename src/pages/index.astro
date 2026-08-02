@@ -1,19 +1,17 @@
 ---
 import { getCollection, render } from 'astro:content';
+import PostList from '../components/PostList.astro';
 import { AUTHOR, SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
 import { Content as FunLinks } from '../content/fun-links.md';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { isoDate, monthYear } from '../utils';
+import { byNewest, personLd } from '../utils';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const cards = await Promise.all(
 	projects.map(async (p) => ({ ...p, Body: (await render(p)).Content })),
 );
 
-const posts = (await getCollection('writing')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-const recent = posts.slice(0, 5);
+const recent = (await getCollection('writing')).sort(byNewest).slice(0, 5);
 
 // Person + WebSite (spec §8). The Person node carries the authorship a human
 // visitor never sees in large type — sameAs is what makes it an entity.
@@ -29,13 +27,7 @@ const jsonLd = {
 			description: SITE_DESCRIPTION,
 			publisher: { '@id': `${home}#person` },
 		},
-		{
-			'@type': 'Person',
-			'@id': `${home}#person`,
-			name: AUTHOR.name,
-			url: home,
-			sameAs: [AUTHOR.github, AUTHOR.linkedin],
-		},
+		personLd(Astro.site!),
 	],
 };
 ---
@@ -92,17 +84,7 @@ const jsonLd = {
 			<h2>Writing</h2>
 			<p class="muted"><small>Timeless notes on engineering, systems, and leadership.</small></p>
 		</div>
-		<ul class="posts">
-			{
-				recent.map((post) => (
-					<li>
-						<time datetime={isoDate(post.data.pubDate)}>{monthYear(post.data.pubDate)}</time>
-						<h3><a href={`/writing/${post.id}`}>{post.data.title}</a></h3>
-						<p>{post.data.description}</p>
-					</li>
-				))
-			}
-		</ul>
+		<PostList posts={recent} />
 		<p>
 			<a href="/writing">Browse all writing →</a>
 			<span class="muted"> · </span>

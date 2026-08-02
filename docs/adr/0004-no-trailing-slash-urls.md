@@ -51,7 +51,11 @@ are omitted deliberately: Google ignores them.
 ## Consequences
 
 - Canonicals, sitemap entries, RSS `link`s and internal `href`s are all written without a
-  trailing slash. Any future helper that builds URLs must match — or `check-urls.mjs` fails.
+  trailing slash. `postPath()` in `src/utils.ts` is the single place a post URL is built —
+  pages, feed and sitemap all call it, so the form cannot drift between them. Anything new that
+  builds a URL goes there too, or `check-urls.mjs` fails the build.
+- The 404 page carries `noindex` and no canonical: an error page is not a destination, and
+  canonicalising it invites indexing a soft 404.
 - The `*.pages.dev` preview domain must canonical back to `unhappypath.dev` so previews are
   not indexed as duplicates (spec §8).
 - `.dev` is HSTS-preloaded: never emit an `http://` URL for this domain.
