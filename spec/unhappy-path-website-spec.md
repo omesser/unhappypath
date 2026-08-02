@@ -149,7 +149,7 @@ Bring one back only if a section outgrows the homepage.
 - **Voice:** Senior engineering leader — direct, practical, no fluff, geeky curiosity welcome. Wry-but-warm, not bitter.
 - **Update cadence:** Low. Add when ready. No publishing schedule required.
 - **v1 ships with clearly-marked stub content**; Oded swaps in real content
-  (projects, posts, fun links). Bio is in; profile photo deferred.
+  (projects, posts, fun links). Bio and profile photo are in.
 
 ---
 
@@ -301,7 +301,7 @@ Open TODOs (Oded):
 - [x] GoatCounter → Settings: enable "ignore my own pageviews" so local/dev traffic stays out of the numbers
 - [ ] Pick hero tagline from drafted options
 - [x] Bio text (homepage About)
-- [~] Profile photo file — deferred; SVG avatar is fine for now
+- [x] Profile photo file (`public/avatar.jpg`)
 - [ ] 4–8 projects curated, first posts (LinkedIn conversions), fun links
 - [ ] Confirm git remote URL under "crd" before any push (do not push unasked)
 

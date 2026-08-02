@@ -39,6 +39,7 @@ export const personLd = (site: URL) => {
 		'@id': `${home}#person`,
 		name: AUTHOR.name,
 		url: home,
+		image: new URL('/avatar.jpg', site).href,
 		sameAs: [AUTHOR.github, AUTHOR.linkedin],
 	};
 };
