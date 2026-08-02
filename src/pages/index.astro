@@ -34,27 +34,22 @@ const jsonLd = {
 
 <BaseLayout jsonLd={jsonLd}>
 	<section id="about" class="hero">
-		<img
-			src="/avatar.jpg"
-			width="104"
-			height="104"
-			alt="Oded Messer — comic-style portrait"
-		/>
+		<img src="/avatar.jpg" width="104" height="104" alt="Oded Messer — comic-style portrait" />
 		<div class="hero-body">
 			<h1>{SITE_TITLE} <span class="muted">| {SITE_TAGLINE}</span></h1>
 			<p>
 				I lead cloud and data at Prisma Photonics — fiber sensing for critical infrastructure.
-				Before that I ran engineering at Iterative (DVC, CML), and spent a long stretch on
-				platform work at Iguazio and Intel.
+				Before that I ran engineering at Iterative (DVC, CML), and spent a long stretch on platform
+				work at Iguazio and Intel.
 			</p>
 			<p>
 				Most of what I care about is unglamorous: cutting friction, clarifying ownership, and
-				building systems teams can run without constant babysitting. Lately that includes
-				figuring out where AI actually helps engineering work, and where it doesn't.
+				building systems teams can run without constant babysitting. Lately that includes figuring
+				out where AI actually helps engineering work, and where it doesn't.
 			</p>
 			<p>
-				This site is for notes on those themes — systems, leadership, and the paths that don't
-				go as planned.
+				This site is for notes on those themes — systems, leadership, and the paths that don't go as
+				planned.
 			</p>
 			<p class="socials">
 				<a href={AUTHOR.github}>GitHub</a>
@@ -72,7 +67,9 @@ const jsonLd = {
 			{
 				cards.map(({ data, Body }) => (
 					<article class="card">
-						<h3><a href={data.github}>{data.title}</a></h3>
+						<h3>
+							<a href={data.github}>{data.title}</a>
+						</h3>
 						<Body />
 						{data.tags.length > 0 && (
 							<ul class="tags">

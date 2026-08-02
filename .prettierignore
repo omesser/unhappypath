@@ -1,0 +1,14 @@
+# ADR-0012: the formatter covers code, config and site content — not the authored
+# documents. The ADRs and the spec are hand-aligned prose whose tables and blame
+# history are worth more than a uniform emphasis character.
+docs/
+spec/
+CONTEXT.md
+README.md
+
+# Generated, not authored.
+package-lock.json
+dist/
+.astro/
+node_modules/
+public/og.png

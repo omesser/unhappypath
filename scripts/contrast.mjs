@@ -24,7 +24,12 @@ const ratio = (a, b) => {
 	return (x + 0.05) / (y + 0.05);
 };
 
+// One line each on purpose: the two palettes are meant to be read as a pair, and
+// the whole point is spotting that light and dark disagree on a key. Exploded to
+// one property per line they no longer line up.
+// prettier-ignore
 const light = { bg: '#fbfbf9', surface: '#f4f4f1', pill: '#eeeeea', fg: '#1f2328', muted: '#5b6470', pillFg: '#4a5460', link: '#1f4f8b' };
+// prettier-ignore
 const dark = { bg: '#14171a', surface: '#1c2024', pill: '#22262b', fg: '#e8eaed', muted: '#a3abb5', pillFg: '#b6bec8', link: '#8ab4f8' };
 
 const pairs = (p, mode) => [

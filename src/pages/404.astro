@@ -2,8 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-{/* noindex: Cloudflare serves this with a 404 status, but nothing should treat the
-    error page itself as a destination worth indexing or canonicalising. */}
+{
+	/* noindex: Cloudflare serves this with a 404 status, but nothing should treat the
+    error page itself as a destination worth indexing or canonicalising. */
+}
 <BaseLayout title="404" description="This page does not exist." noindex>
 	<h1>404 — you have reached the unhappy path.</h1>
 	<p class="muted">(Working as intended.)</p>

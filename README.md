@@ -10,9 +10,14 @@ Node 22+ (`.nvmrc` pins the major; `nvm use`).
 ```sh
 npm install
 npm run dev      # http://localhost:4321
-npm run check    # astro check && astro build — must pass before pushing
+npm run check    # format check + astro check + build + URL/link check — must pass before pushing
+npm run format   # apply formatting (prettier)
 npm run assets   # re-render public/og.png from spec/og.svg (only after a tagline change)
 ```
+
+There is no pre-commit hook and no second entry point: `npm run check` is the whole gate, and
+CI runs exactly that on every PR. Formatting covers code, config and `src/content/`; the
+ADRs, the spec and this file are hand-written and deliberately left alone (ADR-0012).
 
 ## Adding content
 

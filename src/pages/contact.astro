@@ -10,8 +10,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	<h1>Contact</h1>
 
 	<p>
-		Happy to hear from you. A note on routing, so your message lands somewhere I'll actually
-		answer:
+		Happy to hear from you. A note on routing, so your message lands somewhere I'll actually answer:
 	</p>
 
 	<h2>Worth reaching out about</h2>
@@ -30,8 +29,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		{
 			CONTACT_EMAIL ? (
 				<li>
-					<strong>Email</strong> — <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Best
-					for anything long, or anything with an attachment.
+					<strong>Email</strong> — <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Best for
+					anything long, or anything with an attachment.
 				</li>
 			) : (
 				<li class="stub">

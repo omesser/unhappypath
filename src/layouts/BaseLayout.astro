@@ -66,14 +66,12 @@ const year = new Date().getFullYear();
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="generator" content={Astro.generator} />
 
-		{
-			jsonLd && (
-				<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
-			)
-		}
+		{jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
 
-		{/* ADR-0008: the only script on the site. Async, cookieless, prod-only, and
-		    skipped entirely until a site code exists. */}
+		{
+			/* ADR-0008: the only script on the site. Async, cookieless, prod-only, and
+		    skipped entirely until a site code exists. */
+		}
 		{
 			import.meta.env.PROD && GOATCOUNTER_CODE && (
 				<script
@@ -86,9 +84,11 @@ const year = new Date().getFullYear();
 		}
 	</head>
 	<body>
-		{/* Scroll-position rail. Decorative and CSS-only (ADR-0011) — it conveys
+		{
+			/* Scroll-position rail. Decorative and CSS-only (ADR-0011) — it conveys
 		    nothing a screen reader needs, and nothing renders it if the browser
-		    lacks scroll-driven animations. */}
+		    lacks scroll-driven animations. */
+		}
 		<div class="scroll-rail" aria-hidden="true"></div>
 		<a class="skip" href="#main">Skip to content</a>
 		<header>

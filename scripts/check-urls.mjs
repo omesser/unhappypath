@@ -48,7 +48,8 @@ for (const page of pages) {
 	else if (badForm(ogUrl)) problems.push(`${page}: og:url ${badForm(ogUrl)} — ${ogUrl}`);
 
 	// Preview deploys must not be indexed as duplicates of the real domain (spec §8).
-	if (canonical && !canonical.startsWith(SITE)) problems.push(`${page}: canonical off-site — ${canonical}`);
+	if (canonical && !canonical.startsWith(SITE))
+		problems.push(`${page}: canonical off-site — ${canonical}`);
 
 	// Root-relative links only; external ones are not ours to verify. The fragment
 	// and query are stripped, so `/#about` checks the `/` route.
@@ -82,4 +83,6 @@ if (problems.length > 0) {
 	console.error(`URL/feed check failed:\n${problems.map((p) => `  - ${p}`).join('\n')}`);
 	process.exit(1);
 }
-console.log(`URL/feed check passed: ${pages.length} pages, ${items} feed items, all URLs canonical-form.`);
+console.log(
+	`URL/feed check passed: ${pages.length} pages, ${items} feed items, all URLs canonical-form.`,
+);

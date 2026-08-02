@@ -6,7 +6,12 @@ export const monthYear = (d: Date) =>
 
 // "29 July 2026" — for a post's own byline row.
 export const fullDate = (d: Date) =>
-	d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+	d.toLocaleDateString('en-GB', {
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric',
+		timeZone: 'UTC',
+	});
 
 // <time datetime> wants YYYY-MM-DD (spec §8).
 export const isoDate = (d: Date) => d.toISOString().slice(0, 10);

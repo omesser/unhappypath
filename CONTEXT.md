@@ -47,6 +47,7 @@ or the routing.
 | `src/utils.ts` | Date formatting, `postPath()`, `cleanPath()`, the `Person` JSON-LD node |
 | `src/consts.ts` | Tagline, contact email, analytics code, nav — remaining `TODO(oded)` knob is tagline |
 | `scripts/` | `check-urls.mjs` (runs in `npm run check`), `contrast.mjs`, `render-assets.mjs` |
+| `.prettierrc.json` / `.prettierignore` | Formatting. Covers code, config and `src/content/`; `docs/`, `spec/`, this file and the README are hand-written (ADR-0012) |
 | `public/og.png` | The single site-wide social card, rendered from `spec/og.svg` |
 
 ## Open TODOs owned by Oded
