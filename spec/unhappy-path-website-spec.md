@@ -149,7 +149,7 @@ Bring one back only if a section outgrows the homepage.
 - **Voice:** Senior engineering leader — direct, practical, no fluff, geeky curiosity welcome. Wry-but-warm, not bitter.
 - **Update cadence:** Low. Add when ready. No publishing schedule required.
 - **v1 ships with clearly-marked stub content**; Oded swaps in real content
-  (projects, posts, fun links). Bio and profile photo are in.
+  (projects, fun links). Bio, profile photo, and first notes are in.
 
 ---
 
@@ -302,7 +302,8 @@ Open TODOs (Oded):
 - [ ] Pick hero tagline from drafted options
 - [x] Bio text (homepage About)
 - [x] Profile photo file (`public/avatar.jpg`)
-- [ ] 4–8 projects curated, first posts (LinkedIn conversions), fun links
+- [x] First note from LinkedIn conversion (`staff-archetypes-and-ai`)
+- [ ] 4–8 projects curated, more notes (wave 2), fun links polish
 - [ ] Confirm git remote URL under "crd" before any push (do not push unasked)
 
 ---
