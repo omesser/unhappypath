@@ -18,15 +18,11 @@ export const AUTHOR = {
 	linkedin: 'https://www.linkedin.com/in/odedmesser/',
 };
 
-// TODO(oded): personal (not work) email. Rendered only on /contact; left empty
-// until supplied, and the page degrades to LinkedIn-only rather than shipping a
-// broken mailto:.
-export const CONTACT_EMAIL = '';
+// Rendered only on /contact.
+export const CONTACT_EMAIL = 'odedmesser@gmail.com';
 
-// TODO(oded): GoatCounter site code (ADR-0008). The beacon only renders in
-// production and only once this is set, so an unconfigured site ships no script
-// rather than a 404ing one.
-export const GOATCOUNTER_CODE = '';
+// GoatCounter site code (ADR-0008). Beacon is prod-only.
+export const GOATCOUNTER_CODE = 'unhappypath';
 
 // About/Projects/Writing/Fun are homepage sections; Contact is a page (spec §3).
 export const NAV = [

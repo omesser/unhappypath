@@ -126,7 +126,7 @@ Bring one back only if a section outgrows the homepage.
 
 ### Contact Page (`/contact`)
 - "How to direct to me" guidance: what to reach out about, and where (DMs vs email).
-- **Personal email** (not work) — appears ONLY on this page. `TODO` placeholder until supplied.
+- **Personal email** (not work) — appears ONLY on this page (`CONTACT_EMAIL` in `src/consts.ts`).
 - LinkedIn link(s).
 - No form (backend + spam + vendor; `mailto:` is zero-maintenance).
 
@@ -149,7 +149,7 @@ Bring one back only if a section outgrows the homepage.
 - **Voice:** Senior engineering leader — direct, practical, no fluff, geeky curiosity welcome. Wry-but-warm, not bitter.
 - **Update cadence:** Low. Add when ready. No publishing schedule required.
 - **v1 ships with clearly-marked stub content**; Oded swaps in real content
-  (bio, projects, posts, fun links, photo, personal email).
+  (projects, posts, fun links). Bio is in; profile photo deferred.
 
 ---
 
@@ -294,14 +294,15 @@ You will need:
 - Markdown content for bio, projects data, writing posts, fun links
 
 Open TODOs (Oded):
-- [ ] Personal email address for `/contact`
+- [x] Personal email address for `/contact`
 - [ ] Cloudflare dashboard: audit AI Crawl Control / bot-blocking / managed robots.txt (§8 — else AEO silently fails; also §7 analytics layer 1)
 - [ ] Register site in Google Search Console + Bing Webmaster Tools, submit sitemap (§8, post-launch; §7 analytics layer 1)
-- [ ] Create GoatCounter account, confirm the site code, paste the real endpoint into `BaseLayout.astro` (§7 analytics layer 2)
-- [ ] GoatCounter → Settings: enable "ignore my own pageviews" so local/dev traffic stays out of the numbers
+- [x] Create GoatCounter account, confirm the site code (`GOATCOUNTER_CODE = 'unhappypath'` in `src/consts.ts`) (§7 analytics layer 2)
+- [x] GoatCounter → Settings: enable "ignore my own pageviews" so local/dev traffic stays out of the numbers
 - [ ] Pick hero tagline from drafted options
-- [ ] Profile photo file
-- [ ] Bio text, 4–8 projects, first posts (LinkedIn conversions), fun links
+- [x] Bio text (homepage About)
+- [~] Profile photo file — deferred; SVG avatar is fine for now
+- [ ] 4–8 projects curated, first posts (LinkedIn conversions), fun links
 - [ ] Confirm git remote URL under "crd" before any push (do not push unasked)
 
 ---

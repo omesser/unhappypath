@@ -34,15 +34,22 @@ const jsonLd = {
 
 <BaseLayout jsonLd={jsonLd}>
 	<section id="about" class="hero">
-		{/* TODO(oded): replace /avatar.svg with a real photo, then set a descriptive alt. */}
 		<img src="/avatar.svg" width="104" height="104" alt="" />
 		<div class="hero-body">
 			<h1>{SITE_TITLE} <span class="muted">| {SITE_TAGLINE}</span></h1>
-			<p class="stub">
-				<strong>TODO(oded): bio, 150–350 words.</strong> Honest and direct, no fluff. Cover: who
-				you are and what you're doing now; the past experience that actually matters; and what
-				you're currently obsessed with (systems, AI-native orgs, engineering leadership, unhappy
-				paths). Tagline options are in <code>src/consts.ts</code>.
+			<p>
+				I lead cloud and data at Prisma Photonics — fiber sensing for critical infrastructure.
+				Before that I ran engineering at Iterative (DVC, CML), and spent a long stretch on
+				platform work at Iguazio and Intel.
+			</p>
+			<p>
+				Most of what I care about is unglamorous: cutting friction, clarifying ownership, and
+				building systems teams can run without constant babysitting. Lately that includes
+				figuring out where AI actually helps engineering work, and where it doesn't.
+			</p>
+			<p>
+				This site is for notes on those themes — systems, leadership, and the paths that don't
+				go as planned.
 			</p>
 			<p class="socials">
 				<a href={AUTHOR.github}>GitHub</a>

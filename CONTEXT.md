@@ -1,6 +1,6 @@
 # CONTEXT — unhappy path
 
-Personal site of a senior engineering leader. Static Astro 7, Markdown content,
+Personal site of Oded Messer. Static Astro 7, Markdown content,
 Cloudflare Pages, zero client-side JS for rendering (one async analytics beacon is the
 sole exception — ADR-0008). Site identity leads; the person's name is deliberately
 small and rare.
@@ -42,13 +42,13 @@ or the routing.
 | `src/styles/global.css` | Palette custom properties, typography, light + dark |
 | `src/components/` | The shared bits — currently just `PostList.astro` |
 | `src/utils.ts` | Date formatting, `postPath()`, `cleanPath()`, the `Person` JSON-LD node |
-| `src/consts.ts` | Tagline, contact email, analytics code, nav — the `TODO(oded)` knobs |
+| `src/consts.ts` | Tagline, contact email, analytics code, nav — remaining `TODO(oded)` knob is tagline |
 | `scripts/` | `check-urls.mjs` (runs in `npm run check`), `contrast.mjs`, `render-assets.mjs` |
 | `public/og.png` | The single site-wide social card, rendered from `spec/og.svg` |
 
 ## Open TODOs owned by Oded
 
-Tracked in spec §9. Live ones: personal email for `/contact`, profile photo, bio text,
-tagline pick, project curation, first posts, fun links, Cloudflare **AI Crawl Control**
-audit (else AEO fails silently), Google Search Console + Bing Webmaster registration,
-**GoatCounter** account + site code for the analytics beacon.
+Tracked in spec §9. Live ones: tagline pick, project curation, first posts, fun links,
+Cloudflare **AI Crawl Control** audit (else AEO fails silently), Google Search Console +
+Bing Webmaster registration. Contact email, bio, and GoatCounter (`unhappypath`) are set;
+profile photo deferred (SVG avatar is fine for now).
