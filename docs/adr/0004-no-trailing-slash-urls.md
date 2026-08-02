@@ -20,8 +20,8 @@ trailingSlash: 'never',
 build: { format: 'file' },
 ```
 
-Output is `contact.html`, `writing.html`, `writing/<slug>.html`, served as `/contact`,
-`/writing`, `/writing/<slug>`.
+Output is `contact.html`, `notes.html`, `notes/<slug>.html`, served as `/contact`,
+`/notes`, `/notes/<slug>`.
 
 A side benefit decided it: `src/pages/404.astro` compiles to a root **`404.html`**, which is
 exactly the filename Cloudflare Pages looks for. Astro's default `directory` format emits
@@ -32,7 +32,7 @@ exactly the filename Cloudflare Pages looks for. Astro's default `directory` for
 Two things fought this decision and both were caught by building and inspecting `dist/`:
 
 1. **`build.format: 'file'` makes `Astro.url.pathname` carry the output filename**, so
-   canonicals and `og:url` came out as `/writing/foo.html` while the sitemap and JSON-LD used
+   canonicals and `og:url` came out as `/notes/foo.html` while the sitemap and JSON-LD used
    the clean form — exactly the duplicate-content ambiguity this ADR exists to prevent. Fixed
    with `cleanPath()` in `src/utils.ts`; every emitted URL goes through it.
 2. **`@astrojs/rss` appends a trailing slash** to item links unless passed

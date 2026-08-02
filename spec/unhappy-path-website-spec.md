@@ -48,14 +48,14 @@ See `implementation-hints.md` for stack/infra details.
 
 ### Header / Navbar
 - **Logo (left):** Text "unhappy path" (simple, no fancy icon required)
-- **Navigation (right on desktop):** About · Projects · Writing · Fun · Contact
+- **Navigation (right on desktop):** About · Projects · Notes · Fun · Contact
   (first four are homepage anchors; Contact is a page)
 - **No theme toggle** (dark mode follows OS preference)
 - **Mobile:** No hamburger. The same links wrap onto a second line — no JS, no menu state.
 
 ### Footer
 - Small print only: © [Year] Oded Messer — unhappypath.dev (the one place the name appears)
-- Links: RSS Feed (for Writing)
+- Links: RSS Feed (for Notes)
 - Optional: small "Built with …" note
 - Minimal, no clutter
 
@@ -93,15 +93,15 @@ Vertical flow, single primary column (or light grid for projects only).
   - Action links: GitHub · Live (if applicable)
 - Curate **4–8** best projects only. Everything else lives on your GitHub profile.
 
-#### 4.3 Writing Section
-- **Heading:** "Writing"
+#### 4.3 Notes Section
+- **Heading:** "Notes"
 - **Intro line (optional):** "Timeless notes on engineering, systems, leadership, and the unhappy paths."
 - **Layout:** Vertical chronological list, **5 most recent** posts
 - **Per post item:**
   - Date (e.g. Jul 2025)
   - Title (linked to full post)
   - 1–2 line teaser / excerpt
-- "Browse all writing →" link to `/writing`
+- "Browse all notes →" link to `/notes`
 - Clear RSS / subscribe option
 
 #### 4.4 Fun Links / Rabbit Holes Section
@@ -116,8 +116,8 @@ Vertical flow, single primary column (or light grid for projects only).
 | Path              | Purpose                              | Notes |
 |-------------------|--------------------------------------|-------|
 | `/`               | Homepage (all core sections)        | Main entry |
-| `/writing`        | Full archive of posts               | Chronological list |
-| `/writing/[slug]` | Individual post                     | Clean reading view |
+| `/notes`           | Full archive of posts               | Chronological list |
+| `/notes/[slug]`    | Individual post                     | Clean reading view |
 | `/contact`        | How to direct to me                 | See below |
 | `404`             | Custom error page                   | "404 — you have reached the unhappy path. (Working as intended.)" |
 
@@ -130,12 +130,12 @@ Bring one back only if a section outgrows the homepage.
 - LinkedIn link(s).
 - No form (backend + spam + vendor; `mailto:` is zero-maintenance).
 
-### Individual Post Page (`/writing/[slug]`)
+### Individual Post Page (`/notes/[slug]`)
 - Clean, focused reading layout
 - Title
 - Date (+ optional reading time)
 - Full Markdown content
-- "← Back to Writing"
+- "← Back to Notes"
 - No share buttons, no related posts, no tag display. Keep `tags:` in frontmatter
   (render nothing until ~20+ posts make the archive hard to scan).
 
@@ -143,7 +143,7 @@ Bring one back only if a section outgrows the homepage.
 
 ## 5. Content Strategy
 
-- **Writing:** Convert your best timeless LinkedIn posts into proper long-form Markdown articles. Prioritize evergreen topics over news.
+- **Notes:** Convert your best timeless LinkedIn posts into proper long-form Markdown articles. Prioritize evergreen topics over news.
 - **Projects:** Hand-curated from GitHub. Signal over quantity.
 - **Fun Links:** Personal curation. Update whenever something genuinely interesting appears.
 - **Voice:** Senior engineering leader — direct, practical, no fluff, geeky curiosity welcome. Wry-but-warm, not bitter.
@@ -175,7 +175,7 @@ Two visual wireframes are provided (see `implementation-hints.md` for filename m
 - **Performance:** Fast by default (static). Optimize any images.
 - **Font:** One self-hosted variable font — **Inter** via `@fontsource-variable/inter`. No font CDN.
 - **SEO / AEO:** See §8 — Discoverability.
-- **RSS:** Full feed for the Writing section is required.
+- **RSS:** Full feed for the Notes section is required.
 - **Accessibility:** Semantic markup, sufficient contrast, focus states, alt text for any images.
 - **Analytics:** Two layers from day 0, both free, both privacy-preserving by construction.
   Rationale and rejected alternatives: `docs/adr/0008-analytics-goatcounter.md`.
@@ -291,7 +291,7 @@ You will need:
 - `implementation-hints.md` (stack/infra decisions)
 - `seo-aeo-research.md` (cited sources behind §8)
 - Wireframe images (with §6 drift warnings in mind)
-- Markdown content for bio, projects data, writing posts, fun links
+- Markdown content for bio, projects data, notes, fun links
 
 Open TODOs (Oded):
 - [x] Personal email address for `/contact`

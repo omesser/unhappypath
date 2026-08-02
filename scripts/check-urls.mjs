@@ -1,7 +1,11 @@
-// Guards the two output invariants that fail silently and cost real traffic:
+// Guards the output invariants that fail silently and cost real traffic:
 //   1. ADR-0004 — every URL we emit is extensionless and slash-free (canonicals,
 //      og:url, sitemap, feed). Mixed forms read as duplicate content.
 //   2. spec §8 — the feed carries full content, not summaries.
+//   3. Every internal link resolves. Added after ADR-0010's rename left a dead
+//      `/writing` link inside a post body — prose is the one place a route change
+//      cannot be found by renaming a file, and a 404 from your own page is worse
+//      than one from someone else's.
 // Runs on dist/ after the build, so it catches a regression anywhere, not just in
 // cleanPath(). Part of `npm run check`.
 import { readdir, readFile } from 'node:fs/promises';
@@ -15,8 +19,16 @@ const badForm = (url) => {
 	return null;
 };
 
-const pages = (await readdir('dist', { recursive: true })).filter((f) => f.endsWith('.html'));
+const files = await readdir('dist', { recursive: true });
+const pages = files.filter((f) => f.endsWith('.html'));
 if (pages.length === 0) problems.push('dist/ has no HTML — did the build run?');
+
+// What an internal href is allowed to point at: a built route (extensionless, per
+// ADR-0004) or a real file such as /rss.xml, /og.png, /_astro/*.
+const targets = new Set([
+	...pages.map((p) => (p === 'index.html' ? '/' : `/${p.replace(/\.html$/, '')}`)),
+	...files.map((f) => `/${f}`),
+]);
 
 for (const page of pages) {
 	const html = await readFile(`dist/${page}`, 'utf8');
@@ -37,6 +49,13 @@ for (const page of pages) {
 
 	// Preview deploys must not be indexed as duplicates of the real domain (spec §8).
 	if (canonical && !canonical.startsWith(SITE)) problems.push(`${page}: canonical off-site — ${canonical}`);
+
+	// Root-relative links only; external ones are not ours to verify. The fragment
+	// and query are stripped, so `/#about` checks the `/` route.
+	for (const [, href] of html.matchAll(/href="(\/[^"]*)"/g)) {
+		const path = href.split(/[#?]/)[0] || '/';
+		if (!targets.has(path)) problems.push(`${page}: dead internal link — ${href}`);
+	}
 }
 
 const sitemap = await readFile('dist/sitemap.xml', 'utf8');

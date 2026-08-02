@@ -15,7 +15,7 @@ reads well in both light and dark mode, the design works.
 ## Headings, emphasis and links
 
 A second-level heading sits above. Text can be **bold**, *italic*, `inline code`,
-or a [link to another page](/writing). Line length is capped at about 68
+or a [link to another page](/notes). Line length is capped at about 68
 characters so long paragraphs stay readable — which is the entire point of the
 measure, and the reason this paragraph runs on a little.
 

@@ -20,7 +20,7 @@ Everything is Markdown.
 
 | Content | Shape |
 |---|---|
-| Posts | `src/content/writing/<slug>/index.md` — frontmatter + full Markdown body, images colocated in the same folder |
+| Posts | `src/content/notes/<slug>/index.md` — frontmatter + full Markdown body, images colocated in the same folder |
 | Projects | `src/content/projects/<slug>.md` — frontmatter (`title`, `github`, `live`, `tags`, `order`), body is the card description, so it can carry inline links and emphasis |
 | Fun Links | `src/content/fun-links.md` — one hand-written Markdown file; `###` headings group, bullets are the items. No schema. |
 

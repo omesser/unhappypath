@@ -3,10 +3,10 @@ import type { CollectionEntry } from 'astro:content';
 import { isoDate, monthYear, postPath } from '../utils';
 
 interface Props {
-	posts: CollectionEntry<'writing'>[];
+	posts: CollectionEntry<'notes'>[];
 	/**
 	 * Heading level for post titles, so the hierarchy stays H1→H2→H3 (spec §8).
-	 * h3 on the homepage, where the section's own "Writing" h2 sits above the list;
+	 * h3 on the homepage, where the section's own "Notes" h2 sits above the list;
 	 * h2 on the archive, where the page h1 is the only heading above it.
 	 */
 	level?: 2 | 3;

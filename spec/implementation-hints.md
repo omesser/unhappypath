@@ -17,7 +17,7 @@ The spec references wireframes by descriptive name; the actual files here are:
 - **Astro 7** (7.0.x is current, released June 2026). Requires **Node 22+**.
 - Start from the **official Astro blog skeleton** (`npm create astro -- --template blog`)
   for the plumbing only: content collections, RSS, sitemap. Adapt collection
-  name to `writing` per spec routes (`/writing/[slug]`).
+  name to `notes` per spec routes (`/notes/[slug]`) — renamed from `writing` by ADR-0010.
 - **Hand-craft the design** from the spec + wireframes. Explicitly do NOT use a
   theme from template galleries (statichunt/Dante/AstroPaper etc.) — Oded
   reviewed that path and found it generic ("lacks character"). The wireframes

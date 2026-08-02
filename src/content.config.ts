@@ -3,10 +3,10 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 // One folder per post so images sit next to the prose they belong to
-// (src/content/writing/<slug>/index.md). ADR-0003.
-const writing = defineCollection({
+// (src/content/notes/<slug>/index.md). ADR-0003.
+const notes = defineCollection({
 	loader: glob({
-		base: './src/content/writing',
+		base: './src/content/notes',
 		pattern: '**/index.md',
 		generateId: ({ entry }) => entry.replace(/\/index\.md$/, ''),
 	}),
@@ -35,4 +35,4 @@ const projects = defineCollection({
 	}),
 });
 
-export const collections = { writing, projects };
+export const collections = { notes, projects };

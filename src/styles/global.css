@@ -66,8 +66,18 @@ main {
 }
 
 /* Header: text links that wrap to a second line on narrow screens.
-   No hamburger, no menu state, no JS (spec §3). */
+   No hamburger, no menu state, no JS (spec §3).
+
+   Sticky, so following a section link leaves the nav reachable instead of
+   scrolling it away. Needs an opaque background to sit over content; --bg is
+   also the page background, so the band reads as continuous even though the
+   header is only as wide as the measure. Nothing renders outside that column,
+   so there is nothing to show through at the edges. */
 body > header {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	background: var(--bg);
 	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
@@ -158,7 +168,8 @@ a {
 .skip:focus {
 	left: 1rem;
 	top: 0.5rem;
-	z-index: 1;
+	/* Above the sticky header, or the first Tab lands behind it. */
+	z-index: 3;
 	background: var(--bg);
 	padding: 0.5rem 0.75rem;
 	border: 1px solid var(--border);
@@ -169,10 +180,48 @@ a {
 	color: var(--muted);
 }
 
+/* Scroll-position rail (ADR-0011): a hairline on the right edge that fills as the
+   page scrolls, so a long single-column page tells you where you are. Driven
+   entirely by the scroll timeline — no JS, no listeners, no layout reads.
+
+   Gated on @supports because without a scroll timeline the animation would fall
+   back to the document timeline and paint a permanently full bar, which is worse
+   than no indicator. No support, no rail. */
+.scroll-rail {
+	display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+	.scroll-rail {
+		display: block;
+		position: fixed;
+		inset-block: 0;
+		right: 0;
+		width: 3px;
+		background: var(--link);
+		transform: scaleY(0);
+		transform-origin: top;
+		animation: scroll-rail linear;
+		animation-timeline: scroll(root block);
+		z-index: 1;
+	}
+
+	@keyframes scroll-rail {
+		to {
+			transform: scaleY(1);
+		}
+	}
+}
+
 /* Homepage sections ------------------------------------------------------ */
 
 section {
 	padding-block: 2.25rem 0;
+	/* Clears the sticky header when a nav anchor jumps here, so the heading
+	   lands below it rather than underneath it. Roughly the header's height;
+	   when the nav wraps to a second line the section's own top padding
+	   absorbs the difference. */
+	scroll-margin-top: 5.5rem;
 }
 
 section + section {
@@ -469,5 +518,13 @@ article header {
 		animation-duration: 0.01ms !important;
 		transition-duration: 0.01ms !important;
 		scroll-behavior: auto !important;
+	}
+
+	/* The rail is scroll-linked, not autonomous — it moves only as far as the
+	   reader scrolls, which is not the kind of motion this query is guarding
+	   against, so it stays. It does need exempting from the reset above, which
+	   would otherwise snap it to full. */
+	.scroll-rail {
+		animation-duration: auto !important;
 	}
 }

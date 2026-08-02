@@ -7,16 +7,16 @@ import { byNewest, isoDate, postPath } from '../utils';
 // priority/changefreq, so neither is emitted.
 export const GET: APIRoute = async ({ site }) => {
 	const base = new URL(site!).origin;
-	const posts = (await getCollection('writing')).sort(byNewest);
+	const posts = (await getCollection('notes')).sort(byNewest);
 
-	// `/` and `/writing` both list posts, so the newest post's date is their real
+	// `/` and `/notes` both list posts, so the newest post's date is their real
 	// last-modified. /contact has no honest date, so it carries no lastmod —
 	// Google ignores lastmod it does not trust, and a made-up one is worse than none.
 	const newest = posts[0] ? isoDate(posts[0].data.updatedDate ?? posts[0].data.pubDate) : undefined;
 
 	const entries: Array<{ loc: string; lastmod?: string }> = [
 		{ loc: `${base}/`, lastmod: newest },
-		{ loc: `${base}/writing`, lastmod: newest },
+		{ loc: `${base}/notes`, lastmod: newest },
 		{ loc: `${base}/contact` },
 		...posts.map((post) => ({
 			loc: `${base}${postPath(post)}`,

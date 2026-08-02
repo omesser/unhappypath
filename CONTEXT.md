@@ -6,7 +6,9 @@ sole exception — ADR-0008). Site identity leads; the person's name is delibera
 small and rare.
 
 **Spec precedence:** `spec/unhappy-path-website-spec.md` > `spec/implementation-hints.md` >
-the wireframe JPGs. ADRs in `docs/adr/` record the build decisions neither spec file made.
+the wireframe JPGs. ADRs in `docs/adr/` record the build decisions neither spec file made,
+and a few that overrule the spec once Oded had used the thing — ADR-0010 (the section is
+"notes", not "writing") and ADR-0011 (sticky header, scroll rail) are both of that kind.
 
 ## Glossary
 
@@ -17,8 +19,8 @@ or the routing.
 |---|---|---|
 | **unhappy path** | The site identity. Lowercase, two words, in prose and in the logo. | "Unhappy Path", "UnhappyPath". `unhappypath` is only the domain and repo name. |
 | **site identity leads** | The rule from spec §1: no personal name in large type anywhere. Name appears in the footer and in per-post bylines only. | A hero that says "Hi, I'm …" |
-| **writing** | The prose collection. Route `/writing`, collection `writing`, heading "Writing". | "blog", "posts" (as a section name), "articles" |
-| **post** | One entry inside writing. Fine in code (`post.data.title`) and in `/writing/[slug]`. | "article", "entry" |
+| **notes** | The prose collection. Route `/notes`, collection `notes`, heading "Notes". | "writing" (the old name — ADR-0010), "blog", "posts" (as a section name), "articles" |
+| **post** | One entry inside notes. Fine in code (`post.data.title`) and in `/notes/[slug]`. | "article", "entry" |
 | **projects** | 4–8 hand-curated cards, one Markdown file each. Signal over quantity. | "portfolio", "work" |
 | **fun links** | The curated rabbit-holes list; one Markdown file, hand-written bullets. Heading "Fun Links". | "resources", "bookmarks", "links" (too generic) |
 | **stub** | Clearly-marked TODO placeholder content shipped in v1 and swapped out later. | "lorem", "dummy data" |
@@ -37,7 +39,7 @@ or the routing.
 | `spec/` | The authored specification, implementation hints, wireframes, SEO research |
 | `docs/adr/` | Build decisions (this session's output) |
 | `docs/register-search-consoles.md` | How to register Google Search Console + Bing Webmaster |
-| `src/content/writing/` | Posts — one folder per post, `index.md` + colocated images |
+| `src/content/notes/` | Posts — one folder per post, `index.md` + colocated images |
 | `src/content/projects/` | One `.md` per project card |
 | `src/content/fun-links.md` | The whole Fun Links list, hand-written |
 | `src/styles/global.css` | Palette custom properties, typography, light + dark |

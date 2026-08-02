@@ -26,5 +26,5 @@ await png(
 			<text x="510" y="290" fill="#1f4f8b">unhappy path</text>
 		</g>
 	</svg>`,
-	'src/content/writing/markdown-kitchen-sink/diagram.png',
+	'src/content/notes/markdown-kitchen-sink/diagram.png',
 );

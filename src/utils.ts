@@ -13,7 +13,7 @@ export const isoDate = (d: Date) => d.toISOString().slice(0, 10);
 
 /**
  * `build.format: 'file'` makes Astro.url.pathname carry the output filename
- * (`/writing/foo.html`), but ADR-0004 says every URL we emit is extensionless.
+ * (`/notes/foo.html`), but ADR-0004 says every URL we emit is extensionless.
  * Canonicals and og:url must go through this. Verified end-to-end by
  * scripts/check-urls.mjs, which fails the build if a `.html` URL escapes.
  */
@@ -21,7 +21,7 @@ export const cleanPath = (pathname: string) =>
 	pathname === '/index.html' ? '/' : pathname.replace(/\.html$/, '');
 
 /** The one place a post's URL is built — pages, feed and sitemap all go through it. */
-export const postPath = (post: { id: string }) => `/writing/${post.id}`;
+export const postPath = (post: { id: string }) => `/notes/${post.id}`;
 
 /** Newest first. Used by the homepage, the archive and the feed. */
 export const byNewest = (a: { data: { pubDate: Date } }, b: { data: { pubDate: Date } }) =>

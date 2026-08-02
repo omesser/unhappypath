@@ -11,7 +11,7 @@ const cards = await Promise.all(
 	projects.map(async (p) => ({ ...p, Body: (await render(p)).Content })),
 );
 
-const recent = (await getCollection('writing')).sort(byNewest).slice(0, 5);
+const recent = (await getCollection('notes')).sort(byNewest).slice(0, 5);
 
 // Person + WebSite (spec §8). The Person node carries the authorship a human
 // visitor never sees in large type — sameAs is what makes it an entity.
@@ -91,14 +91,14 @@ const jsonLd = {
 		</div>
 	</section>
 
-	<section id="writing">
+	<section id="notes">
 		<div class="section-head">
-			<h2>Writing</h2>
+			<h2>Notes</h2>
 			<p class="muted"><small>Timeless notes on engineering, systems, and leadership.</small></p>
 		</div>
 		<PostList posts={recent} />
 		<p>
-			<a href="/writing">Browse all writing →</a>
+			<a href="/notes">Browse all notes →</a>
 			<span class="muted"> · </span>
 			<a href="/rss.xml">RSS</a>
 		</p>

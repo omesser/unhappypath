@@ -4,14 +4,14 @@ import PostList from '../components/PostList.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { byNewest } from '../utils';
 
-const posts = (await getCollection('writing')).sort(byNewest);
+const posts = (await getCollection('notes')).sort(byNewest);
 ---
 
 <BaseLayout
-	title="Writing"
+	title="Notes"
 	description="Every post — timeless notes on engineering, systems, leadership, and the unhappy paths."
 >
-	<h1>Writing</h1>
+	<h1>Notes</h1>
 	<p class="muted">
 		Everything, newest first. <a href="/rss.xml">RSS</a>.
 	</p>

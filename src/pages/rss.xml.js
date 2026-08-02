@@ -17,7 +17,7 @@ const absolutize = (html, site) =>
 export async function GET(context) {
 	const site = context.site.href; // ends with '/'
 	const container = await AstroContainer.create();
-	const posts = (await getCollection('writing')).sort(byNewest);
+	const posts = (await getCollection('notes')).sort(byNewest);
 
 	const items = await Promise.all(
 		posts.map(async (post) => {

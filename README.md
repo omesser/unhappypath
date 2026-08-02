@@ -18,7 +18,7 @@ npm run assets   # re-render public/og.png from spec/og.svg (only after a taglin
 
 | Want to add            | Do this                                                                        |
 | ---------------------- | ------------------------------------------------------------------------------ |
-| A post                 | `src/content/writing/<slug>/index.md`, images alongside it in the same folder   |
+| A post                 | `src/content/notes/<slug>/index.md`, images alongside it in the same folder   |
 | A project card         | `src/content/projects/<slug>.md` — frontmatter + a one-line body                |
 | A fun link             | Add a bullet to `src/content/fun-links.md`                                      |
 | A draft                | Keep it on a branch — `main` is production, and there is no `draft:` flag       |
