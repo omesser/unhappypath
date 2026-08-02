@@ -296,7 +296,7 @@ You will need:
 Open TODOs (Oded):
 - [x] Personal email address for `/contact`
 - [ ] Cloudflare dashboard: audit AI Crawl Control / bot-blocking / managed robots.txt (§8 — else AEO silently fails; also §7 analytics layer 1)
-- [ ] Register site in Google Search Console + Bing Webmaster Tools, submit sitemap (§8, post-launch; §7 analytics layer 1)
+- [ ] Register site in Google Search Console + Bing Webmaster Tools, submit sitemap (§8, post-launch; §7 analytics layer 1) — steps: `docs/register-search-consoles.md`
 - [x] Create GoatCounter account, confirm the site code (`GOATCOUNTER_CODE = 'unhappypath'` in `src/consts.ts`) (§7 analytics layer 2)
 - [x] GoatCounter → Settings: enable "ignore my own pageviews" so local/dev traffic stays out of the numbers
 - [ ] Pick hero tagline from drafted options

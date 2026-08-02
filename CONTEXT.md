@@ -36,6 +36,7 @@ or the routing.
 |---|---|
 | `spec/` | The authored specification, implementation hints, wireframes, SEO research |
 | `docs/adr/` | Build decisions (this session's output) |
+| `docs/register-search-consoles.md` | How to register Google Search Console + Bing Webmaster |
 | `src/content/writing/` | Posts — one folder per post, `index.md` + colocated images |
 | `src/content/projects/` | One `.md` per project card |
 | `src/content/fun-links.md` | The whole Fun Links list, hand-written |
@@ -50,5 +51,6 @@ or the routing.
 
 Tracked in spec §9. Live ones: tagline pick, project curation, first posts, fun links,
 Cloudflare **AI Crawl Control** audit (else AEO fails silently), Google Search Console +
-Bing Webmaster registration. Contact email, bio, and GoatCounter (`unhappypath`) are set;
+Bing Webmaster registration (see `docs/register-search-consoles.md`). Contact email, bio,
+and GoatCounter (`unhappypath`) are set;
 profile photo deferred (SVG avatar is fine for now).

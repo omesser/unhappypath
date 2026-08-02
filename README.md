@@ -30,6 +30,7 @@ Everything else — bio, tagline, contact email, analytics code — lives in
 
 - `CONTEXT.md` — glossary and layout
 - `docs/adr/` — why the stack is what it is
+- `docs/register-search-consoles.md` — Google Search Console + Bing Webmaster setup
 - `spec/` — the specification the site was built from
 
 ## Licensing
