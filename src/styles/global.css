@@ -65,6 +65,17 @@ main {
 	padding-block: 1rem 4rem;
 }
 
+.construction-banner {
+	margin: 0;
+	padding: 0.5rem 1.25rem;
+	border-bottom: 1px solid var(--border);
+	background: var(--surface);
+	color: var(--fg);
+	font-size: 0.875rem;
+	line-height: 1.5;
+	text-align: center;
+}
+
 /* Header: text links that wrap to a second line on narrow screens.
    No hamburger, no menu state, no JS (spec §3).
 
