@@ -11,7 +11,8 @@
 
 - [DeanOnDelivery](https://www.deanondelivery.com/home/) - On Product Management (and more) by [Dean Peters](https://www.linkedin.com/in/deanpeters/). Among the gems - [Behold, the Product Management Prioritization Menagerie](https://www.deanondelivery.com/product_management/behold-the-product-management-prioritization-menagerie/) - HiPPO, RHiNO, ZEbRA, WoLF, and seagulls: a field guide to the animals that eat your backlog.
 - [Nate B. Jones' newsletter](https://natesnewsletter.substack.com/) - Worth following for the latest AI news, but more thoughtful than 99% of what's out there.
-- [Staff archetypes](https://staffeng.com/guides/staff-archetypes/) - Will Larson's Tech Lead / Architect / Solver / Right Hand map; useful when "staff engineer" is doing too much work as one title.
+- [Staff archetypes](https://staffeng.com/guides/staff-archetypes/) - Will Larson's mental map for staff+ engineers; useful when "staff engineer" is doing too much work as one title.
+- [Designations, levels and calibrations](https://lethain.com/perf-management-system/) - Will Larson's practical breakdown of career ladders, performance designations, and calibration, with the right emphasis on ladders as the foundation.
 - [Falsehoods programmers believe about time](https://gist.github.com/timvisee/fcda9bbdff88d45cc9061606b4b923ca) - the checklist I revisit whenever "just store UTC" starts sounding like a complete plan.
 
 ### Tools I love
