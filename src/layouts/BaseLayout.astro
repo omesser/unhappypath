@@ -30,7 +30,7 @@ const {
 	noindex = false,
 } = Astro.props;
 
-const pageTitle = title ? `${title} — ${SITE_TITLE}` : `${SITE_TITLE} — ${SITE_TAGLINE}`;
+const pageTitle = title ? `${title} - ${SITE_TITLE}` : `${SITE_TITLE} - ${SITE_TAGLINE}`;
 // ADR-0004: one URL form everywhere — no trailing slash, no .html extension.
 const canonical = new URL(cleanPath(Astro.url.pathname), Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
@@ -103,7 +103,7 @@ const shouldCountPageview = import.meta.env.PROD && GOATCOUNTER_CODE && !isCloud
 			<slot />
 		</main>
 		<footer>
-			<span>© {year} {AUTHOR.name} — unhappypath.dev</span>
+			<span>© {year} {AUTHOR.name} - unhappypath.dev</span>
 			<a href="/rss.xml">RSS</a>
 		</footer>
 	</body>

@@ -6,7 +6,7 @@ export const SITE_TITLE = 'unhappy path';
 export const SITE_TAGLINE = 'Software engineering hijinks';
 
 export const SITE_DESCRIPTION =
-	'Notes on engineering, systems, leadership, and the unhappy paths — by Oded Messer.';
+	'Notes on engineering, systems, leadership, and the unhappy paths - by Oded Messer.';
 
 export const AUTHOR = {
 	name: 'Oded Messer',
