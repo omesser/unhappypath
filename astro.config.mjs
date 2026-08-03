@@ -17,7 +17,8 @@ const externalMarkdownLinks = {
 		 */
 		visit(node, context) {
 			const href = node.properties?.href;
-			if (typeof href !== 'string' || !/^https?:\/\//i.test(href) || href.startsWith(SITE)) return;
+			if (typeof href !== 'string' || !/^https?:\/\//i.test(href) || new URL(href).origin === SITE)
+				return;
 
 			context.setProperty(node, 'target', '_blank');
 			context.setProperty(node, 'rel', ['noopener', 'noreferrer']);

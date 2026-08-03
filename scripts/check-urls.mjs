@@ -48,7 +48,7 @@ for (const page of pages) {
 	else if (badForm(ogUrl)) problems.push(`${page}: og:url ${badForm(ogUrl)} — ${ogUrl}`);
 
 	// Preview deploys must not be indexed as duplicates of the real domain (spec §8).
-	if (canonical && !canonical.startsWith(SITE))
+	if (canonical && new URL(canonical).origin !== SITE)
 		problems.push(`${page}: canonical off-site — ${canonical}`);
 
 	// Root-relative links only; external ones are not ours to verify. The fragment
@@ -65,7 +65,7 @@ for (const page of pages) {
 		/<a\b([^>]*)href="(https?:\/\/[^"]+)"([^>]*)>([\s\S]*?)<\/a>/g,
 	)) {
 		const [, before, href, after, body] = match;
-		if (href.startsWith(SITE)) continue;
+		if (new URL(href).origin === SITE) continue;
 
 		const attrs = `${before} ${after}`;
 		if (!/target="_blank"/.test(attrs))

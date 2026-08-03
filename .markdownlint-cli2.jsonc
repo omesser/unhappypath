@@ -3,7 +3,7 @@
 // an empty or reversed link. Every rule disabled below is disabled for a reason.
 {
   "globs": ["**/*.md"],
-  "ignores": ["node_modules", "dist", ".astro"],
+  "ignores": ["node_modules", "dist", ".astro", ".claude", ".cursor", ".idea"],
 
   "config": {
     // --- Cosmetics. Prettier owns these where it runs; where it does not
