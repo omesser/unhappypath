@@ -48,6 +48,7 @@ or the routing.
 | `src/consts.ts` | Tagline, contact email, analytics code, nav — remaining `TODO(oded)` knob is tagline |
 | `scripts/` | `check-urls.mjs` (runs in `npm run check`), `contrast.mjs`, `render-assets.mjs` |
 | `.prettierrc.json` / `.prettierignore` | Formatting. Covers code, config and `src/content/`; `docs/`, `spec/`, this file and the README are hand-written (ADR-0012) |
+| `.markdownlint-cli2.jsonc` | Markdown linting — semantics only, and it covers **all** Markdown including `docs/` and `spec/`, because linting reports without rewriting (ADR-0013) |
 | `public/og.png` | The single site-wide social card, rendered from `spec/og.svg` |
 
 ## Open TODOs owned by Oded
