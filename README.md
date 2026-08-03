@@ -12,14 +12,19 @@ npm install
 npm run dev      # http://localhost:4321
 npm run build    # static site → dist/
 npm run preview  # serve dist/ locally
-npm run check    # format check + astro check + build + URL/link check — must pass before pushing
-npm run format   # apply formatting (prettier)
+npm run check    # prettier + markdownlint + astro check + build + URL/link check
+npm run format   # apply formatting and auto-fixable lint
 npm run assets   # re-render public/og.png from spec/og.svg (only after a tagline change)
 ```
 
 There is no pre-commit hook and no second entry point: `npm run check` is the whole gate, and
-CI runs exactly that on every PR. Formatting covers code, config and `src/content/`; the
-ADRs, the spec and this file are hand-written and deliberately left alone (ADR-0012).
+CI runs exactly that on every PR.
+
+Two tools split the job. **Prettier** formats code, config and `src/content/`; the ADRs, the
+spec, `CONTEXT.md` and this file are hand-written and deliberately left alone (ADR-0012).
+**markdownlint** lints *all* Markdown including `docs/` and `spec/` — it reports without
+rewriting, so it costs those files nothing. It only enforces semantics: heading ladders, code
+fences with a language, links that go somewhere (ADR-0013).
 
 ## Build
 

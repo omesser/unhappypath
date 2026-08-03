@@ -10,8 +10,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "prettier --check . && astro check && astro build && node scripts/check-urls.mjs",
-    "format": "prettier --write .",
+    "check": "prettier --check . && markdownlint-cli2 && astro check && astro build && node scripts/check-urls.mjs",
+    "format": "prettier --write . && markdownlint-cli2 --fix",
     "assets": "node scripts/render-assets.mjs",
     "astro": "astro"
   },
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "markdownlint-cli2": "^0.23.2",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^6.0.3"
