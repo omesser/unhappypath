@@ -91,7 +91,7 @@ for projects only.
   - 1–2 sentence description
   - Tech tags (small pills)
   - Action links: GitHub · Live (if applicable)
-- Curate **3–8** best projects only. Everything else lives on your GitHub profile.
+- Curate **2–8** best projects only. Everything else lives on your GitHub profile.
 
 #### 4.3 Notes Section
 - **Heading:** "Notes"
@@ -303,7 +303,7 @@ Open TODOs (Oded):
 - [x] Bio text (homepage About)
 - [x] Profile photo file (`public/avatar.jpg`)
 - [x] First note from LinkedIn conversion (`staff-archetypes-and-ai`)
-- [x] Three projects curated and Fun Links polished
+- [x] Two projects curated and Fun Links polished
 - [ ] More notes (wave 2)
 - [ ] Confirm git remote URL under "crd" before any push (do not push unasked)
 
