@@ -9,6 +9,8 @@
 
 ### Honorable mentions
 
+- [Matt Pocock's skills](https://github.com/mattpocock/skills/) - A practical collection of agent skills for real engineering work.
+- [Nate B. Jones' newsletter](https://natesnewsletter.substack.com/) - Worth following for the latest AI news, but more thoughtful than 99% of what's out there.
 - [Staff archetypes](https://staffeng.com/guides/staff-archetypes/) - Will Larson's Tech Lead / Architect / Solver / Right Hand map; useful when "staff engineer" is doing too much work as one title.
 - [Falsehoods programmers believe about time](https://gist.github.com/timvisee/fcda9bbdff88d45cc9061606b4b923ca) - the checklist I revisit whenever "just store UTC" starts sounding like a complete plan.
 

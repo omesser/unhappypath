@@ -1,6 +1,6 @@
 ---
 title: 'Staff archetypes in the age of agentic engineering'
-description: 'Agentic tools are quietly reshaping which Staff-plus shapes thrive. Solvers are winning the incentive game; Tech Leads and Architects are getting squeezed - and that trade-off will show up in the talent mix for years.'
+description: 'Agentic tools are quietly reshaping which Staff+ archetypes thrive and which are squeezed. Not all Engineers are feeling the pressure the same way.'
 pubDate: 2026-06-19
 tags: [engineering-leadership, ai, staff-engineer]
 ---
