@@ -391,8 +391,8 @@ section + section {
 	font-size: 0.9375rem;
 }
 
-/* Fun links: a plain Markdown list, styled lightly (spec §4.4). */
-.fun h3 {
+/* Links: a plain Markdown list, styled lightly (spec §4.4). */
+.links h3 {
 	margin: 1.5rem 0 0.5rem;
 	color: var(--muted);
 	font-size: 0.8125rem;
@@ -400,11 +400,11 @@ section + section {
 	letter-spacing: 0.06em;
 }
 
-.fun ul {
+.links ul {
 	padding-left: 1.15rem;
 }
 
-.fun li {
+.links li {
 	margin-bottom: 0.4rem;
 }
 

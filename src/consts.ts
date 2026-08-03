@@ -20,11 +20,11 @@ export const CONTACT_EMAIL = 'odedmesser@gmail.com';
 // GoatCounter site code (ADR-0008). Beacon is prod-only.
 export const GOATCOUNTER_CODE = 'unhappypath';
 
-// About/Projects/Notes/Fun are homepage sections; Contact is a page (spec §3).
+// About/Projects/Notes/Links are homepage sections; Contact is a page (spec §3).
 export const NAV = [
 	{ href: '/#about', label: 'About' },
 	{ href: '/#notes', label: 'Notes' },
 	{ href: '/#projects', label: 'Projects' },
-	{ href: '/#fun', label: 'Fun Links' },
+	{ href: '/#links', label: 'Links' },
 	{ href: '/contact', label: 'Contact' },
 ];

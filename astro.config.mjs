@@ -5,7 +5,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 const SITE = 'https://unhappypath.dev';
 
 // Markdown is content, but external-link behavior is site chrome. Keep it here
-// so every note, project body and Fun Link gets the same safe, accessible link
+// so every note, project body and curated link gets the same safe, accessible behavior
 // without asking authors to write raw HTML.
 const externalMarkdownLinks = {
 	name: 'external-markdown-links',

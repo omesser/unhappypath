@@ -20,8 +20,8 @@ or the routing.
 | **site identity leads** | The rule from spec §1: no personal name in large type anywhere. Name appears in the footer and in per-post bylines only. | A hero that says "Hi, I'm …" |
 | **notes** | The prose collection. Route `/notes`, collection `notes`, heading "Notes". | "writing" (the old name), "blog", "posts" (as a section name), "articles" |
 | **post** | One entry inside notes. Fine in code (`post.data.title`) and in `/notes/[slug]`. | "article", "entry" |
-| **projects** | 4–8 hand-curated cards, one Markdown file each. Signal over quantity. | "portfolio", "work" |
-| **fun links** | The curated rabbit-holes list; one Markdown file, hand-written bullets. Heading "Fun Links". | "resources", "bookmarks", "links" (too generic) |
+| **projects** | 2–8 hand-curated cards, one Markdown file each. Signal over quantity. | "portfolio", "work" |
+| **links** | Recommended reads, newsletters, and tools; one Markdown file, hand-written bullets. Heading "Links". | "fun links", "recommendations", "resources", "bookmarks" |
 | **stub** | Clearly-marked TODO placeholder content shipped in v1 and swapped out later. | "lorem", "dummy data" |
 | **measure** | The prose line-length limit, ~65–70ch. Exposed as CSS `--measure`. | "container width", "max-width" |
 | **SEO** | Findability in Google/Bing. | — |
@@ -40,7 +40,7 @@ or the routing.
 | `docs/register-search-consoles.md` | How to register Google Search Console + Bing Webmaster |
 | `src/content/notes/` | Posts — one folder per post, `index.md` + colocated images |
 | `src/content/projects/` | One `.md` per project card |
-| `src/content/fun-links.md` | The whole Fun Links list, hand-written |
+| `src/content/links.md` | The whole recommended Links list, hand-written |
 | `src/styles/global.css` | Palette custom properties, typography, light + dark |
 | `src/components/` | Shared rendering — `PostList.astro` and accessible `ExternalLink.astro` |
 | `src/utils.ts` | Date formatting, `postPath()`, `cleanPath()`, the `Person` JSON-LD node |
@@ -54,6 +54,6 @@ or the routing.
 
 Tracked in spec §9. Live ones: Cloudflare **AI Crawl Control** audit (else AEO fails
 silently), Google Search Console + Bing Webmaster registration (see
-`docs/register-search-consoles.md`). The tagline, project selection, Fun Links, contact email,
+`docs/register-search-consoles.md`). The tagline, project selection, Links, contact email,
 bio, GoatCounter (`unhappypath`), profile photo (`public/avatar.jpg`), and first note
 (`staff-archetypes-and-ai`) are set.

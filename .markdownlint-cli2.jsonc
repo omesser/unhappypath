@@ -27,8 +27,8 @@
     // why MDX was not installed.
     "MD033": false,
     // Content files have no H1 in the body — the title comes from frontmatter
-    // and the page renders it. fun-links.md deliberately starts at ### because
-    // it renders inside the homepage's "Fun Links" <h2>.
+    // and the page renders it. links.md deliberately starts at ### because it
+    // renders inside the homepage's "Links" <h2>.
     "MD041": false,
   },
 }

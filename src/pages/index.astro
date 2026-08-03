@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import ExternalLink from '../components/ExternalLink.astro';
 import PostList from '../components/PostList.astro';
 import { AUTHOR, SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
-import { Content as FunLinks } from '../content/fun-links.md';
+import { Content as Links } from '../content/links.md';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { byNewest, personLd } from '../utils';
 
@@ -101,8 +101,8 @@ const jsonLd = {
 		</div>
 	</section>
 
-	<section id="fun" class="fun">
-		<h2>Fun Links</h2>
-		<FunLinks />
+	<section id="links" class="links">
+		<h2>Links</h2>
+		<Links />
 	</section>
 </BaseLayout>

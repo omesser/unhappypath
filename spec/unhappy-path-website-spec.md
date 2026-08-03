@@ -19,7 +19,7 @@ Precedence: this spec > `implementation-hints.md` > wireframes.
   - Short "About me" / bio
   - Links to GitHub projects
   - Bunch of prose (timeless writing, converted from LinkedIn posts)
-  - Fun Links / Rabbit Holes section
+  - Links section
   - Contact page ("how to direct to me")
 - Senior engineering leader voice: direct, no corporate fluff, geeky & practical
 - Single source of truth for personal brand + writing home
@@ -48,7 +48,7 @@ See `implementation-hints.md` for stack/infra details.
 
 ### Header / Navbar
 - **Logo (left):** Text "unhappy path" (simple, no fancy icon required)
-- **Navigation (right on desktop):** About · Notes · Projects · Fun Links · Contact
+- **Navigation (right on desktop):** About · Notes · Projects · Links · Contact
   (first four are homepage anchors; Contact is a page)
 - **No theme toggle** (dark mode follows OS preference)
 - **Mobile:** No hamburger. The same links wrap onto a second line — no JS, no menu state.
@@ -64,7 +64,7 @@ See `implementation-hints.md` for stack/infra details.
 ## 4. Content Structure
 
 ### Homepage (`/`)
-Vertical flow: About → Notes → Projects → Fun Links. Single primary column, with a light grid
+Vertical flow: About → Notes → Projects → Links. Single primary column, with a light grid
 for projects only.
 
 #### 4.1 Hero / About Section
@@ -104,8 +104,8 @@ for projects only.
 - "Browse all notes →" link to `/notes`
 - Clear RSS / subscribe option
 
-#### 4.4 Fun Links / Rabbit Holes Section
-- **Heading:** "Fun Links" or "Rabbit Holes"
+#### 4.4 Links Section
+- **Heading:** "Links"
 - **Layout:** Simple bulleted list or light cards
 - **Per item:** Title + short reason why it's interesting + link
 - 5–10 curated items. Easy to update manually.
@@ -121,7 +121,7 @@ for projects only.
 | `/contact`        | How to direct to me                 | See below |
 | `404`             | Custom error page                   | "404 — you have reached the unhappy path. (Working as intended.)" |
 
-No `/about`, `/projects`, or `/fun` pages — homepage sections cover them.
+No `/about`, `/projects`, or `/links` pages — homepage sections cover them.
 Bring one back only if a section outgrows the homepage.
 
 ### Contact Page (`/contact`)
@@ -145,10 +145,11 @@ Bring one back only if a section outgrows the homepage.
 
 - **Notes:** Convert your best timeless LinkedIn posts into proper long-form Markdown articles. Prioritize evergreen topics over news.
 - **Projects:** Hand-curated from GitHub. Signal over quantity.
-- **Fun Links:** Personal curation. Update whenever something genuinely interesting appears.
+- **Links:** Recommended reads, newsletters, and tools. Update whenever something genuinely
+  interesting appears.
 - **Voice:** Senior engineering leader — direct, practical, no fluff, geeky curiosity welcome. Wry-but-warm, not bitter.
 - **Update cadence:** Low. Add when ready. No publishing schedule required.
-- **v1 ships with real public content:** bio, profile photo, three curated projects, Fun Links,
+- **v1 ships with real public content:** bio, profile photo, two curated projects, Links,
   and the first note are in.
 
 ---
@@ -291,7 +292,7 @@ You will need:
 - `implementation-hints.md` (stack/infra decisions)
 - `seo-aeo-research.md` (cited sources behind §8)
 - Wireframe images (with §6 drift warnings in mind)
-- Markdown content for bio, projects data, notes, fun links
+- Markdown content for bio, projects data, notes, and links
 
 Open TODOs (Oded):
 - [x] Personal email address for `/contact`
@@ -303,7 +304,7 @@ Open TODOs (Oded):
 - [x] Bio text (homepage About)
 - [x] Profile photo file (`public/avatar.jpg`)
 - [x] First note from LinkedIn conversion (`staff-archetypes-and-ai`)
-- [x] Two projects curated and Fun Links polished
+- [x] Two projects curated and Links polished
 - [ ] More notes (wave 2)
 - [ ] Confirm git remote URL under "crd" before any push (do not push unasked)
 

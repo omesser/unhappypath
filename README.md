@@ -67,7 +67,7 @@ builds and omitted from Cloudflare branch previews.
 | ---------------------- | ------------------------------------------------------------------------------ |
 | A post                 | `src/content/notes/<slug>/index.md`, images alongside it in the same folder   |
 | A project card         | `src/content/projects/<slug>.md` — frontmatter + a one-line body                |
-| A fun link             | Add a bullet to `src/content/fun-links.md`                                      |
+| A recommended link     | Add a bullet to `src/content/links.md`                                          |
 | A draft                | Keep it on a branch — `main` is production, and there is no `draft:` flag       |
 
 The homepage bio lives in `src/pages/index.astro`. The tagline, contact email, analytics code,

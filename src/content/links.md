@@ -1,11 +1,13 @@
 <!--
-  The whole Fun Links section, hand-written (ADR-0003). No schema, no frontmatter:
+  The whole Links section, hand-written (ADR-0003). No schema, no frontmatter:
   add a bullet, ship it.
 
   Use `###` for group labels, not `##`: this file renders inside the homepage's
-  "Fun Links" <h2>, so `##` here would produce sibling h2s and break the
+  "Links" <h2>, so `##` here would produce sibling h2s and break the
   H1→H2→H3 hierarchy spec §8 requires.
 -->
+
+Recommended reads, newsletters, and tools I keep coming back to.
 
 ### Honorable mentions
 

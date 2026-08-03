@@ -9,10 +9,10 @@ Oded's #1 stated priority is "minimum hassle to edit/add content", and he requir
 to do real Markdown work when dropping in new prose: structure, formatting, inline links,
 embedded media.
 
-Posts were never in question. The open part was the two *structured lists*: Projects (4–8
-cards, ~5 fields each) and Fun Links (5–10 items, each a title + a reason + a URL). YAML data
-files with Zod schemas were proposed and rejected — "content should be markdown files, not
-YAML".
+Posts were never in question. The open part was the two *structured lists*: Projects (2–8
+cards, ~5 fields each) and Links (5–10 recommendations, each a title + a reason + a URL). YAML
+data files with Zod schemas were proposed and rejected — "content should be markdown files,
+not YAML".
 
 ## Decision
 
@@ -22,13 +22,13 @@ Everything is Markdown.
 |---|---|
 | Posts | `src/content/notes/<slug>/index.md` — frontmatter + full Markdown body, images colocated in the same folder |
 | Projects | `src/content/projects/<slug>.md` — frontmatter (`title`, `github`, `live`, `tags`, `order`), body is the card description, so it can carry inline links and emphasis |
-| Fun Links | `src/content/fun-links.md` — one hand-written Markdown file; `###` headings group, bullets are the items. No schema. |
+| Links | `src/content/links.md` — one hand-written Markdown file; `###` headings group, bullets are the items. No schema. |
 
-Fun Links uses `###`, not `##`: the file renders inside the homepage's "Fun Links" `<h2>`, so
-`##` would emit sibling h2s and break the H1→H2→H3 hierarchy spec §8 requires.
+Links uses `###`, not `##`: the file renders inside the homepage's "Links" `<h2>`, so `##`
+would emit sibling h2s and break the H1→H2→H3 hierarchy spec §8 requires.
 
-Fun Links gets no per-item schema because spec §4.4 asks for "a simple bulleted list" — a file
-per bullet would be ten files for ten lines.
+Links gets no per-item schema because spec §4.4 asks for "a simple bulleted list" — a file per
+bullet would be ten files for ten lines.
 
 **MDX is not installed.** Plain `.md` already covers headings, lists, tables, code fences,
 inline links, `astro:assets`-optimized colocated images, and raw HTML (so a YouTube `<iframe>`

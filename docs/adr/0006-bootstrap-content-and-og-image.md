@@ -16,7 +16,7 @@ authenticated as `omesser`.
 ## Decision
 
 **Stubs, TODO-marked:** bio (with inline structure prompts, 150–350 words), three tagline
-drafts to choose from, three example fun-links bullets, and a neutral SVG avatar placeholder.
+drafts to choose from, three example link bullets, and a neutral SVG avatar placeholder.
 
 *Revised during implementation:* `/contact` ships **no** placeholder email. `CONTACT_EMAIL` in
 `src/consts.ts` starts empty and the page renders a TODO box instead of an address — a fake
