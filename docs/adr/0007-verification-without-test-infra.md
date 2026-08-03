@@ -25,9 +25,9 @@ carries full content (spec §8), and every root-relative link resolves to someth
 actually emitted. It also verifies that every off-site HTTP(S) anchor opens in a new tab with
 safe `rel` values and a screen-reader cue. It earned its place immediately by catching two
 real defects the rendered pages looked fine with, and has kept earning it — the link check
-exists because ADR-0010's rename left a dead `/writing` link inside a post body, where no
-amount of renaming files would have found it. This is not the CI browser automation rejected
-below; it reads `dist/` and needs no browser.
+exists because the rename to `/notes` left a dead `/writing` link inside a post body, where
+no amount of renaming files would have found it. This is not the CI browser automation
+rejected below; it reads `dist/` and needs no browser.
 
 `scripts/contrast.mjs` is the other one: it computes the WCAG ratio for every colour pair the
 stylesheet actually uses, so the palette claim below is arithmetic rather than an opinion.

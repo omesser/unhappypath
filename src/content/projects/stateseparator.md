@@ -7,4 +7,4 @@ order: 2
 ---
 
 A Technion-era tool that takes an entangled quantum state and finds the closest
-separable one. C++ and Eigen under a small web front end.
+separable one. C++ and Eigen under a small web front end. Undergone a revival, facelift, and public deployment in 2026

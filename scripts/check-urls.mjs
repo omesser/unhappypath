@@ -2,10 +2,10 @@
 //   1. ADR-0004 — every URL we emit is extensionless and slash-free (canonicals,
 //      og:url, sitemap, feed). Mixed forms read as duplicate content.
 //   2. spec §8 — the feed carries full content, not summaries.
-//   3. Every internal link resolves. Added after ADR-0010's rename left a dead
-//      `/writing` link inside a post body — prose is the one place a route change
-//      cannot be found by renaming a file, and a 404 from your own page is worse
-//      than one from someone else's.
+//   3. Every internal link resolves. Added after the rename to `/notes` left a
+//      dead `/writing` link inside a post body — prose is the one place a route
+//      change cannot be found by renaming a file, and a 404 from your own page
+//      is worse than one from someone else's.
 // Runs on dist/ after the build, so it catches a regression anywhere, not just in
 // cleanPath(). Part of `npm run check`.
 import { readdir, readFile } from 'node:fs/promises';

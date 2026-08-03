@@ -7,8 +7,7 @@ small and rare.
 
 **Spec precedence:** `spec/unhappy-path-website-spec.md` > `spec/implementation-hints.md` >
 the wireframe JPGs. ADRs in `docs/adr/` record the build decisions neither spec file made,
-and a few that overrule the spec once Oded had used the thing — ADR-0010 (the section is
-"notes", not "writing") and ADR-0011 (sticky header, scroll rail) are both of that kind.
+including accepted overrides such as ADR-0011's sticky header and scroll rail.
 
 ## Glossary
 
@@ -19,7 +18,7 @@ or the routing.
 |---|---|---|
 | **unhappy path** | The site identity. Lowercase, two words, in prose and in the logo. | "Unhappy Path", "UnhappyPath". `unhappypath` is only the domain and repo name. |
 | **site identity leads** | The rule from spec §1: no personal name in large type anywhere. Name appears in the footer and in per-post bylines only. | A hero that says "Hi, I'm …" |
-| **notes** | The prose collection. Route `/notes`, collection `notes`, heading "Notes". | "writing" (the old name — ADR-0010), "blog", "posts" (as a section name), "articles" |
+| **notes** | The prose collection. Route `/notes`, collection `notes`, heading "Notes". | "writing" (the old name), "blog", "posts" (as a section name), "articles" |
 | **post** | One entry inside notes. Fine in code (`post.data.title`) and in `/notes/[slug]`. | "article", "entry" |
 | **projects** | 4–8 hand-curated cards, one Markdown file each. Signal over quantity. | "portfolio", "work" |
 | **fun links** | The curated rabbit-holes list; one Markdown file, hand-written bullets. Heading "Fun Links". | "resources", "bookmarks", "links" (too generic) |
