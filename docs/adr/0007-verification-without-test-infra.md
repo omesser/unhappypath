@@ -12,19 +12,22 @@ initial HTML for non-JS-executing AI crawlers (spec §8), and valid RSS/sitemap/
 
 ## Decision
 
-`npm run check` = `astro check && astro build && node scripts/check-urls.mjs`, and it must pass
-with zero errors. `astro check` covers TypeScript and the content-collection schemas, so a
-malformed project frontmatter or a broken content reference fails there.
+`npm run build` is the production gate: Prettier, `astro check`, `astro build`,
+`scripts/check-urls.mjs`, and `scripts/contrast.mjs`. `npm run check` is an alias for the same
+gate, and it must pass with zero errors. `astro check` covers TypeScript and the
+content-collection schemas, so malformed project frontmatter or a broken content reference
+fails there.
 
 `scripts/check-urls.mjs` was added during implementation — a ~85-line, zero-dependency script
 that asserts the output invariants which fail *silently*: every canonical/`og:url`/sitemap/feed
 URL is in the one canonical form (ADR-0004), every page has a canonical, every feed item
 carries full content (spec §8), and every root-relative link resolves to something the build
-actually emitted. It earned its place immediately by catching two real defects the rendered
-pages looked fine with, and has kept earning it — the link check exists because ADR-0010's
-rename left a dead `/writing` link inside a post body, where no amount of renaming files
-would have found it. This is not the CI browser automation rejected below; it reads `dist/`
-and needs no browser.
+actually emitted. It also verifies that every off-site HTTP(S) anchor opens in a new tab with
+safe `rel` values and a screen-reader cue. It earned its place immediately by catching two
+real defects the rendered pages looked fine with, and has kept earning it — the link check
+exists because the rename to `/notes` left a dead `/writing` link inside a post body, where
+no amount of renaming files would have found it. This is not the CI browser automation
+rejected below; it reads `dist/` and needs no browser.
 
 `scripts/contrast.mjs` is the other one: it computes the WCAG ratio for every colour pair the
 stylesheet actually uses, so the palette claim below is arithmetic rather than an opinion.
@@ -47,6 +50,6 @@ already-static site as wasted effort).
 ## Consequences
 
 - No test dependencies, no test config, no fixture upkeep.
-- Accessibility and AEO correctness rest on a disciplined manual pass; the checklist above is
-  the record of what that pass covers.
+- Accessibility and AEO checks that require rendering still rest on a disciplined manual pass;
+  contrast, external-link behavior, and generated URL/feed correctness are automated.
 - Bring back automation if client-side JS or genuine logic ever enters the site.

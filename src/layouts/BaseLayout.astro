@@ -30,11 +30,13 @@ const {
 	noindex = false,
 } = Astro.props;
 
-const pageTitle = title ? `${title} — ${SITE_TITLE}` : `${SITE_TITLE} — ${SITE_TAGLINE}`;
+const pageTitle = title ? `${title} - ${SITE_TITLE}` : `${SITE_TITLE} - ${SITE_TAGLINE}`;
 // ADR-0004: one URL form everywhere — no trailing slash, no .html extension.
 const canonical = new URL(cleanPath(Astro.url.pathname), Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
 const year = new Date().getFullYear();
+const isCloudflarePreview = process.env.CF_PAGES === '1' && process.env.CF_PAGES_BRANCH !== 'main';
+const shouldCountPageview = import.meta.env.PROD && GOATCOUNTER_CODE && !isCloudflarePreview;
 ---
 
 <!doctype html>
@@ -69,11 +71,11 @@ const year = new Date().getFullYear();
 		{jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
 
 		{
-			/* ADR-0008: the only script on the site. Async, cookieless, prod-only, and
-		    skipped entirely until a site code exists. */
+			/* ADR-0008: the only script on the site. Async, cookieless, production-only,
+		    and excluded from Cloudflare preview branches. */
 		}
 		{
-			import.meta.env.PROD && GOATCOUNTER_CODE && (
+			shouldCountPageview && (
 				<script
 					is:inline
 					async
@@ -101,7 +103,7 @@ const year = new Date().getFullYear();
 			<slot />
 		</main>
 		<footer>
-			<span>© {year} {AUTHOR.name} — unhappypath.dev</span>
+			<span>© {year} {AUTHOR.name} - unhappypath.dev</span>
 			<a href="/rss.xml">RSS</a>
 		</footer>
 	</body>

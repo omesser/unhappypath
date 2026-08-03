@@ -176,6 +176,18 @@ a {
 	border-radius: var(--radius);
 }
 
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
 .muted {
 	color: var(--muted);
 }
@@ -379,8 +391,8 @@ section + section {
 	font-size: 0.9375rem;
 }
 
-/* Fun links: a plain Markdown list, styled lightly (spec §4.4). */
-.fun h3 {
+/* Links: a plain Markdown list, styled lightly (spec §4.4). */
+.links h3 {
 	margin: 1.5rem 0 0.5rem;
 	color: var(--muted);
 	font-size: 0.8125rem;
@@ -388,11 +400,11 @@ section + section {
 	letter-spacing: 0.06em;
 }
 
-.fun ul {
+.links ul {
 	padding-left: 1.15rem;
 }
 
-.fun li {
+.links li {
 	margin-bottom: 0.4rem;
 }
 
@@ -499,16 +511,6 @@ article header {
 	border: 0;
 	border-top: 1px solid var(--border);
 	margin: 2.5rem 0;
-}
-
-/* A clearly-marked stub, so nothing placeholder-ish ships unnoticed (ADR-0006). */
-.stub {
-	background: var(--pill);
-	border: 1px dashed var(--muted);
-	border-radius: var(--radius);
-	padding: 0.75rem 1rem;
-	font-size: 0.875rem;
-	color: var(--pill-fg);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,8 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
+import ExternalLink from '../components/ExternalLink.astro';
 import PostList from '../components/PostList.astro';
 import { AUTHOR, SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
-import { Content as FunLinks } from '../content/fun-links.md';
+import { Content as Links } from '../content/links.md';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { byNewest, personLd } from '../utils';
 
@@ -33,29 +34,40 @@ const jsonLd = {
 ---
 
 <BaseLayout jsonLd={jsonLd}>
-	<section id="about" class="hero">
-		<img src="/avatar.jpg" width="104" height="104" alt="Oded Messer — comic-style portrait" />
+	<section id="about" class="hero" aria-label="About">
+		<img src="/avatar.jpg" width="104" height="104" alt="Oded Messer - comic-style portrait" />
 		<div class="hero-body">
 			<h1>{SITE_TITLE} <span class="muted">| {SITE_TAGLINE}</span></h1>
 			<p>
-				I lead cloud and data at Prisma Photonics — fiber sensing for critical infrastructure.
-				Before that I ran engineering at Iterative (DVC, CML), and spent a long stretch on platform
-				work at Iguazio and Intel.
+				Welcome to my little neck of the woods. This is where I write about software systems,
+				architecture, processes, leadership, the paths that do not go as planned, why, and how to
+				make them (hopefully) better. Lately this includes figuring out where AI actually helps
+				engineering work, and where it does not.
 			</p>
 			<p>
-				Most of what I care about is unglamorous: cutting friction, clarifying ownership, and
-				building systems teams can run without constant babysitting. Lately that includes figuring
-				out where AI actually helps engineering work, and where it doesn't.
-			</p>
-			<p>
-				This site is for notes on those themes — systems, leadership, and the paths that don't go as
-				planned.
+				I write about things I care about - they are usually unglamorous, and rarely innovative, but
+				hopefully concise, insightful and entertaining enough to read through. I hope there's
+				something here for you to take away and apply in your scenario or line of work. That's it.
+				Welcome to <em>Unhappy Path</em>.
 			</p>
 			<p class="socials">
-				<a href={AUTHOR.github}>GitHub</a>
-				<a href={AUTHOR.linkedin}>LinkedIn</a>
+				<ExternalLink href={AUTHOR.github}>GitHub</ExternalLink>
+				<ExternalLink href={AUTHOR.linkedin}>LinkedIn</ExternalLink>
 			</p>
 		</div>
+	</section>
+
+	<section id="notes">
+		<div class="section-head">
+			<h2>Notes</h2>
+			<p class="muted"><small>Notes on engineering, systems, and leadership.</small></p>
+		</div>
+		<PostList posts={recent} />
+		<p>
+			<a href="/notes">Browse all notes →</a>
+			<span class="muted"> · </span>
+			<a href="/rss.xml">RSS</a>
+		</p>
 	</section>
 
 	<section id="projects">
@@ -68,7 +80,7 @@ const jsonLd = {
 				cards.map(({ data, Body }) => (
 					<article class="card">
 						<h3>
-							<a href={data.github}>{data.title}</a>
+							<ExternalLink href={data.github}>{data.title}</ExternalLink>
 						</h3>
 						<Body />
 						{data.tags.length > 0 && (
@@ -78,31 +90,19 @@ const jsonLd = {
 								))}
 							</ul>
 						)}
-						<p class="card-links">
-							<a href={data.github}>GitHub</a>
-							{data.live && <a href={data.live}>Live</a>}
-						</p>
+						{data.live && (
+							<p class="card-links">
+								<ExternalLink href={data.live}>Live</ExternalLink>
+							</p>
+						)}
 					</article>
 				))
 			}
 		</div>
 	</section>
 
-	<section id="notes">
-		<div class="section-head">
-			<h2>Notes</h2>
-			<p class="muted"><small>Timeless notes on engineering, systems, and leadership.</small></p>
-		</div>
-		<PostList posts={recent} />
-		<p>
-			<a href="/notes">Browse all notes →</a>
-			<span class="muted"> · </span>
-			<a href="/rss.xml">RSS</a>
-		</p>
-	</section>
-
-	<section id="fun" class="fun">
-		<h2>Fun Links</h2>
-		<FunLinks />
+	<section id="links" class="links">
+		<h2>Links</h2>
+		<Links />
 	</section>
 </BaseLayout>

@@ -165,7 +165,7 @@ robots.txt does:
 User-agent: *
 Allow: /
 
-Sitemap: https://unhappypath.dev/sitemap-index.xml
+Sitemap: https://unhappypath.dev/sitemap.xml
 ```
 
 If you want "cite me, don't train on me" (defensible for a writer; costs you nothing in
@@ -194,7 +194,7 @@ Disallow: /
 User-agent: Bytespider
 Disallow: /
 
-Sitemap: https://unhappypath.dev/sitemap-index.xml
+Sitemap: https://unhappypath.dev/sitemap.xml
 ```
 
 Trade-off to be honest about [speculative but reasoned]: being in training corpora may make

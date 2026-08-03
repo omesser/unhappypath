@@ -38,7 +38,7 @@ const pairs = (p, mode) => [
 	[`${mode} link`, p.link, p.bg, 4.5],
 	[`${mode} card body text`, p.fg, p.surface, 4.5],
 	[`${mode} card link/heading`, p.link, p.surface, 4.5],
-	[`${mode} tag pill + stub box`, p.pillFg, p.pill, 4.5],
+	[`${mode} tag pill`, p.pillFg, p.pill, 4.5],
 	[`${mode} focus ring (UI component, 3:1)`, p.link, p.bg, 3.0],
 ];
 

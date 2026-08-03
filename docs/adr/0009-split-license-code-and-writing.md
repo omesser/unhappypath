@@ -17,7 +17,7 @@ in tension with it.
 
 - `LICENSE` — MIT, covering code. Copyright holder: Oded Messer.
 - `LICENSE-CONTENT` — CC BY 4.0, covering everything under `src/content/` (posts, projects,
-  fun links) and the wireframes/spec prose. Short file pointing at the canonical license deed
+  links) and the wireframes/spec prose. Short file pointing at the canonical license deed
   rather than inlining the full legal code.
 - `README.md` states the split in one line so it is discoverable without reading either file.
 

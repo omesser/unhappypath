@@ -19,7 +19,7 @@ Precedence: this spec > `implementation-hints.md` > wireframes.
   - Short "About me" / bio
   - Links to GitHub projects
   - Bunch of prose (timeless writing, converted from LinkedIn posts)
-  - Fun Links / Rabbit Holes section
+  - Links section
   - Contact page ("how to direct to me")
 - Senior engineering leader voice: direct, no corporate fluff, geeky & practical
 - Single source of truth for personal brand + writing home
@@ -48,13 +48,13 @@ See `implementation-hints.md` for stack/infra details.
 
 ### Header / Navbar
 - **Logo (left):** Text "unhappy path" (simple, no fancy icon required)
-- **Navigation (right on desktop):** About · Projects · Notes · Fun · Contact
+- **Navigation (right on desktop):** About · Notes · Projects · Links · Contact
   (first four are homepage anchors; Contact is a page)
 - **No theme toggle** (dark mode follows OS preference)
 - **Mobile:** No hamburger. The same links wrap onto a second line — no JS, no menu state.
 
 ### Footer
-- Small print only: © [Year] Oded Messer — unhappypath.dev (the one place the name appears)
+- Small print only: © [Year] Oded Messer — unhappypath.dev
 - Links: RSS Feed (for Notes)
 - Optional: small "Built with …" note
 - Minimal, no clutter
@@ -64,12 +64,12 @@ See `implementation-hints.md` for stack/infra details.
 ## 4. Content Structure
 
 ### Homepage (`/`)
-Vertical flow, single primary column (or light grid for projects only).
+Vertical flow: About → Notes → Projects → Links. Single primary column, with a light grid
+for projects only.
 
 #### 4.1 Hero / About Section
-- **Heading:** the site, not the person — **"Unhappy path | Software Engineering hijinks"**
-  or similarly lighthearted. Fun to look at, appeals to engineers.
-  (Draft 2–3 tagline options in stub content for Oded to pick.)
+- **Heading:** the site, not the person — **"unhappy path | Software engineering hijinks"**.
+  Fun to look at, appeals to engineers.
 - **Desktop:** Profile photo/avatar on left + text on right. **Mobile:** photo on top, then text.
 - **Content:**
   - Bio: 150–350 words max. Honest, direct. Cover:
@@ -91,11 +91,11 @@ Vertical flow, single primary column (or light grid for projects only).
   - 1–2 sentence description
   - Tech tags (small pills)
   - Action links: GitHub · Live (if applicable)
-- Curate **4–8** best projects only. Everything else lives on your GitHub profile.
+- Curate **2–8** best projects only. Everything else lives on your GitHub profile.
 
 #### 4.3 Notes Section
 - **Heading:** "Notes"
-- **Intro line (optional):** "Timeless notes on engineering, systems, leadership, and the unhappy paths."
+- **Intro line (optional):** "Notes on engineering, systems, and leadership."
 - **Layout:** Vertical chronological list, **5 most recent** posts
 - **Per post item:**
   - Date (e.g. Jul 2025)
@@ -104,8 +104,8 @@ Vertical flow, single primary column (or light grid for projects only).
 - "Browse all notes →" link to `/notes`
 - Clear RSS / subscribe option
 
-#### 4.4 Fun Links / Rabbit Holes Section
-- **Heading:** "Fun Links" or "Rabbit Holes"
+#### 4.4 Links Section
+- **Heading:** "Links"
 - **Layout:** Simple bulleted list or light cards
 - **Per item:** Title + short reason why it's interesting + link
 - 5–10 curated items. Easy to update manually.
@@ -121,7 +121,7 @@ Vertical flow, single primary column (or light grid for projects only).
 | `/contact`        | How to direct to me                 | See below |
 | `404`             | Custom error page                   | "404 — you have reached the unhappy path. (Working as intended.)" |
 
-No `/about`, `/projects`, or `/fun` pages — homepage sections cover them.
+No `/about`, `/projects`, or `/links` pages — homepage sections cover them.
 Bring one back only if a section outgrows the homepage.
 
 ### Contact Page (`/contact`)
@@ -145,11 +145,12 @@ Bring one back only if a section outgrows the homepage.
 
 - **Notes:** Convert your best timeless LinkedIn posts into proper long-form Markdown articles. Prioritize evergreen topics over news.
 - **Projects:** Hand-curated from GitHub. Signal over quantity.
-- **Fun Links:** Personal curation. Update whenever something genuinely interesting appears.
+- **Links:** Recommended reads, newsletters, and tools. Update whenever something genuinely
+  interesting appears.
 - **Voice:** Senior engineering leader — direct, practical, no fluff, geeky curiosity welcome. Wry-but-warm, not bitter.
 - **Update cadence:** Low. Add when ready. No publishing schedule required.
-- **v1 ships with clearly-marked stub content**; Oded swaps in real content
-  (projects, fun links). Bio, profile photo, and first notes are in.
+- **v1 ships with real public content:** bio, profile photo, two curated projects, Links,
+  and the first note are in.
 
 ---
 
@@ -263,8 +264,8 @@ The site-identity-first branding stays, but:
   machines get full authorship without the humans seeing a billboard.
 
 ### Plumbing
-- `@astrojs/sitemap` + `@astrojs/rss` — **full-content** feed, not summaries (feeds both
-  human subscribers and AI ingestion).
+- Hand-rolled sitemap (ADR-0004) + `@astrojs/rss` — **full-content** feed, not summaries
+  (feeds both human subscribers and AI ingestion).
 - Pick one URL form (trailing slash or not) and enforce it everywhere: Astro `trailingSlash`
   config, rss() helper, canonicals, sitemap, internal links.
 - Ensure `*.pages.dev` preview domain doesn't get indexed as a duplicate (canonical to
@@ -291,7 +292,7 @@ You will need:
 - `implementation-hints.md` (stack/infra decisions)
 - `seo-aeo-research.md` (cited sources behind §8)
 - Wireframe images (with §6 drift warnings in mind)
-- Markdown content for bio, projects data, notes, fun links
+- Markdown content for bio, projects data, notes, and links
 
 Open TODOs (Oded):
 - [x] Personal email address for `/contact`
@@ -299,11 +300,12 @@ Open TODOs (Oded):
 - [ ] Register site in Google Search Console + Bing Webmaster Tools, submit sitemap (§8, post-launch; §7 analytics layer 1) — steps: `docs/register-search-consoles.md`
 - [x] Create GoatCounter account, confirm the site code (`GOATCOUNTER_CODE = 'unhappypath'` in `src/consts.ts`) (§7 analytics layer 2)
 - [x] GoatCounter → Settings: enable "ignore my own pageviews" so local/dev traffic stays out of the numbers
-- [ ] Pick hero tagline from drafted options
+- [x] Pick hero tagline (`Software engineering hijinks`)
 - [x] Bio text (homepage About)
 - [x] Profile photo file (`public/avatar.jpg`)
 - [x] First note from LinkedIn conversion (`staff-archetypes-and-ai`)
-- [ ] 4–8 projects curated, more notes (wave 2), fun links polish
+- [x] Two projects curated and Links polished
+- [ ] More notes (wave 2)
 - [ ] Confirm git remote URL under "crd" before any push (do not push unasked)
 
 ---

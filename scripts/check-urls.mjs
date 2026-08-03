@@ -2,10 +2,10 @@
 //   1. ADR-0004 — every URL we emit is extensionless and slash-free (canonicals,
 //      og:url, sitemap, feed). Mixed forms read as duplicate content.
 //   2. spec §8 — the feed carries full content, not summaries.
-//   3. Every internal link resolves. Added after ADR-0010's rename left a dead
-//      `/writing` link inside a post body — prose is the one place a route change
-//      cannot be found by renaming a file, and a 404 from your own page is worse
-//      than one from someone else's.
+//   3. Every internal link resolves. Added after the rename to `/notes` left a
+//      dead `/writing` link inside a post body — prose is the one place a route
+//      change cannot be found by renaming a file, and a 404 from your own page
+//      is worse than one from someone else's.
 // Runs on dist/ after the build, so it catches a regression anywhere, not just in
 // cleanPath(). Part of `npm run check`.
 import { readdir, readFile } from 'node:fs/promises';
@@ -48,7 +48,7 @@ for (const page of pages) {
 	else if (badForm(ogUrl)) problems.push(`${page}: og:url ${badForm(ogUrl)} — ${ogUrl}`);
 
 	// Preview deploys must not be indexed as duplicates of the real domain (spec §8).
-	if (canonical && !canonical.startsWith(SITE))
+	if (canonical && new URL(canonical).origin !== SITE)
 		problems.push(`${page}: canonical off-site — ${canonical}`);
 
 	// Root-relative links only; external ones are not ours to verify. The fragment
@@ -56,6 +56,27 @@ for (const page of pages) {
 	for (const [, href] of html.matchAll(/href="(\/[^"]*)"/g)) {
 		const path = href.split(/[#?]/)[0] || '/';
 		if (!targets.has(path)) problems.push(`${page}: dead internal link — ${href}`);
+	}
+
+	// External HTTP(S) links deliberately open away from the site. Enforce the
+	// behavior in generated HTML so links authored in Astro and Markdown cannot
+	// drift apart.
+	for (const match of html.matchAll(
+		/<a\b([^>]*)href="(https?:\/\/[^"]+)"([^>]*)>([\s\S]*?)<\/a>/g,
+	)) {
+		const [, before, href, after, body] = match;
+		if (new URL(href).origin === SITE) continue;
+
+		const attrs = `${before} ${after}`;
+		if (!/target="_blank"/.test(attrs))
+			problems.push(`${page}: external link does not open in a new tab — ${href}`);
+
+		const rel = attrs.match(/rel="([^"]+)"/)?.[1]?.split(/\s+/) ?? [];
+		if (!rel.includes('noopener') || !rel.includes('noreferrer'))
+			problems.push(`${page}: external link lacks noopener noreferrer — ${href}`);
+
+		if (!/opens in (?:a )?new tab/i.test(body))
+			problems.push(`${page}: external link lacks a screen-reader new-tab cue — ${href}`);
 	}
 }
 
@@ -84,5 +105,5 @@ if (problems.length > 0) {
 	process.exit(1);
 }
 console.log(
-	`URL/feed check passed: ${pages.length} pages, ${items} feed items, all URLs canonical-form.`,
+	`URL/feed check passed: ${pages.length} pages, ${items} feed items, URLs and links valid.`,
 );

@@ -1,52 +1,52 @@
 ---
+import ExternalLink from '../components/ExternalLink.astro';
 import { AUTHOR, CONTACT_EMAIL } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
 	title="Contact"
-	description="How to reach Oded Messer — what to reach out about, and where."
+	description="How to reach Oded Messer - what to reach out about, and where."
 >
 	<h1>Contact</h1>
-
 	<p>
-		Happy to hear from you. A note on routing, so your message lands somewhere I'll actually answer:
+		Hi there! I'm Oded. A software engineer, architect, and manager with over 13 years of
+		experience. Most recently, I led cloud and data at Prisma Photonics, where we used fiber sensing
+		to monitor critical infrastructure. Before that, I led engineering at Iterative (now DataChain),
+		working on MLOps tools including DVC, CML, and DataChain. Earlier, I worked on data science
+		platform-as-a-service (PaaS) at Iguazio (now part of QuantumBlack, AI by McKinsey) and Intel. I
+		also do occasional consulting.
 	</p>
 
-	<h2>Worth reaching out about</h2>
+	<p>Happy to hear from you. Here is the best way to reach me.</p>
+
+	<h2>Get in touch if…</h2>
 	<ul>
 		<li>Something I wrote was wrong, or you have a better counter-example.</li>
-		<li>Engineering leadership, scaling teams, AI-native ways of working.</li>
-		<li>You're hiring for something genuinely unusual, or want to compare notes.</li>
+		<li>
+			You want to chat about distributed systems, software architecture, MLOps, AIOps or to
+			philosophize about software futurism.
+		</li>
+		<li>
+			You have an unusual engineering leadership problem, need advice or want to compare notes.
+		</li>
 	</ul>
 
 	<h2>Where</h2>
 	<ul>
 		<li>
-			<strong>LinkedIn DM</strong> — <a href={AUTHOR.linkedin}>linkedin.com/in/odedmesser</a>. Best
-			for anything short.
+			<strong>LinkedIn DM</strong> - <ExternalLink href={AUTHOR.linkedin}>
+				linkedin.com/in/odedmesser
+			</ExternalLink>. Best for anything short.
 		</li>
-		{
-			CONTACT_EMAIL ? (
-				<li>
-					<strong>Email</strong> — <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Best for
-					anything long, or anything with an attachment.
-				</li>
-			) : (
-				<li class="stub">
-					<strong>TODO(oded): personal email.</strong> Set <code>CONTACT_EMAIL</code> in{' '}
-					<code>src/consts.ts</code> and this line becomes a mailto: link. Until then the page
-					deliberately shows no address rather than a broken one.
-				</li>
-			)
-		}
 		<li>
-			<strong>GitHub</strong> — <a href={AUTHOR.github}>github.com/omesser</a>. Issues and PRs on
-			anything of mine.
+			<strong>Email</strong> - <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Best for
+			anything long, or anything with an attachment.
+		</li>
+		<li>
+			<strong>GitHub</strong> - <ExternalLink href={AUTHOR.github}>
+				github.com/omesser
+			</ExternalLink>. Issues and PRs on anything of mine.
 		</li>
 	</ul>
-
-	<p class="muted">
-		<small>No contact form — a <code>mailto:</code> needs no backend and no spam filter.</small>
-	</p>
 </BaseLayout>
