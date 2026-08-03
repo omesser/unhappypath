@@ -13,7 +13,7 @@ type Props = CollectionEntry<'notes'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
-const { title, description, pubDate, updatedDate, heroImage } = post.data;
+const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } = post.data;
 
 const url = new URL(postPath(post), Astro.site).href;
 const jsonLd = {
@@ -52,7 +52,7 @@ const jsonLd = {
 				<Image
 					class="hero-img"
 					src={heroImage}
-					alt=""
+					alt={heroImageAlt ?? ''}
 					widths={[480, 800]}
 					sizes="(max-width: 40rem) 100vw, 68ch"
 				/>

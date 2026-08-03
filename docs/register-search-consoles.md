@@ -8,7 +8,7 @@ Do this after the site is live on `unhappypath.dev`. DNS ownership can be verifi
 earlier; sitemap submit needs a real deploy.
 
 **Sitemap URL to submit everywhere:**
-`https://unhappypath.dev/sitemap-index.xml`
+`https://unhappypath.dev/sitemap.xml`
 
 Do **not** register the `*.pages.dev` preview domain — canonicals already point at
 `unhappypath.dev`.
@@ -30,7 +30,7 @@ Do **not** register the `*.pages.dev` preview domain — canonicals already poin
 5. Click **Verify** in Search Console. Propagation is usually minutes; can take
    longer.
 6. Left nav → **Sitemaps** → submit
-   `https://unhappypath.dev/sitemap-index.xml`.
+   `https://unhappypath.dev/sitemap.xml`.
 
 Leave the verification TXT record in place — Google re-checks it.
 
@@ -45,7 +45,7 @@ Leave the verification TXT record in place — Google re-checks it.
    a second DNS dance.
 4. Otherwise verify with a Cloudflare TXT record the same way as Google.
 5. Submit the same sitemap:
-   `https://unhappypath.dev/sitemap-index.xml`.
+   `https://unhappypath.dev/sitemap.xml`.
 
 Bing matters for AEO: its index feeds parts of the ChatGPT ecosystem (spec §8).
 

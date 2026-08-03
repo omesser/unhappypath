@@ -28,7 +28,7 @@ Rejected, both proposed:
 
 "Notes" won on three counts: it names the artifact rather than either party's activity;
 it is already the word the site uses for this content in `SITE_DESCRIPTION` and in the
-homepage section intro ("Timeless notes on engineering, systems, and leadership"), so the
+homepage section intro ("Notes on engineering, systems, and leadership"), so the
 vocabulary converges instead of adding a fourth synonym; and it carries no promise about
 length, register or cadence that future content could break.
 

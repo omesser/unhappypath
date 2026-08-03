@@ -8,20 +8,23 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "prettier --check . && markdownlint-cli2 && astro check && npm run build:site && node scripts/check-urls.mjs && node scripts/contrast.mjs",
+    "build:site": "astro build",
     "preview": "astro preview",
-    "check": "prettier --check . && markdownlint-cli2 && astro check && astro build && node scripts/check-urls.mjs",
+    "check": "npm run build",
     "format": "prettier --write . && markdownlint-cli2 --fix",
     "assets": "node scripts/render-assets.mjs",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "^0.3.5",
     "@astrojs/rss": "^4.0.19",
     "astro": "^7.1.6",
     "sharp": "^0.35.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.1.2",
     "markdownlint-cli2": "^0.23.2",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",

@@ -43,18 +43,18 @@ or the routing.
 | `src/content/projects/` | One `.md` per project card |
 | `src/content/fun-links.md` | The whole Fun Links list, hand-written |
 | `src/styles/global.css` | Palette custom properties, typography, light + dark |
-| `src/components/` | The shared bits — currently just `PostList.astro` |
+| `src/components/` | Shared rendering — `PostList.astro` and accessible `ExternalLink.astro` |
 | `src/utils.ts` | Date formatting, `postPath()`, `cleanPath()`, the `Person` JSON-LD node |
-| `src/consts.ts` | Tagline, contact email, analytics code, nav — remaining `TODO(oded)` knob is tagline |
-| `scripts/` | `check-urls.mjs` (runs in `npm run check`), `contrast.mjs`, `render-assets.mjs` |
+| `src/consts.ts` | Tagline, contact email, analytics code, author links, and nav |
+| `scripts/` | Generated-output/link checks, WCAG contrast checks, and asset rendering (`npm run build` runs both checks) |
 | `.prettierrc.json` / `.prettierignore` | Formatting. Covers code, config and `src/content/`; `docs/`, `spec/`, this file and the README are hand-written (ADR-0012) |
 | `.markdownlint-cli2.jsonc` | Markdown linting — semantics only, and it covers **all** Markdown including `docs/` and `spec/`, because linting reports without rewriting (ADR-0013) |
 | `public/og.png` | The single site-wide social card, rendered from `spec/og.svg` |
 
 ## Open TODOs owned by Oded
 
-Tracked in spec §9. Live ones: tagline pick, project curation, fun links polish,
-Cloudflare **AI Crawl Control** audit (else AEO fails silently), Google Search Console +
-Bing Webmaster registration (see `docs/register-search-consoles.md`). Contact email, bio,
-GoatCounter (`unhappypath`), profile photo (`public/avatar.jpg`), and first note
+Tracked in spec §9. Live ones: Cloudflare **AI Crawl Control** audit (else AEO fails
+silently), Google Search Console + Bing Webmaster registration (see
+`docs/register-search-consoles.md`). The tagline, project selection, Fun Links, contact email,
+bio, GoatCounter (`unhappypath`), profile photo (`public/avatar.jpg`), and first note
 (`staff-archetypes-and-ai`) are set.

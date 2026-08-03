@@ -57,6 +57,27 @@ for (const page of pages) {
 		const path = href.split(/[#?]/)[0] || '/';
 		if (!targets.has(path)) problems.push(`${page}: dead internal link — ${href}`);
 	}
+
+	// External HTTP(S) links deliberately open away from the site. Enforce the
+	// behavior in generated HTML so links authored in Astro and Markdown cannot
+	// drift apart.
+	for (const match of html.matchAll(
+		/<a\b([^>]*)href="(https?:\/\/[^"]+)"([^>]*)>([\s\S]*?)<\/a>/g,
+	)) {
+		const [, before, href, after, body] = match;
+		if (href.startsWith(SITE)) continue;
+
+		const attrs = `${before} ${after}`;
+		if (!/target="_blank"/.test(attrs))
+			problems.push(`${page}: external link does not open in a new tab — ${href}`);
+
+		const rel = attrs.match(/rel="([^"]+)"/)?.[1]?.split(/\s+/) ?? [];
+		if (!rel.includes('noopener') || !rel.includes('noreferrer'))
+			problems.push(`${page}: external link lacks noopener noreferrer — ${href}`);
+
+		if (!/opens in (?:a )?new tab/i.test(body))
+			problems.push(`${page}: external link lacks a screen-reader new-tab cue — ${href}`);
+	}
 }
 
 const sitemap = await readFile('dist/sitemap.xml', 'utf8');
@@ -84,5 +105,5 @@ if (problems.length > 0) {
 	process.exit(1);
 }
 console.log(
-	`URL/feed check passed: ${pages.length} pages, ${items} feed items, all URLs canonical-form.`,
+	`URL/feed check passed: ${pages.length} pages, ${items} feed items, URLs and links valid.`,
 );
