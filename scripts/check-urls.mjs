@@ -6,6 +6,7 @@
 //      dead `/writing` link inside a post body — prose is the one place a route
 //      change cannot be found by renaming a file, and a 404 from your own page
 //      is worse than one from someone else's.
+//   4. Every page carries the site-wide work-in-progress notice.
 // Runs on dist/ after the build, so it catches a regression anywhere, not just in
 // cleanPath(). Part of `npm run check`.
 import { readdir, readFile } from 'node:fs/promises';
@@ -32,6 +33,11 @@ const targets = new Set([
 
 for (const page of pages) {
 	const html = await readFile(`dist/${page}`, 'utf8');
+
+	if (!/class="construction-banner"/.test(html))
+		problems.push(`${page}: missing under-construction banner`);
+	if (!/UNDER CONSTRUCTION[\s\S]*This site is a work in progress\./.test(html))
+		problems.push(`${page}: under-construction banner copy has drifted`);
 
 	// Error pages carry noindex instead of a canonical (nothing should treat them
 	// as a destination), so they are exempt from the canonical requirement only.
