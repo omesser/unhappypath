@@ -424,7 +424,7 @@ consensus-safe].
 
 ## 5. Concrete checklist for unhappypath.dev (Astro)
 
-1. `astro.config.mjs`: set `site: "https://unhappypath.dev"`, pick `trailingSlash` policy, add
+1. `astro.config.ts`: set `site: "https://unhappypath.dev"`, pick `trailingSlash` policy, add
    `@astrojs/sitemap`.
 2. Base layout `<head>`: canonical link, title, meta description, OG block, `twitter:card`,
    RSS autodiscovery link, JSON-LD component (WebSite/Person or BlogPosting by page type).

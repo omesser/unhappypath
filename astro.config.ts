@@ -1,6 +1,6 @@
-// @ts-check
 import { satteri } from '@astrojs/markdown-satteri';
 import { defineConfig, fontProviders } from 'astro/config';
+import type { HastPluginDefinition } from 'satteri';
 
 const SITE = 'https://unhappypath.dev';
 
@@ -11,10 +11,6 @@ const externalMarkdownLinks = {
 	name: 'external-markdown-links',
 	element: {
 		filter: ['a'],
-		/**
-		 * @param {any} node
-		 * @param {any} context
-		 */
 		visit(node, context) {
 			const href = node.properties?.href;
 			if (typeof href !== 'string' || !/^https?:\/\//i.test(href) || new URL(href).origin === SITE)
@@ -30,7 +26,7 @@ const externalMarkdownLinks = {
 			});
 		},
 	},
-};
+} satisfies HastPluginDefinition;
 
 // https://astro.build/config
 export default defineConfig({

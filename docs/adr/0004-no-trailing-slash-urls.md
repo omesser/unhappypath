@@ -14,7 +14,7 @@ ambiguity for both search and answer engines — but it does not pick which form
 `trailingSlash: 'never'` with `build.format: 'file'`.
 
 ```js
-// astro.config.mjs
+// astro.config.ts
 site: 'https://unhappypath.dev',
 trailingSlash: 'never',
 build: { format: 'file' },
