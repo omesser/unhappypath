@@ -432,7 +432,7 @@ consensus-safe].
    `Sitemap:` line.
 4. Cloudflare dashboard: AI Crawl Control → confirm the search/user bots you want are allowed;
    disable default AI-bot blocking; don't enable pay-per-crawl.
-5. `src/pages/rss.xml.js` with full `content`; sanitize-html.
+5. `src/pages/rss.xml.ts` with full `content`; sanitize-html.
 6. Blog post frontmatter: `pubDate`, `updatedDate` → rendered `<time>` + JSON-LD + sitemap
    `lastmod`.
 7. About page: bio, photo, `Person` JSON-LD with `sameAs` links; every post byline links to it.

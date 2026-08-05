@@ -58,7 +58,7 @@ logic for lint rules to find. Revisit if real logic lands.
 
 - `printWidth: 100` matches the house style but has no zero-churn setting: at 100 Prettier
   splits three long lines, and widening to 120 instead *joins* lines in `sitemap.xml.ts` and
-  `rss.xml.js`. Adoption was one reformat commit either way.
+  `rss.xml.ts`. Adoption was one reformat commit either way.
 - `scripts/contrast.mjs` carries two `// prettier-ignore` comments. The two palettes are one
   line each so they can be read as a pair; exploded to a property per line they stop lining
   up, which is the only thing they are for.
