@@ -28,9 +28,9 @@ const ratio = (a, b) => {
 // the whole point is spotting that light and dark disagree on a key. Exploded to
 // one property per line they no longer line up.
 // prettier-ignore
-const light = { bg: '#fbfbf9', surface: '#f4f4f1', pill: '#eeeeea', fg: '#1f2328', muted: '#5b6470', pillFg: '#4a5460', link: '#1f4f8b' };
+const light = { bg: '#fbfbf9', surface: '#f4f4f1', pill: '#eeeeea', fg: '#1f2328', muted: '#5b6470', pillFg: '#4a5460', link: '#1f4f8b', noticeBg: '#f4c430', noticeFg: '#1f2328' };
 // prettier-ignore
-const dark = { bg: '#14171a', surface: '#1c2024', pill: '#22262b', fg: '#e8eaed', muted: '#a3abb5', pillFg: '#b6bec8', link: '#8ab4f8' };
+const dark = { bg: '#14171a', surface: '#1c2024', pill: '#22262b', fg: '#e8eaed', muted: '#a3abb5', pillFg: '#b6bec8', link: '#8ab4f8', noticeBg: '#f4c430', noticeFg: '#1f2328' };
 
 const pairs = (p, mode) => [
 	[`${mode} body text`, p.fg, p.bg, 4.5],
@@ -38,7 +38,8 @@ const pairs = (p, mode) => [
 	[`${mode} link`, p.link, p.bg, 4.5],
 	[`${mode} card body text`, p.fg, p.surface, 4.5],
 	[`${mode} card link/heading`, p.link, p.surface, 4.5],
-	[`${mode} tag pill + stub box`, p.pillFg, p.pill, 4.5],
+	[`${mode} tag pill`, p.pillFg, p.pill, 4.5],
+	[`${mode} construction banner`, p.noticeFg, p.noticeBg, 4.5],
 	[`${mode} focus ring (UI component, 3:1)`, p.link, p.bg, 3.0],
 ];
 

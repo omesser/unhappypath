@@ -36,7 +36,8 @@ Control audit was already a launch-blocking checklist item for §8 reasons.
 
 **Layer 2 — GoatCounter**, hosted free tier (personal, non-commercial; donation-funded). One
 async 3.5 KB script in `BaseLayout.astro`. No cookies, no `localStorage`, no personal data
-retained, therefore no consent banner. Yields pageviews per path, referrers, country, browser.
+retained, therefore no consent banner. It is included in production builds and omitted from
+Cloudflare branch previews. Yields pageviews per path, referrers, country, browser.
 
 The script does not violate §8. That rule is *all content in the initial HTML so non-JS-executing
 crawlers see everything* — it is not a byte budget. Async, content-free, and invisible to

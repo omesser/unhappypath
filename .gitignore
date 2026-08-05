@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Claude
 .claude/
+
+# Agent implementation artifacts
+docs/superpowers/

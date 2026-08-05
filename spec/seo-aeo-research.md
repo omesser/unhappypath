@@ -160,18 +160,18 @@ ways: block training, stay citable.
 Maximal discoverability version — allow everything, which is also what an empty/permissive
 robots.txt does:
 
-```
+```robots
 # https://unhappypath.dev/robots.txt
 User-agent: *
 Allow: /
 
-Sitemap: https://unhappypath.dev/sitemap-index.xml
+Sitemap: https://unhappypath.dev/sitemap.xml
 ```
 
 If you want "cite me, don't train on me" (defensible for a writer; costs you nothing in
 answer-engine visibility per the vendors' own docs):
 
-```
+```robots
 User-agent: *
 Allow: /
 
@@ -194,7 +194,7 @@ Disallow: /
 User-agent: Bytespider
 Disallow: /
 
-Sitemap: https://unhappypath.dev/sitemap-index.xml
+Sitemap: https://unhappypath.dev/sitemap.xml
 ```
 
 Trade-off to be honest about [speculative but reasoned]: being in training corpora may make

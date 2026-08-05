@@ -1,9 +1,40 @@
 // @ts-check
+import { satteri } from '@astrojs/markdown-satteri';
 import { defineConfig, fontProviders } from 'astro/config';
+
+const SITE = 'https://unhappypath.dev';
+
+// Markdown is content, but external-link behavior is site chrome. Keep it here
+// so every note, project body and curated link gets the same safe, accessible behavior
+// without asking authors to write raw HTML.
+const externalMarkdownLinks = {
+	name: 'external-markdown-links',
+	element: {
+		filter: ['a'],
+		/**
+		 * @param {any} node
+		 * @param {any} context
+		 */
+		visit(node, context) {
+			const href = node.properties?.href;
+			if (typeof href !== 'string' || !/^https?:\/\//i.test(href) || new URL(href).origin === SITE)
+				return;
+
+			context.setProperty(node, 'target', '_blank');
+			context.setProperty(node, 'rel', ['noopener', 'noreferrer']);
+			context.appendChild(node, {
+				type: 'element',
+				tagName: 'span',
+				properties: { className: ['visually-hidden'] },
+				children: [{ type: 'text', value: ' (opens in a new tab)' }],
+			});
+		},
+	},
+};
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://unhappypath.dev',
+	site: SITE,
 
 	// ADR-0004: one URL form, no trailing slash. `format: 'file'` also emits a root
 	// 404.html, which is the filename Cloudflare Pages looks for.
@@ -28,6 +59,7 @@ export default defineConfig({
 	// properties that global.css switches on. Without this, every code block is
 	// github-dark — a dark slab on a light page.
 	markdown: {
+		processor: satteri({ hastPlugins: [externalMarkdownLinks] }),
 		shikiConfig: {
 			themes: { light: 'github-light', dark: 'github-dark' },
 		},

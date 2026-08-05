@@ -10,16 +10,56 @@ Node 22+ (`.nvmrc` pins the major; `nvm use`).
 ```sh
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # static site → dist/
+npm run build    # full production gate + static site → dist/
+npm run build:site # Astro static build only
 npm run preview  # serve dist/ locally
-npm run check    # format check + astro check + build + URL/link check — must pass before pushing
-npm run format   # apply formatting (prettier)
+npm run check    # alias for the full build gate — must pass before pushing
+npm run format   # apply formatting and auto-fixable Markdown lint
 npm run assets   # re-render public/og.png from spec/og.svg (only after a tagline change)
 ```
 
-There is no pre-commit hook and no second entry point: `npm run check` is the whole gate, and
-CI runs exactly that on every PR. Formatting covers code, config and `src/content/`; the
-ADRs, the spec and this file are hand-written and deliberately left alone (ADR-0012).
+There is no pre-commit hook. `npm run build` and `npm run check` run the same complete gate:
+Prettier, markdownlint, Astro diagnostics, the static build, generated URL/feed/link checks,
+and WCAG contrast checks. CI runs it on every PR, and Cloudflare runs it before every deploy.
+
+Two tools split the job. **Prettier** formats code, config and `src/content/`; the ADRs, the
+spec, `CONTEXT.md` and this file are hand-written and deliberately left alone (ADR-0012).
+**markdownlint** lints *all* Markdown including `docs/` and `spec/` — it reports without
+rewriting, so it costs those files nothing. It only enforces semantics: heading ladders, code
+fences with a language, links that go somewhere (ADR-0013).
+
+## Build
+
+`npm run build` verifies the site and then runs Astro's static build. Output is `dist/`
+(`build.format: 'file'` — see ADR-0004), so pages land as `index.html`, `notes.html`,
+`notes/<slug>.html`, etc. Use `npm run build:site` only when you deliberately need the
+unverified Astro build.
+
+Cloudflare Pages project settings (Git integration):
+
+| Setting | Value |
+| --- | --- |
+| Framework preset | Astro |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node version | from `.nvmrc` (`22`) |
+
+No Wrangler config and no Cloudflare credentials in this repo — Pages builds from Git.
+
+## Deploy
+
+Cloudflare Pages owns deployment (ADR-0005). GitHub Actions only runs `npm run check` on
+PRs; it never deploys.
+
+| Event | What happens |
+| --- | --- |
+| Push / merge to `main` | Production deploy → [unhappypath.dev](https://unhappypath.dev) |
+| Push to any other branch / open a PR | Preview deploy (Cloudflare gives a `*.pages.dev` URL) |
+
+`main` is production. There is no `draft:` flag for posts — keep unfinished work on a
+branch. Custom domain and the first Pages ↔ GitHub connect are dashboard one-time setup
+in the Cloudflare account that holds `unhappypath.dev`. GoatCounter is included on production
+builds and omitted from Cloudflare branch previews.
 
 ## Build
 
@@ -57,11 +97,11 @@ in the Cloudflare account that holds `unhappypath.dev`.
 | ---------------------- | ------------------------------------------------------------------------------ |
 | A post                 | `src/content/notes/<slug>/index.md`, images alongside it in the same folder   |
 | A project card         | `src/content/projects/<slug>.md` — frontmatter + a one-line body                |
-| A fun link             | Add a bullet to `src/content/fun-links.md`                                      |
+| A recommended link     | Add a bullet to `src/content/links.md`                                          |
 | A draft                | Keep it on a branch — `main` is production, and there is no `draft:` flag       |
 
-Everything else — bio, tagline, contact email, analytics code — lives in
-`src/consts.ts`. Grep for `TODO(oded)` to find what still needs real content.
+The homepage bio lives in `src/pages/index.astro`. The tagline, contact email, analytics code,
+author links, and navigation live in `src/consts.ts`.
 
 ## Docs
 

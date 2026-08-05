@@ -11,15 +11,21 @@ const notes = defineCollection({
 		generateId: ({ entry }) => entry.replace(/\/index\.md$/, ''),
 	}),
 	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			// Captured but deliberately not rendered until ~20+ posts (spec §4, deferred).
-			tags: z.array(z.string()).default([]),
-			heroImage: z.optional(image()),
-		}),
+		z
+			.object({
+				title: z.string(),
+				description: z.string(),
+				pubDate: z.coerce.date(),
+				updatedDate: z.coerce.date().optional(),
+				// Captured but deliberately not rendered until ~20+ posts (spec §4, deferred).
+				tags: z.array(z.string()).default([]),
+				heroImage: image().optional(),
+				heroImageAlt: z.string().min(1).optional(),
+			})
+			.refine((data) => !data.heroImage || data.heroImageAlt, {
+				message: 'heroImageAlt is required when heroImage is set',
+				path: ['heroImageAlt'],
+			}),
 });
 
 // One file per project card; the Markdown body is the description, so it can
