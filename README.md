@@ -61,36 +61,6 @@ branch. Custom domain and the first Pages ↔ GitHub connect are dashboard one-t
 in the Cloudflare account that holds `unhappypath.dev`. GoatCounter is included on production
 builds and omitted from Cloudflare branch previews.
 
-## Build
-
-`npm run build` runs Astro's static build. Output is `dist/` (`build.format: 'file'` — see
-ADR-0004), so pages land as `index.html`, `notes.html`, `notes/<slug>.html`, etc.
-
-Cloudflare Pages project settings (Git integration):
-
-| Setting | Value |
-| --- | --- |
-| Framework preset | Astro |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
-| Node version | from `.nvmrc` (`22`) |
-
-No Wrangler config and no Cloudflare credentials in this repo — Pages builds from Git.
-
-## Deploy
-
-Cloudflare Pages owns deployment (ADR-0005). GitHub Actions only runs `npm run check` on
-PRs; it never deploys.
-
-| Event | What happens |
-| --- | --- |
-| Push / merge to `main` | Production deploy → [unhappypath.dev](https://unhappypath.dev) |
-| Push to any other branch / open a PR | Preview deploy (Cloudflare gives a `*.pages.dev` URL) |
-
-`main` is production. There is no `draft:` flag for posts — keep unfinished work on a
-branch. Custom domain and the first Pages ↔ GitHub connect are dashboard one-time setup
-in the Cloudflare account that holds `unhappypath.dev`.
-
 ## Adding content
 
 | Want to add            | Do this                                                                        |
