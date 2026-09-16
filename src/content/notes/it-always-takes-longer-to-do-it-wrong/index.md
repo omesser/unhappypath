@@ -22,7 +22,7 @@ floor. Then another. Until there's a cute little tower. Not very stable.
 Eventually the tower falls on someone. Nobody dies. It just tends to happen when
 it's inconvenient. Everyone knows this tower. Of course they do.
 
-![A collapsing tower of empty toilet-paper rolls next to a panicked man sitting on a toilet.](./it-always-takes-longer-to-do-it-wrong-jul-2026.jpg)
+![Oh noes!!!](./it-always-takes-longer-to-do-it-wrong-jul-2026.jpg)
 
 Andy, no matter what he tries, cannot get the kids to stop. His line on it:
 
