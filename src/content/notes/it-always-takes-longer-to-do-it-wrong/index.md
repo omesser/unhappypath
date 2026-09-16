@@ -3,8 +3,6 @@ title: 'It always takes longer to do it wrong'
 description: 'Every shortcut looks reasonable in the moment. You are just putting another empty roll on the tower. When it falls, it falls on whoever happens to be standing there.'
 pubDate: 2026-07-03
 tags: [technical-debt, engineering, architecture]
-heroImage: './it-always-takes-longer-to-do-it-wrong-jul-2026.jpg'
-heroImageAlt: 'A collapsing tower of empty toilet-paper rolls next to a panicked man sitting on a toilet.'
 ---
 
 A short weekend note on the cost of shortcuts — or "micro-laziness", depending
