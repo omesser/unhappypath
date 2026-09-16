@@ -3,6 +3,8 @@ title: 'It always takes longer to do it wrong'
 description: 'Every shortcut looks reasonable in the moment. You are just putting another empty roll on the tower. When it falls, it falls on whoever happens to be standing there.'
 pubDate: 2026-07-03
 tags: [technical-debt, engineering, architecture]
+heroImage: './toilet-paper-agile.svg'
+heroImageAlt: 'Three year-long timelines. Waterfall dumps one giant mess in December. Bad Agile grows the mess month by month. Real Agile deals with small messes continuously.'
 ---
 
 A short weekend note on the cost of shortcuts — or "micro-laziness", depending
