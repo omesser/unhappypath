@@ -28,6 +28,8 @@ Andy, no matter what he tries, cannot get the kids to stop. His line on it:
 
 > It always takes longer to do it wrong.
 
+![A collapsing tower of empty toilet-paper rolls next to a panicked man sitting on a toilet.](./it-always-takes-longer-to-do-it-wrong-jul-2026.jpg)
+
 End of toilet-paper stories.
 
 This is true of almost everything. It is extremely familiar in software
