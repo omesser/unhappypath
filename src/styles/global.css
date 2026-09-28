@@ -339,6 +339,66 @@ section + section {
 	margin-bottom: 0;
 }
 
+/* The featured card is a window its project's sprite perches on: full width,
+   with the sprite pacing the top edge. Hover or focus pauses it, like a poke
+   (ADR-0014). */
+.card-featured {
+	grid-column: 1 / -1;
+	position: relative;
+	margin-top: 3.5rem;
+	--sprite: 4rem;
+}
+
+.sprite {
+	position: absolute;
+	bottom: calc(100% - 0.4rem);
+	left: 0;
+	width: var(--sprite);
+	animation: pace 18s linear infinite;
+}
+
+.sprite img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.card-featured:hover .sprite,
+.card-featured:focus-within .sprite {
+	animation-play-state: paused;
+}
+
+/* The global reset only shortens durations, so an infinite walk would teleport. */
+@media (prefers-reduced-motion: reduce) {
+	.sprite {
+		animation: none;
+	}
+}
+
+/* The GIF faces right; mirror it for the walk back. */
+@keyframes pace {
+	0% {
+		left: 0;
+		transform: scaleX(1);
+	}
+	48% {
+		left: calc(100% - var(--sprite));
+		transform: scaleX(1);
+	}
+	50% {
+		left: calc(100% - var(--sprite));
+		transform: scaleX(-1);
+	}
+	98% {
+		left: 0;
+		transform: scaleX(-1);
+	}
+	100% {
+		left: 0;
+		transform: scaleX(1);
+	}
+}
+
 .tags {
 	display: flex;
 	flex-wrap: wrap;

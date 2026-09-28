@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import ExternalLink from '../components/ExternalLink.astro';
 import PostList from '../components/PostList.astro';
@@ -9,7 +10,12 @@ import { byNewest, personLd } from '../utils';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const cards = await Promise.all(
-	projects.map(async (p) => ({ ...p, Body: (await render(p)).Content })),
+	projects.map(async (p) => ({
+		...p,
+		Body: (await render(p)).Content,
+		// sharp keeps only the first GIF frame, which is the still shown under reduced motion.
+		still: p.data.sprite && (await getImage({ src: p.data.sprite, format: 'png' })),
+	})),
 );
 
 const recent = (await getCollection('notes')).sort(byNewest).slice(0, 5);
@@ -77,8 +83,20 @@ const jsonLd = {
 		</div>
 		<div class="projects">
 			{
-				cards.map(({ data, Body }) => (
-					<article class="card">
+				cards.map(({ data, Body, still }) => (
+					<article class:list={['card', { 'card-featured': data.sprite }]}>
+						{still && (
+							<picture class="sprite" aria-hidden="true">
+								<source media="(prefers-reduced-motion: reduce)" srcset={still.src} />
+								<img
+									src={data.sprite!.src}
+									width={data.sprite!.width}
+									height={data.sprite!.height}
+									decoding="async"
+									alt=""
+								/>
+							</picture>
+						)}
 						<h3>
 							<ExternalLink href={data.github}>{data.title}</ExternalLink>
 						</h3>
