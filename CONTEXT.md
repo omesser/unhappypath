@@ -39,7 +39,7 @@ or the routing.
 | `docs/adr/` | Build decisions (this session's output) |
 | `docs/register-search-consoles.md` | How to register Google Search Console + Bing Webmaster |
 | `src/content/notes/` | Posts — one folder per post, `index.md` + colocated images |
-| `src/content/projects/` | One `.md` per project card; a card's sprite sits in `<slug>/` beside it (ADR-0014) |
+| `src/content/projects/` | One `.md` per project card; a card's sprites sit in `<slug>/` beside it (ADR-0014) |
 | `src/content/links.md` | The whole recommended Links list, hand-written |
 | `src/styles/global.css` | Palette custom properties, typography, light + dark |
 | `src/components/` | Shared rendering — `PostList.astro` and accessible `ExternalLink.astro` |

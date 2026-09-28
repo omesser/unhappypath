@@ -339,63 +339,57 @@ section + section {
 	margin-bottom: 0;
 }
 
-/* The featured card is a window its project's sprite perches on: full width,
-   with the sprite pacing the top edge. Hover or focus pauses it, like a poke
-   (ADR-0014). */
+/* The featured card carries a stage: its project's characters take turns
+   along the floor, walkers crossing and the rest performing in the middle.
+   The per-turn keyframes depend on the cast size, so index.astro emits them.
+   Hover or focus pauses the show, like a poke (ADR-0014). */
 .card-featured {
 	grid-column: 1 / -1;
+}
+
+.stage {
 	position: relative;
-	margin-top: 3.5rem;
-	--sprite: 4rem;
+	height: 4.5rem;
+	margin: 0.75rem 0;
+	overflow: hidden;
+	border-bottom: 1px solid var(--border);
 }
 
-.sprite {
+.stage img {
 	position: absolute;
-	bottom: calc(100% - 0.4rem);
-	left: 0;
-	width: var(--sprite);
-	animation: pace 18s linear infinite;
+	bottom: 0;
+	left: 50%;
+	height: 4rem;
+	width: auto;
+	opacity: 0;
+	transform: translateX(-50%);
+	animation-duration: var(--cycle);
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
 }
 
-.sprite img {
-	display: block;
-	width: 100%;
-	height: auto;
+.stage .walk {
+	animation-name: walk;
 }
 
-.card-featured:hover .sprite,
-.card-featured:focus-within .sprite {
+.stage .perform {
+	animation-name: perform;
+}
+
+.card-featured:is(:hover, :focus-within) .stage img {
 	animation-play-state: paused;
 }
 
-/* The global reset only shortens durations, so an infinite walk would teleport. */
+/* One still character instead of the show. The global reset only shortens
+   durations, so an infinite show would flicker through the cast. */
 @media (prefers-reduced-motion: reduce) {
-	.sprite {
+	.stage img.walk,
+	.stage img.perform {
 		animation: none;
 	}
-}
 
-/* The GIF faces right; mirror it for the walk back. */
-@keyframes pace {
-	0% {
-		left: 0;
-		transform: scaleX(1);
-	}
-	48% {
-		left: calc(100% - var(--sprite));
-		transform: scaleX(1);
-	}
-	50% {
-		left: calc(100% - var(--sprite));
-		transform: scaleX(-1);
-	}
-	98% {
-		left: 0;
-		transform: scaleX(-1);
-	}
-	100% {
-		left: 0;
-		transform: scaleX(1);
+	.stage picture:first-of-type img {
+		opacity: 1;
 	}
 }
 
