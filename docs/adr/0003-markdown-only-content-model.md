@@ -21,7 +21,7 @@ Everything is Markdown.
 | Content | Shape |
 |---|---|
 | Posts | `src/content/notes/<slug>/index.md` — frontmatter + full Markdown body, images colocated in the same folder |
-| Projects | `src/content/projects/<slug>.md` — frontmatter (`title`, `github`, `live`, `tags`, `order`), body is the card description, so it can carry inline links and emphasis |
+| Projects | `src/content/projects/<slug>.md` — frontmatter (`title`, `github`, `live`, `tags`, `order`, optional `sprites` and `still` per ADR-0014), body is the card description, so it can carry inline links and emphasis |
 | Links | `src/content/links.md` — one hand-written Markdown file; `###` headings group, bullets are the items. No schema. |
 
 Links uses `###`, not `##`: the file renders inside the homepage's "Links" `<h2>`, so `##`

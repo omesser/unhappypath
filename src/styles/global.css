@@ -339,6 +339,60 @@ section + section {
 	margin-bottom: 0;
 }
 
+/* The featured card carries a stage: its project's characters take turns
+   along the floor, walkers crossing and the rest performing in the middle.
+   The per-turn keyframes depend on the cast size, so index.astro emits them.
+   Hover or focus pauses the show, like a poke (ADR-0014). */
+.card-featured {
+	grid-column: 1 / -1;
+}
+
+.stage {
+	position: relative;
+	height: 4.5rem;
+	margin: 0.75rem 0;
+	overflow: hidden;
+	border-bottom: 1px solid var(--border);
+}
+
+.stage img {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	height: 4rem;
+	width: auto;
+	opacity: 0;
+	transform: translateX(-50%);
+	animation-duration: var(--cycle);
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+.stage .walk {
+	animation-name: walk;
+}
+
+.stage .perform {
+	animation-name: perform;
+}
+
+.card-featured:is(:hover, :focus-within) .stage img {
+	animation-play-state: paused;
+}
+
+/* One still character instead of the show. The global reset only shortens
+   durations, so an infinite show would flicker through the cast. */
+@media (prefers-reduced-motion: reduce) {
+	.stage img.walk,
+	.stage img.perform {
+		animation: none;
+	}
+
+	.stage picture:first-of-type img {
+		opacity: 1;
+	}
+}
+
 .tags {
 	display: flex;
 	flex-wrap: wrap;

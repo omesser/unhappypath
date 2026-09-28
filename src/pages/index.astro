@@ -12,6 +12,23 @@ const cards = await Promise.all(
 	projects.map(async (p) => ({ ...p, Body: (await render(p)).Content })),
 );
 
+// Each sprite gets one turn of TURN seconds per cycle. A keyframe percentage
+// cannot be a CSS variable, so the turn's share of the cycle is baked in here.
+const TURN = 6;
+const stageCss = (n: number) => {
+	const turn = 100 / n;
+	return `
+@keyframes walk {
+	0% { opacity: 1; left: 0; transform: translateX(-100%); }
+	${turn}% { opacity: 1; left: 100%; transform: translateX(0); }
+	${turn + 0.01}%, 100% { opacity: 0; left: 100%; }
+}
+@keyframes perform {
+	0%, ${turn}%, 100% { opacity: 0; }
+	${turn * 0.15}%, ${turn * 0.85}% { opacity: 1; }
+}`;
+};
+
 const recent = (await getCollection('notes')).sort(byNewest).slice(0, 5);
 
 // Person + WebSite (spec §8). The Person node carries the authorship a human
@@ -78,11 +95,37 @@ const jsonLd = {
 		<div class="projects">
 			{
 				cards.map(({ data, Body }) => (
-					<article class="card">
+					<article class:list={['card', { 'card-featured': data.sprites.length > 0 }]}>
 						<h3>
 							<ExternalLink href={data.github}>{data.title}</ExternalLink>
 						</h3>
 						<Body />
+						{data.sprites.length > 0 && (
+							<div
+								class="stage"
+								aria-hidden="true"
+								style={`--cycle: ${data.sprites.length * TURN}s`}
+							>
+								<style is:inline set:html={stageCss(data.sprites.length)} />
+								{data.sprites.map(({ src, walks }, i) => (
+									<picture>
+										{i === 0 && data.still && (
+											<source media="(prefers-reduced-motion: reduce)" srcset={data.still.src} />
+										)}
+										<img
+											src={src.src}
+											width={src.width}
+											height={src.height}
+											class={walks ? 'walk' : 'perform'}
+											style={`animation-delay: ${i * TURN}s`}
+											loading="lazy"
+											decoding="async"
+											alt=""
+										/>
+									</picture>
+								))}
+							</div>
+						)}
 						{data.tags.length > 0 && (
 							<ul class="tags">
 								{data.tags.map((t) => (
