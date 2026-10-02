@@ -19,6 +19,7 @@ Recommended reads, newsletters, and tools I keep coming back to.
   - [Middle management roles are also a trap](https://lethain.com/middle-management-roles-were-also-a-trap/)
   - ["Good engineering management" is a fad](https://lethain.com/good-eng-mgmt-is-a-fad/)
 - [Falsehoods programmers believe about time](https://gist.github.com/timvisee/fcda9bbdff88d45cc9061606b4b923ca) - the checklist I revisit whenever "just store UTC" starts sounding like a complete plan.
+- [Computer, Enhance!](https://www.computerenhance.com/) - Casey Muratori's course and writing on performance-oriented programming. I come back to it when I want a slowdown explained in terms of the CPU.
 
 ### Tools I love
 
