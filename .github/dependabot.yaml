@@ -1,16 +1,16 @@
 version: 2
 
 updates:
-  - directory: "/"
-    package-ecosystem: "npm"
+  - directory: '/'
+    package-ecosystem: 'npm'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "maintenance"
+      - 'maintenance'
 
-  - directory: "/"
-    package-ecosystem: "github-actions"
+  - directory: '/'
+    package-ecosystem: 'github-actions'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "maintenance"
+      - 'maintenance'
