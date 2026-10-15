@@ -1,0 +1,6 @@
+# Old URLs Google still has indexed (Search Console "Not found (404)").
+# The section was renamed writing -> notes, and the two bootstrap notes were removed.
+/writing                            /notes 301
+/writing/*                          /notes 301
+/notes/hello-unhappy-path           /notes 301
+/notes/markdown-kitchen-sink        /notes 301
