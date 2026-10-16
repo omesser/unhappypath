@@ -236,6 +236,9 @@ falls out of the zero-JS principle (§2.3) for free; don't break it later.
 - Training bots (`GPTBot`, `ClaudeBot`, `Google-Extended`, `Applebot-Extended`, `CCBot`) are
   a separate, personal call — blocking them does NOT affect search/answer citability.
   Default for v1: allow all; revisit if it starts to bother.
+- Exception: SEO/aggressive scrapers (AhrefsBot, SemrushBot, MJ12bot, DotBot, BLEXBot,
+  PetalBot, MegaIndex, DataForSeoBot, Bytespider, serpstatbot) get `Disallow: /`, and
+  `/cdn-cgi/` (Cloudflare's reserved path) is disallowed for everyone.
 - **Gotcha — Cloudflare silently blocks AI crawlers on new zones** and can serve a managed
   robots.txt (`ai-train=no`) on your behalf. Auditing **AI Crawl Control / bot settings /
   managed robots.txt** in the Cloudflare dashboard is a launch-checklist item, or the whole
