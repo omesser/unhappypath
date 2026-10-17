@@ -15,5 +15,21 @@
 
 User-agent: *
 Allow: /
+# /cdn-cgi/ is Cloudflare's reserved path (email-obfuscation link Google reports as 404).
+Disallow: /cdn-cgi/
+
+# SEO/aggressive scrapers: they don't help citability, so opt them out. robots.txt is
+# advisory only; real abuse protection is Cloudflare WAF / bot rules.
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: MJ12bot
+User-agent: DotBot
+User-agent: BLEXBot
+User-agent: PetalBot
+User-agent: MegaIndex
+User-agent: DataForSeoBot
+User-agent: Bytespider
+User-agent: serpstatbot
+Disallow: /
 
 Sitemap: https://unhappypath.dev/sitemap.xml

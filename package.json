@@ -17,16 +17,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "^0.3.5",
+    "@astrojs/markdown-satteri": "^0.4.3",
     "@astrojs/rss": "^4.0.19",
     "astro": "^7.2.8",
-    "sharp": "^0.35.0"
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@types/node": "^26.1.2",
     "markdownlint-cli2": "^0.23.3",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.10",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^6.0.3"
   }
