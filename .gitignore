@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # Agent implementation artifacts
 docs/superpowers/
+
+# Local git worktrees
+.worktrees/
