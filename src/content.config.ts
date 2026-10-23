@@ -38,6 +38,8 @@ const projects = defineCollection({
 			title: z.string(),
 			github: z.url(),
 			live: z.url().optional(),
+			// Adds "github" and "website" links under the card (the title already links to GitHub).
+			website: z.url().optional(),
 			tags: z.array(z.string()).default([]),
 			order: z.number(),
 			// `walks` sprites cross the stage facing right; the rest perform in place.

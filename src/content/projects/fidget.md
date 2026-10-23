@@ -1,6 +1,7 @@
 ---
 title: Fidget
 github: https://github.com/omesser/fidget
+website: https://omesser.github.io/fidget/
 tags: [rust, ai-agents, desktop]
 order: 0
 still: ./fidget/buddy-bot-still.png

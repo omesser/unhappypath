@@ -138,6 +138,12 @@ const jsonLd = {
 								<ExternalLink href={data.live}>Live</ExternalLink>
 							</p>
 						)}
+						{data.website && (
+							<p class="card-links">
+								<ExternalLink href={data.github}>github</ExternalLink>
+								<ExternalLink href={data.website}>website</ExternalLink>
+							</p>
+						)}
 					</article>
 				))
 			}
