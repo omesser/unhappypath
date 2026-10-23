@@ -70,43 +70,45 @@ const shouldCountPageview = import.meta.env.PROD && GOATCOUNTER_CODE && !isCloud
 
 		{jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
 
-		{
-			/* ADR-0008: the only script on the site. Async, cookieless, production-only,
-		    and excluded from Cloudflare preview branches. */
-		}
-		{
-			shouldCountPageview && (
-				<script
-					is:inline
-					async
-					src="https://gc.zgo.at/count.js"
-					data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`}
-				/>
-			)
-		}
+		{/* ADR-0008: the only script on the site. Async, cookieless, production-only,
+		    and excluded from Cloudflare preview branches. */}
+		{shouldCountPageview && (
+			<script
+				is:inline
+				async
+				src="https://gc.zgo.at/count.js"
+				data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`}
+			/>
+		)}
 	</head>
 	<body>
 		<aside class="construction-banner" aria-label="Site status">
 			<strong>UNDER CONSTRUCTION</strong> - This site is a work in progress.
 		</aside>
-		{
-			/* Scroll-position rail. Decorative and CSS-only (ADR-0011) — it conveys
+		{/* Scroll-position rail. Decorative and CSS-only (ADR-0011) — it conveys
 		    nothing a screen reader needs, and nothing renders it if the browser
-		    lacks scroll-driven animations. */
-		}
+		    lacks scroll-driven animations. */}
 		<div class="scroll-rail" aria-hidden="true"></div>
-		<a class="skip" href="#main">Skip to content</a>
+		<a class="skip" href="#main">
+			Skip to content
+		</a>
 		<header>
-			<a class="logo" href="/">{SITE_TITLE}</a>
+			<a class="logo" href="/">
+				{SITE_TITLE}
+			</a>
 			<nav aria-label="Main">
-				{NAV.map(({ href, label }) => <a href={href}>{label}</a>)}
+				{NAV.map(({ href, label }) => (
+					<a href={href}>{label}</a>
+				))}
 			</nav>
 		</header>
 		<main id="main">
 			<slot />
 		</main>
 		<footer>
-			<span>© {year} {AUTHOR.name} - unhappypath.dev</span>
+			<span>
+				© {year} {AUTHOR.name} - unhappypath.dev
+			</span>
 			<a href="/rss.xml">RSS</a>
 		</footer>
 	</body>

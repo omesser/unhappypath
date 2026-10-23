@@ -35,32 +35,31 @@ const jsonLd = {
 		<header>
 			<h1>{title}</h1>
 			<p class="byline">
-				<a href="/#about">{AUTHOR.name}</a>{' · '}<time datetime={isoDate(pubDate)}>
-					{fullDate(pubDate)}
-				</time>{
-					updatedDate && (
-						<>
-							{' · updated '}
-							<time datetime={isoDate(updatedDate)}>{fullDate(updatedDate)}</time>
-						</>
-					)
-				}
+				<a href="/#about">{AUTHOR.name}</a>
+				{' · '}
+				<time datetime={isoDate(pubDate)}>{fullDate(pubDate)}</time>
+				{updatedDate && (
+					<>
+						{' · updated '}
+						<time datetime={isoDate(updatedDate)}>{fullDate(updatedDate)}</time>
+					</>
+				)}
 			</p>
 		</header>
-		{
-			heroImage && (
-				<Image
-					class="hero-img"
-					src={heroImage}
-					alt={heroImageAlt ?? ''}
-					widths={[480, 800]}
-					sizes="(max-width: 40rem) 100vw, 68ch"
-				/>
-			)
-		}
+		{heroImage && (
+			<Image
+				class="hero-img"
+				src={heroImage}
+				alt={heroImageAlt ?? ''}
+				widths={[480, 800]}
+				sizes="(max-width: 40rem) 100vw, 68ch"
+			/>
+		)}
 		<div class="prose">
 			<Content />
 		</div>
 	</article>
-	<p><a href="/notes">← Back to Notes</a></p>
+	<p>
+		<a href="/notes">← Back to Notes</a>
+	</p>
 </BaseLayout>
