@@ -100,6 +100,13 @@ const jsonLd = {
 							<ExternalLink href={data.github}>{data.title}</ExternalLink>
 						</h3>
 						<Body />
+						{(data.website || data.live) && (
+							<p class="card-links">
+								<ExternalLink href={data.github}>github</ExternalLink>
+								{data.website && <ExternalLink href={data.website}>website</ExternalLink>}
+								{data.live && <ExternalLink href={data.live}>live</ExternalLink>}
+							</p>
+						)}
 						{data.sprites.length > 0 && (
 							<div
 								class="stage"
@@ -132,11 +139,6 @@ const jsonLd = {
 									<li>{t}</li>
 								))}
 							</ul>
-						)}
-						{data.live && (
-							<p class="card-links">
-								<ExternalLink href={data.live}>Live</ExternalLink>
-							</p>
 						)}
 					</article>
 				))
