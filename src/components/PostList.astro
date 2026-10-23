@@ -17,15 +17,13 @@ const Title = `h${level}` as 'h2' | 'h3';
 ---
 
 <ul class="posts">
-	{
-		posts.map((post) => (
-			<li>
-				<time datetime={isoDate(post.data.pubDate)}>{monthYear(post.data.pubDate)}</time>
-				<Title>
-					<a href={postPath(post)}>{post.data.title}</a>
-				</Title>
-				<p>{post.data.description}</p>
-			</li>
-		))
-	}
+	{posts.map((post) => (
+		<li>
+			<time datetime={isoDate(post.data.pubDate)}>{monthYear(post.data.pubDate)}</time>
+			<Title>
+				<a href={postPath(post)}>{post.data.title}</a>
+			</Title>
+			<p>{post.data.description}</p>
+		</li>
+	))}
 </ul>

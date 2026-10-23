@@ -54,7 +54,9 @@ const jsonLd = {
 	<section id="about" class="hero" aria-label="About">
 		<img src="/avatar.jpg" width="104" height="104" alt="Oded Messer - comic-style portrait" />
 		<div class="hero-body">
-			<h1>{SITE_TITLE} <span class="muted">| {SITE_TAGLINE}</span></h1>
+			<h1>
+				{SITE_TITLE} <span class="muted">| {SITE_TAGLINE}</span>
+			</h1>
 			<p>
 				Welcome to my little neck of the woods. This is where I write about software systems,
 				architecture, processes, leadership, the paths that do not go as planned, why, and how to
@@ -77,7 +79,9 @@ const jsonLd = {
 	<section id="notes">
 		<div class="section-head">
 			<h2>Notes</h2>
-			<p class="muted"><small>Notes on engineering, systems, and leadership.</small></p>
+			<p class="muted">
+				<small>Notes on engineering, systems, and leadership.</small>
+			</p>
 		</div>
 		<PostList posts={recent} />
 		<p>
@@ -90,59 +94,55 @@ const jsonLd = {
 	<section id="projects">
 		<div class="section-head">
 			<h2>Projects</h2>
-			<p class="muted"><small>A few things I've built or contributed to.</small></p>
+			<p class="muted">
+				<small>A few things I've built or contributed to.</small>
+			</p>
 		</div>
 		<div class="projects">
-			{
-				cards.map(({ data, Body }) => (
-					<article class:list={['card', { 'card-featured': data.sprites.length > 0 }]}>
-						<h3>
-							<ExternalLink href={data.github}>{data.title}</ExternalLink>
-						</h3>
-						<Body />
-						{(data.website || data.live) && (
-							<p class="card-links">
-								<ExternalLink href={data.github}>github</ExternalLink>
-								{data.website && <ExternalLink href={data.website}>website</ExternalLink>}
-								{data.live && <ExternalLink href={data.live}>live</ExternalLink>}
-							</p>
-						)}
-						{data.sprites.length > 0 && (
-							<div
-								class="stage"
-								aria-hidden="true"
-								style={`--cycle: ${data.sprites.length * TURN}s`}
-							>
-								<style is:inline set:html={stageCss(data.sprites.length)} />
-								{data.sprites.map(({ src, walks }, i) => (
-									<picture>
-										{i === 0 && data.still && (
-											<source media="(prefers-reduced-motion: reduce)" srcset={data.still.src} />
-										)}
-										<img
-											src={src.src}
-											width={src.width}
-											height={src.height}
-											class={walks ? 'walk' : 'perform'}
-											style={`animation-delay: ${i * TURN}s`}
-											loading="lazy"
-											decoding="async"
-											alt=""
-										/>
-									</picture>
-								))}
-							</div>
-						)}
-						{data.tags.length > 0 && (
-							<ul class="tags">
-								{data.tags.map((t) => (
-									<li>{t}</li>
-								))}
-							</ul>
-						)}
-					</article>
-				))
-			}
+			{cards.map(({ data, Body }) => (
+				<article class:list={['card', { 'card-featured': data.sprites.length > 0 }]}>
+					<h3>
+						<ExternalLink href={data.github}>{data.title}</ExternalLink>
+					</h3>
+					<Body />
+					{(data.website || data.live) && (
+						<p class="card-links">
+							<ExternalLink href={data.github}>github</ExternalLink>
+							{data.website && <ExternalLink href={data.website}>website</ExternalLink>}
+							{data.live && <ExternalLink href={data.live}>live</ExternalLink>}
+						</p>
+					)}
+					{data.sprites.length > 0 && (
+						<div class="stage" aria-hidden="true" style={`--cycle: ${data.sprites.length * TURN}s`}>
+							<style is:inline set:html={stageCss(data.sprites.length)} />
+							{data.sprites.map(({ src, walks }, i) => (
+								<picture>
+									{i === 0 && data.still && (
+										<source media="(prefers-reduced-motion: reduce)" srcset={data.still.src} />
+									)}
+									<img
+										src={src.src}
+										width={src.width}
+										height={src.height}
+										class={walks ? 'walk' : 'perform'}
+										style={`animation-delay: ${i * TURN}s`}
+										loading="lazy"
+										decoding="async"
+										alt=""
+									/>
+								</picture>
+							))}
+						</div>
+					)}
+					{data.tags.length > 0 && (
+						<ul class="tags">
+							{data.tags.map((t) => (
+								<li>{t}</li>
+							))}
+						</ul>
+					)}
+				</article>
+			))}
 		</div>
 	</section>
 
