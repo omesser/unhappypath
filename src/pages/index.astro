@@ -133,15 +133,11 @@ const jsonLd = {
 								))}
 							</ul>
 						)}
-						{data.live && (
-							<p class="card-links">
-								<ExternalLink href={data.live}>Live</ExternalLink>
-							</p>
-						)}
-						{data.website && (
+						{(data.website || data.live) && (
 							<p class="card-links">
 								<ExternalLink href={data.github}>github</ExternalLink>
-								<ExternalLink href={data.website}>website</ExternalLink>
+								{data.website && <ExternalLink href={data.website}>website</ExternalLink>}
+								{data.live && <ExternalLink href={data.live}>live</ExternalLink>}
 							</p>
 						)}
 					</article>

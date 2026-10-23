@@ -38,7 +38,7 @@ const projects = defineCollection({
 			title: z.string(),
 			github: z.url(),
 			live: z.url().optional(),
-			// Adds "github" and "website" links under the card (the title already links to GitHub).
+			// Optional project site. With `live`, it adds a `github` link row under the card.
 			website: z.url().optional(),
 			tags: z.array(z.string()).default([]),
 			order: z.number(),
