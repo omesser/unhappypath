@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "description": "Run a Function only for the four removed starter notes, with and without a trailing slash. Every other URL stays a static asset.",
+  "include": [
+    "/notes/hello-unhappy-path",
+    "/notes/hello-unhappy-path/",
+    "/notes/markdown-kitchen-sink",
+    "/notes/markdown-kitchen-sink/",
+    "/writing/hello-unhappy-path",
+    "/writing/hello-unhappy-path/",
+    "/writing/markdown-kitchen-sink",
+    "/writing/markdown-kitchen-sink/"
+  ],
+  "exclude": []
+}

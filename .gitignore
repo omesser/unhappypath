@@ -1,5 +1,9 @@
 # build output
 dist/
+
+# wrangler pages dev cache
+.wrangler/
+
 # generated types
 .astro/
 

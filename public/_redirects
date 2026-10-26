@@ -1,6 +1,10 @@
-# Old URLs Google still has indexed (Search Console "Not found (404)").
-# The section was renamed writing -> notes, and the two bootstrap notes were removed.
+# The section was renamed writing -> notes. /writing and any URL under it that
+# was never a real post still 301 to the notes index.
+#
+# /writing/* also matches the two removed starter posts. Those requests do not
+# use this file: an exact-path Pages Function returns 410, and Pages does not
+# apply _redirects to a request a Function serves. A 301 from a deleted post to
+# a listing is a soft 404, which is what Search Console was flagging. _redirects
+# cannot send 410, so those four URLs are not listed here.
 /writing                            /notes 301
 /writing/*                          /notes 301
-/notes/hello-unhappy-path           /notes 301
-/notes/markdown-kitchen-sink        /notes 301
