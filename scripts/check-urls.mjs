@@ -7,8 +7,13 @@
 //      change cannot be found by renaming a file, and a 404 from your own page
 //      is worse than one from someone else's.
 //   4. Every page carries the site-wide work-in-progress notice.
-// Runs on dist/ after the build, so it catches a regression anywhere, not just in
-// cleanPath(). Part of `npm run check`.
+//   5. The four removed starter notes are 410s from exact-path Pages Functions,
+//      and nothing else invokes a Function. A 301 of a deleted post to /notes
+//      is the soft 404 Search Console was flagging.
+//   6. X-Robots-Tag: noindex applies to pages.dev hosts only. A path-only rule
+//      would deindex unhappypath.dev.
+// Runs on dist/ after the build, and on the /functions routes Pages compiles
+// outside that output. Part of `npm run check`.
 import { readdir, readFile } from 'node:fs/promises';
 
 const SITE = 'https://unhappypath.dev';
@@ -106,6 +111,86 @@ const items = (feed.match(/<item>/g) ?? []).length;
 if (items === 0) problems.push('feed: no items');
 else if (encoded < items) problems.push(`feed: ${encoded}/${items} items carry full content`);
 
+// Removed bootstrap notes. Each path is listed with and without a trailing
+// slash: file routing treats those as one route, and a strict _routes.json
+// matcher would not. Wrangler's matcher also makes the slash optional.
+const removedNotes = [
+	'/notes/hello-unhappy-path',
+	'/notes/markdown-kitchen-sink',
+	'/writing/hello-unhappy-path',
+	'/writing/markdown-kitchen-sink',
+];
+
+const redirects = parseRedirects(await readFile('dist/_redirects', 'utf8'));
+const expectedRedirects = [
+	{ source: '/writing', destination: '/notes', status: '301' },
+	{ source: '/writing/*', destination: '/notes', status: '301' },
+];
+if (JSON.stringify(redirects) !== JSON.stringify(expectedRedirects))
+	problems.push(
+		`_redirects: expected only the /writing -> /notes 301s, got ${JSON.stringify(redirects)}`,
+	);
+
+const routes = JSON.parse(await readFile('dist/_routes.json', 'utf8'));
+const expectedInclude = removedNotes.flatMap((path) => [path, `${path}/`]);
+if (routes.version !== 1 || !Array.isArray(routes.exclude) || routes.exclude.length !== 0)
+	problems.push('_routes.json: version must be 1 and exclude must be empty');
+if (JSON.stringify(routes.include) !== JSON.stringify(expectedInclude))
+	problems.push(
+		`_routes.json: include must be only the removed notes, got ${JSON.stringify(routes.include)}`,
+	);
+
+const functionFiles = (await readdir('functions', { recursive: true })).filter((file) =>
+	file.endsWith('.js'),
+);
+const expectedFunctions = removedNotes.map((path) => `${path.slice(1)}.js`);
+if (JSON.stringify([...functionFiles].sort()) !== JSON.stringify([...expectedFunctions].sort()))
+	problems.push(
+		`functions/: expected only the four removed-note routes, got ${functionFiles.join(', ')}`,
+	);
+
+for (const path of removedNotes) {
+	const mod = await import(`../functions${path}.js`);
+	const response = await mod.onRequest();
+	if (response.status !== 410) problems.push(`${path}: Pages Function status ${response.status}`);
+	if (response.headers.get('location'))
+		problems.push(`${path}: 410 must not redirect (Location is a soft 404)`);
+	if (response.headers.get('x-robots-tag'))
+		problems.push(
+			`${path}: 410 must not set X-Robots-Tag (that header is host-scoped in _headers)`,
+		);
+	const body = await response.text();
+	if (body !== 'This page has been removed.\n')
+		problems.push(`${path}: unexpected 410 body ${JSON.stringify(body)}`);
+}
+
+// Pages _headers: protocol and port are ignored, a :placeholder is one label,
+// and a single * is greedy. A pattern with no host matches every host, which
+// is how a path-only noindex would take the apex out of Google.
+const headerRules = parseHeaders(await readFile('dist/_headers', 'utf8'));
+const noindexRules = headerRules.filter((rule) =>
+	rule.headers.some((header) => header.toLowerCase() === 'x-robots-tag: noindex'),
+);
+const expectedNoindex = ['https://:project.pages.dev/*', 'https://:version.:project.pages.dev/*'];
+if (JSON.stringify(noindexRules.map((rule) => rule.pattern)) !== JSON.stringify(expectedNoindex))
+	problems.push(
+		`_headers: X-Robots-Tag rules must be exactly the pages.dev hosts, got ${JSON.stringify(noindexRules)}`,
+	);
+if (headerRules.length !== noindexRules.length)
+	problems.push('_headers: unexpected extra header rules');
+
+const indexed = (host) => noindexRules.some((rule) => headerMatches(rule.pattern, host, '/notes'));
+for (const host of [
+	'unhappypath.pages.dev',
+	'preview.unhappypath.pages.dev',
+	'373f31e2.unhappypath.pages.dev',
+]) {
+	if (!indexed(host)) problems.push(`_headers: ${host} would not get noindex`);
+}
+for (const host of ['unhappypath.dev', 'www.unhappypath.dev']) {
+	if (indexed(host)) problems.push(`_headers: ${host} would get noindex`);
+}
+
 if (problems.length > 0) {
 	console.error(`URL/feed check failed:\n${problems.map((p) => `  - ${p}`).join('\n')}`);
 	process.exit(1);
@@ -113,3 +198,47 @@ if (problems.length > 0) {
 console.log(
 	`URL/feed check passed: ${pages.length} pages, ${items} feed items, URLs and links valid.`,
 );
+
+function parseRedirects(text) {
+	return text
+		.split('\n')
+		.map((line) => line.trim())
+		.filter((line) => line && !line.startsWith('#'))
+		.map((line) => {
+			const [source, destination, status = '302'] = line.split(/\s+/);
+			return { source, destination, status };
+		});
+}
+
+function parseHeaders(text) {
+	const rules = [];
+	for (const line of text.split('\n')) {
+		if (!line.trim() || line.trim().startsWith('#')) continue;
+		if (/^\s/.test(line)) rules.at(-1)?.headers.push(line.trim());
+		else rules.push({ pattern: line.trim(), headers: [] });
+	}
+	return rules;
+}
+
+function headerMatches(pattern, host, path) {
+	const absolute = pattern.match(/^https:\/\/([^/]+)(\/.*)?$/);
+	if (pattern.includes('://') && !absolute) return true;
+	const hostPattern = absolute ? absolute[1] : null;
+	const pathPattern = absolute ? absolute[2] || '/*' : pattern;
+	const hostOk = hostPattern === null || globMatches(hostPattern, host);
+	return hostOk && globMatches(pathPattern, path);
+}
+
+// One splat, greedy. :placeholder is a single host label (stops at "." or "/").
+function globMatches(pattern, value) {
+	const parts = pattern.split('*');
+	if (parts.length > 2) return false;
+	const escape = (part) =>
+		part
+			.split(/(:[A-Za-z]\w*)/g)
+			.map((piece) =>
+				piece.startsWith(':') ? '[^.]+' : piece.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+			)
+			.join('');
+	return new RegExp(`^${parts.map(escape).join('.*')}$`).test(value);
+}

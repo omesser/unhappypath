@@ -1,0 +1,10 @@
+# pages.dev hosts only. These absolute rules do not match unhappypath.dev.
+# :project is the single-label project host (unhappypath.pages.dev).
+# :version is the extra label on preview hashes and branch aliases
+# (<hash>.unhappypath.pages.dev, <branch>.unhappypath.pages.dev).
+# A path-only rule would noindex the apex. Do not add one.
+https://:project.pages.dev/*
+	X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+	X-Robots-Tag: noindex
