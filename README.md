@@ -5,7 +5,7 @@ content, deployed on Cloudflare Pages.
 
 ## Running it
 
-Node 22+ (`.nvmrc` pins the major; `nvm use`).
+Node 22.23.4 or newer, which Astro requires (`.nvmrc` pins the major; `nvm install 22` gets the latest patch).
 
 ```sh
 npm install
